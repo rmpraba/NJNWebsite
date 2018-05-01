@@ -2,37 +2,41 @@
 @extends('layouts.sidebar')
 @section('content')
 <style type="text/css">
-	.tinf
-	{
-		width:75px;
-	}
+    .tinf
+    {
+        width:75px;
+    }
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #b30000 !important;
     }
+    #viewtargetcontainer{
+        margin-top: 5%;
+        margin-bottom: 2%;
+    }
 </style>
- <div id="main" class="row">
+ <div class="row" id="viewtargetcontainer">
         <!-- sidebar content -->
-        <div id="sidebar" class="col-md-4">
+        <div id="sidebar" class="col-md-3">
             @include('includes.sidebar')
         </div>
         <!-- main content -->
-        <div id="content" class="col-md-8">
+        <div id="viewtargetcontent" class="col-md-9">
     <center><h1 style="color: #b30000;"> Physical & Financial Target </h1></center>
     <form action="/viewpftarget" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="vdistrictcode" hidden>
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
     <table style="width: 100%;">
- 	<tr>
- 		<td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="vdistrict" id="dvistrict" name="vdistrict"></span>
- 		<br>Division:<span data-field="vdivision" id="vdivision" name="vdivision"></span></th>
+    <tr>
+        <td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="vdistrict" id="dvistrict" name="vdistrict"></span>
+        <br>Division:<span data-field="vdivision" id="vdivision" name="vdivision"></span></th>
     </tr>
     <tr><td>&nbsp</td><td>&nbsp&nbsp&nbsp&nbsp</td><td>&nbsp</td></tr>
     <tr>
     <td>
     <div class="form-group">
-    	<label>Financial Year:</label><br>
-    	<select class="form-control" id="vsel1" name="vfiscalyear" required>
+        <label>Financial Year:</label><br>
+        <select class="form-control" id="vsel1" name="vfiscalyear" required>
         <option value="">-----Select Academic Year-----</option>
         <option value="2018-2019">2018-2019</option>
         <option value="2019-2020">2019-2020</option>
@@ -52,15 +56,15 @@
     </td>
     </tr>
     <tr>
-    	<td>
-    		<div class="form-group">
+        <td>
+            <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="vbatch" class="form-control" style="width:350px" required>
                 <!-- <option value="">--- Select Batch ---</option> -->
                 </select>
             </div>
-    	</td>
-    	<td></td>
+        </td>
+        <td></td>
         <th><div class="form-group">
         <label>Batch Timing:</label><br>
         <!-- <span data-field="timing"></span> -->
@@ -70,46 +74,46 @@
     </tr>
     <tr><td>&nbsp</td><td></td><td>&nbsp</td></tr>
     <tr>
-    	<th>Category Type:<span data-field="vtype" id="vtype" name="vtype"></span>
-    	</th><td></td>
-    	<th>Training Subject:<span data-field="vsubject" id="vsubject" name="vsubject"></th>
+        <th>Category Type:<span data-field="vtype" id="vtype" name="vtype"></span>
+        </th><td></td>
+        <th>Training Subject:<span data-field="vsubject" id="vsubject" name="vsubject"></th>
     </tr>    
 </table> <br><br>
 
 <table class="table table-bordered" >
-	<tr>
-		<th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th><th colspan="3">Finacial target in Rs</th>
-	</tr>
-	<tr>
-		<td>Male</td><td>Female</td><td>Total</td><td>Male</td><td>Female</td><td>Total</td>
-	</tr>
-	<tr>
-		<td>1</td><th>General</th>
-		<td><input required class="tinf" type="number" name="vgenpm" id="vone" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vgenpf" id="vtwo" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vgenpt" id="vavvy" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vgenfm" id="vthree" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vgenff" id="vfour" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vgenft" id=vavvy1 value="" readonly></td>	
-	</tr>
-	<tr>
-		<td>2</td><th>SCP</th>
-		<td><input required class="tinf" type="number" name="vscppm" id="vfive" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vscppf" id="vsix" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vscppt" id="vavvy2" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vscpfm" id="vseven" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vscpff" id="veight" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vscpft" id="vavvy3" value="" readonly></td>		
-	</tr>
-	<tr>
-		<td>3</td><th>TSP</th>
-		<td><input required class="tinf" type="number" name="vtsppm" id="vnine" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vtsppf" id="vten" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vtsppt" id="vavvy4" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtspfm" id="vleven" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vtspff" id="vtwel" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="vtspft" id="vavvy5" value="" readonly></td>		
-	</tr>
+    <tr>
+        <th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th><th colspan="3">Finacial target in Rs</th>
+    </tr>
+    <tr>
+        <td>Male</td><td>Female</td><td>Total</td><td>Male</td><td>Female</td><td>Total</td>
+    </tr>
+    <tr>
+        <td>1</td><th>General</th>
+        <td><input required class="tinf" type="number" name="vgenpm" id="vone" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenpf" id="vtwo" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenpt" id="vavvy" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vgenfm" id="vthree" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenff" id="vfour" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenft" id=vavvy1 value="" readonly></td>  
+    </tr>
+    <tr>
+        <td>2</td><th>SCP</th>
+        <td><input required class="tinf" type="number" name="vscppm" id="vfive" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vscppf" id="vsix" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vscppt" id="vavvy2" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vscpfm" id="vseven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vscpff" id="veight" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vscpft" id="vavvy3" value="" readonly></td>        
+    </tr>
+    <tr>
+        <td>3</td><th>TSP</th>
+        <td><input required class="tinf" type="number" name="vtsppm" id="vnine" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtsppf" id="vten" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtsppt" id="vavvy4" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtspfm" id="vleven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtspff" id="vtwel" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtspft" id="vavvy5" value="" readonly></td>        
+    </tr>
     <tr>
         <td>4</td><th>Minorities</th>
         <td><input required class="tinf" type="number" name="vminpm" id="vthirteen" OnChange="av(this)"></td>
@@ -119,15 +123,15 @@
         <td><input required class="tinf" type="number" name="vminff" id="vsixteen" OnChange="av(this)"></td>
         <td><input required class="tinf" type="number" name="vminft" id="vavvy7" value="" readonly></td>      
     </tr>
-	<tr>
-		<td></td><th>Total</th>
-		<td><input required class="tinf" type="number" name="vtotpm" id="vt0" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtotpf" id="vt1" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtotpt" id="vt2" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtotfm" id="vt3" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtotff" id="vt4" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="vtotft" id="vt5" value="" readonly></td>		
-	</tr>
+    <tr>
+        <td></td><th>Total</th>
+        <td><input required class="tinf" type="number" name="vtotpm" id="vt0" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtotpf" id="vt1" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtotpt" id="vt2" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtotfm" id="vt3" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtotff" id="vt4" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vtotft" id="vt5" value="" readonly></td>       
+    </tr>
 </table>
 <!-- <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button> -->
 </form>

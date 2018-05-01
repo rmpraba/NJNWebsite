@@ -1,38 +1,42 @@
-<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+<!-- <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script> -->
 @extends('layouts.sidebar')
 @section('content')
 <style type="text/css">
-	.tinf
-	{
-		width:75px;
-	}
+    .tinf
+    {
+        width:75px;
+    }
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #b30000 !important;
     }
+    #targetcontainer{
+        margin-top: 5%;
+        margin-bottom: 2%;
+    }
 </style>
- <div id="main" class="row">
+ <div class="row" id="targetcontainer">
         <!-- sidebar content -->
-        <div id="sidebar" class="col-md-4">
+        <div id="sidebar" class="col-md-3">
             @include('includes.sidebar')
         </div>
         <!-- main content -->
-        <div id="content" class="col-md-8">
+        <div id="targetcontent" class="col-md-9">
     <center><h1 style="color: #b30000;"> Physical & Financial Target </h1></center>
     <form action="/insertpftarget" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="districtcode" hidden>
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
     <table style="width: 100%;">
- 	<tr>
- 		<td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="district" id="district" name="district"></span>
- 		<br>Division:<span data-field="division" id="division" name="division"></span></th>
+    <tr>
+        <td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="district" id="district" name="district"></span>
+        <br>Division:<span data-field="division" id="division" name="division"></span></th>
     </tr>
     <tr><td>&nbsp</td><td>&nbsp&nbsp&nbsp&nbsp</td><td>&nbsp</td></tr>
     <tr>
     <td>
     <div class="form-group">
-    	<label>Financial Year:</label><br>
-    	<select class="form-control" id="sel1" name="fiscalyear" required>
+        <label>Financial Year:</label><br>
+        <select class="form-control" id="sel1" name="fiscalyear" required>
         <option value="">-----Select Academic Year-----</option>
         <option value="2018-2019">2018-2019</option>
         <option value="2019-2020">2019-2020</option>
@@ -52,15 +56,15 @@
     </td>
     </tr>
     <tr>
-    	<td>
-    		<div class="form-group">
+        <td>
+            <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="batch" class="form-control" style="width:350px" required>
                 <!-- <option value="">--- Select Batch ---</option> -->
                 </select>
             </div>
-    	</td>
-    	<td></td>
+        </td>
+        <td></td>
         <th><div class="form-group">
         <label>Batch Timing:</label><br>
         <!-- <span data-field="timing"></span> -->
@@ -70,46 +74,46 @@
     </tr>
     <tr><td>&nbsp</td><td></td><td>&nbsp</td></tr>
     <tr>
-    	<th>Category Type:<span data-field="type" id="type" name="type"></span>
-    	</th><td></td>
-    	<th>Training Subject:<span data-field="subject" id="subject" name="subject"></th>
+        <th>Category Type:<span data-field="type" id="type" name="type"></span>
+        </th><td></td>
+        <th>Training Subject:<span data-field="subject" id="subject" name="subject"></th>
     </tr>    
 </table> <br><br>
 
 <table class="table table-bordered" >
-	<tr>
-		<th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th><th colspan="3">Finacial target in Rs</th>
-	</tr>
-	<tr>
-		<td>Male</td><td>Female</td><td>Total</td><td>Male</td><td>Female</td><td>Total</td>
-	</tr>
-	<tr>
-		<td>1</td><th>General</th>
-		<td><input required class="tinf" type="number" name="genpm" id="one" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="genpf" id="two" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="genpt" id="avvy" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="genfm" id="three" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="genff" id="four" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="genft" id=avvy1 value="" readonly></td>	
-	</tr>
-	<tr>
-		<td>2</td><th>SCP</th>
-		<td><input required class="tinf" type="number" name="scppm" id="five" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="scppf" id="six" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="scppt" id="avvy2" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="scpfm" id="seven" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="scpff" id="eight" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="scpft" id="avvy3" value="" readonly></td>		
-	</tr>
-	<tr>
-		<td>3</td><th>TSP</th>
-		<td><input required class="tinf" type="number" name="tsppm" id="nine" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="tsppf" id="ten" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="tsppt" id="avvy4" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="tspfm" id="leven" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="tspff" id="twel" OnChange="av(this)"></td>
-		<td><input required class="tinf" type="number" name="tspft" id="avvy5" value="" readonly></td>		
-	</tr>
+    <tr>
+        <th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th><th colspan="3">Finacial target in Rs</th>
+    </tr>
+    <tr>
+        <td>Male</td><td>Female</td><td>Total</td><td>Male</td><td>Female</td><td>Total</td>
+    </tr>
+    <tr>
+        <td>1</td><th>General</th>
+        <td><input required class="tinf" type="number" name="genpm" id="one" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="genpf" id="two" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="genpt" id="avvy" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="genfm" id="three" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="genff" id="four" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="genft" id=avvy1 value="" readonly></td>    
+    </tr>
+    <tr>
+        <td>2</td><th>SCP</th>
+        <td><input required class="tinf" type="number" name="scppm" id="five" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="scppf" id="six" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="scppt" id="avvy2" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="scpfm" id="seven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="scpff" id="eight" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="scpft" id="avvy3" value="" readonly></td>      
+    </tr>
+    <tr>
+        <td>3</td><th>TSP</th>
+        <td><input required class="tinf" type="number" name="tsppm" id="nine" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="tsppf" id="ten" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="tsppt" id="avvy4" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="tspfm" id="leven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="tspff" id="twel" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="tspft" id="avvy5" value="" readonly></td>      
+    </tr>
     <tr>
         <td>4</td><th>Minorities</th>
         <td><input required class="tinf" type="number" name="minpm" id="thirteen" OnChange="av(this)"></td>
@@ -119,15 +123,15 @@
         <td><input required class="tinf" type="number" name="minff" id="sixteen" OnChange="av(this)"></td>
         <td><input required class="tinf" type="number" name="minft" id="avvy7" value="" readonly></td>      
     </tr>
-	<tr>
-		<td></td><th>Total</th>
-		<td><input required class="tinf" type="number" name="totpm" id="t0" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="totpf" id="t1" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="totpt" id="t2" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="totfm" id="t3" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="totff" id="t4" value="" readonly></td>
-		<td><input required class="tinf" type="number" name="totft" id="t5" value="" readonly></td>		
-	</tr>
+    <tr>
+        <td></td><th>Total</th>
+        <td><input required class="tinf" type="number" name="totpm" id="t0" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="totpf" id="t1" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="totpt" id="t2" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="totfm" id="t3" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="totff" id="t4" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="totft" id="t5" value="" readonly></td>     
+    </tr>
 </table>
 <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button>
 </form>

@@ -12,11 +12,11 @@
 </style>
 <div class="container">
 
-    <header class="row" id="head">
+    <header class="row" id="hhead">
         @include('includes.header')
     </header>
 
-    <div id="main" class="row" >
+    <div id="mmain" class="row" >
 
             @yield('content')
 
