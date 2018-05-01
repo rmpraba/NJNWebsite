@@ -20,7 +20,7 @@ class viewpftargetfetchController extends BaseController
         // $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
         // $tc = DB::select('SELECT * FROM training_centre WHERE district_id in(SELECT district_code FROM districts WHERE district_name=?)',[$info[0]->district]);
         // return view('tcview.pftarget',['district'=>$info[0]->district,'tc'=>$tc]);
-      $tcs = DB::table("training_centre")->pluck("centre_name","centre_id");
+      $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
         return view('tcview.viewpftarget',compact('tcs'));
     }
     public function viewgetBatchList($id)
@@ -45,7 +45,7 @@ f.general_male_target as genfm,f.general_female_target as genff,f.general_target
 f.tsp_male_target as tspfm,f.tsp_female_target as tspff,
 f.tsp_target_total as tspft,f.scp_male_target as scpfm,f.scp_female_target as scpff,f.scp_target_total as scpft,
 f.min_male_target as minfm,f.min_female_target as minff,f.min_target_total as minft  
-FROM training_batches b join training_centre t on(b.centre_id=t.centre_id) join batches ba 
+FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba 
 on(b.batch_id=ba.id) join districts d on(d.district_code=t.district_id)
 join physical_target p on(p.centre_id=b.centre_id) join financial_target f on(f.centre_id=b.centre_id)
  WHERE b.id=? and p.batch_id=b.batch_id and f.batch_id=b.batch_id and f.batch_id=p.batch_id

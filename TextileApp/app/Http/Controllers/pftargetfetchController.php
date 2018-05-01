@@ -20,7 +20,7 @@ class pftargetfetchController extends BaseController
         // $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
         // $tc = DB::select('SELECT * FROM training_centre WHERE district_id in(SELECT district_code FROM districts WHERE district_name=?)',[$info[0]->district]);
         // return view('tcview.pftarget',['district'=>$info[0]->district,'tc'=>$tc]);
-      $tcs = DB::table("training_centre")->pluck("centre_name","centre_id");
+      $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
         return view('tcview.pftarget',compact('tcs'));
     }
     public function getBatchList($id)
@@ -34,7 +34,7 @@ class pftargetfetchController extends BaseController
     public function getBatchInfo($id)
     {
       // echo "hi".$id;
-        $info = DB::select('SELECT * FROM training_batches b join training_centre t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.id) join districts d on(d.district_code=t.district_id) WHERE b.id=?' , [$id]);
+        $info = DB::select('SELECT * FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.id) join districts d on(d.district_code=t.district_id) WHERE b.id=?' , [$id]);
         // echo "halo".$info[0]->batch_type;
         // $batchinfo = DB::table("batches")
         //             ->where("id",$id)
