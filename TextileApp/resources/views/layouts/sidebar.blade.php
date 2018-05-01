@@ -7,33 +7,12 @@
 <style type="text/css">
             html, body {
                 margin: 0;
-                height: 100%;
-                position: fixed;
+                height: 100vh;
             }
-            .container{
-                margin: 0;
-                width: 100%;
-                height: 100%;
-                position: fixed;
+            main{
+                 height: 110vh;  
             }
-            #head{
-                width: 100%;
-                /*height: 10%;*/
-                position: fixed;
-            }
-            #main{
-                width: 100%;
-                height: 60%; 
-                margin-top: 10%; 
-                overflow: scroll;
-                position: fixed;
-            }    
-            #foot{
-                width: 100%;
-                /*height: 80%;*/
-                position: fixed;
-                margin-top: 30%; 
-            } 
+
 </style>
 <div class="container">
 
