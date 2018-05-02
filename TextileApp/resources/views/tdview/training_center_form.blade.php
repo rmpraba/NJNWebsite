@@ -4,11 +4,11 @@
 @section('content')
 
 
-  <div style="width:20%;height: 100px;float: left;">
+  <div style="width:20%;height: 100px;float: left;margin-top: 5%;">
    @include('includes.tdsidebar')
   </div>
-  <div style="width:70%;margin-left:8%; float:left;overflow:auto;">
-          <center><h2 style="color:red;">Training centre</h2></center>
+  <div style="width:70%;margin-left:8%; float:left;overflow:auto;margin-top: 5%;">
+          <center><h1 style="color: #b30000;">Training Centre</h1></center>
           <!-- heading -->
           <form action="" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
