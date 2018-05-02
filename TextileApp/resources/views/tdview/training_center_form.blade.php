@@ -42,10 +42,10 @@
             		<label for="usr">District</label>
                 <select class="form-control" id="sel1" name="district" required>
                 <option value="" disabled selected>Select your District</option>
-                <option>District1</option>
-                <option>District2</option>
-                <option>District3</option>
-                <option>District4</option>
+                <option>Kolar</option>
+                <option>Mysore</option>
+                <option>Kalkare</option>
+                <option>Kolar</option>
                 </select>
             	  </div>
 
@@ -53,10 +53,7 @@
                   		<label for="usr">State</label>
                 			<select class="form-control" id="sel1" name="state" required>
                       <option value="" disabled selected>Select your State</option>
-                      <option>State1</option>
-                      <option>State2</option>
-                      <option>State3</option>
-                      <option>State4</option>
+                      <option>Karnataka</option>
                       </select>
                   	  </div>
                   	  <div style="float:left;width: 45%;margin-left: 10%" class="form-group">
@@ -111,29 +108,30 @@
                   		<label for="usr">Type of centre</label>
                   		<select class="form-control" id="sel1" name="centre" required>
                       <option value="" disabled selected>Select centre type</option>
-              		    <option>type one</option>
-              		    <option>type two</option>
-              		    <option>type three</option>
-              		    <option>type four</option>
+              		    <option>Govt Training Centre</option>
+              		    <option>Public Training Centre</option>
+              		    <option>Private Training Centre</option>
+              		    <option>Networked Training Centre</option>
               		    </select>
                   	  </div>
 
             	  <div style="float:left;width: 45%;" class="form-group">
             		<label for="usr">Status</label>
-            		<select class="form-control" id="sel1" name="status" required>
+                <input type="text" class="form-control" id="usr" name="status" readonly value="active" required>
+            		<!-- <select class="form-control" id="sel1" name="status" required>
         		    <option value="" disabled selected>Select status</option>
         		    <option>inactive</option>
         		    <option>active</option>
-        		    </select>
+        		    </select> -->
             	  </div>
                 <div style="float:left;width: 45%;margin-left: 10%" class="form-group">
                 <label for="usr">Training subject</label>
                 <select class="form-control" id="sel1" name="training">
                 <option value="" disabled selected>Select subject</option>
-              	<option>subject one</option>
-              	<option>subject two</option>
-              	<option>subject three</option>
-              	<option>subject four</option>
+              	<option>Weaving</option>
+              	<option>Clothing</option>
+              	<option>Dyeing</option>
+              	<option>Sewing</option>
               	</select>
                 </div>
 
