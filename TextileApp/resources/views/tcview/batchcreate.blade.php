@@ -1,16 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('content')
-
-
-
 <style type="text/css">
-	.input{
-		width:200px;
-	}
-	table{
-		width:300px;
-	}
 	.lbl{
 		font-weight: bold;
 		font-size: 17px;
@@ -18,62 +9,45 @@
 	#heading{
 		color:#b30000;
 	}
-	#div1{
-		height:400px;
-		width:370px;
-		float:left;
-	}
-	#div2{
-		height:300px;
-		width:300px;
-		float:left;
-		margin:0px 0px 100px 200px;
+	.input{
+		width: 250px;
 	}
 	.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #b30000 !important;
     }
-
-
+    #batchcreatecontainer{
+    	margin-top: 5%;
+    	margin-bottom: 2%;
+    }
 </style>
-
-<div id="div1">
+<div class="row" id="batchcreatecontainer">
+<div id="sidebar" class="col-md-3">
 @include('includes.sidebar')
 </div>
-<div id="div2">
-<h1 id="heading" align="Center" >Batch Creation</h1><br><br>
+<div id="targetcontent" class="col-md-9">
+<h1 id="heading">Batch Creation</h1>
 <form action="" method="post">
 {{csrf_field()}}
-<table>
+<table style="width: 80%;" cellspacing="15">
 <tr>
-<td><label class="lbl">Batch Name:</label>
-<input class="input" type="text" name="batchname"></td>
-<td>&nbsp&nbsp</td>
-<td><label  class="lbl">Training Type:</label>
-<input  class="input" type="text" name="trainingtype"></td>
+<td><label class="lbl">Batch Name:</label><br>
+<input class="input" type="text" name="batchname" required><br></td>
+<td></td>
+<td><label  class="lbl">Training Type:</label><br>
+<input  class="input" type="text" name="trainingtype" required><br></td>
 </tr>
-<tr><td>&nbsp</td><td>&nbsp&nbsp</td>
-<td>&nbsp</td></tr>
-<tr><td><label class="lbl">Number of Candidates:</label>
-<input class="input" type="number" name="noofstud"></td></tr>
 <tr>
-<tr><td>&nbsp</td><td>&nbsp&nbsp</td>
-<td>&nbsp</td></tr>
-<td><label  class="lbl">Start Date:</label>
-<input  class="input" type="date" name="startdate"></td>	
-<td>&nbsp&nbsp</td>
-<td><label  class="lbl">End Date:</label>
-<input  class="input" type="date" name="enddate"></td>
+<td><label  class="lbl">Start Date:</label><br>
+<input  class="input" type="date" name="startdate" required><br></td>	
+<td></td>
+<td><label  class="lbl">End Date:</label><br>
+<input  class="input" type="date" name="enddate" required><br></td>
 </tr>
-<tr><td>&nbsp</td><td>&nbsp&nbsp</td><td>&nbsp</td></tr>
-
-
-<tr><td>&nbsp</td><td>&nbsp</td></tr>
-<tr><td>&nbsp &nbsp</td><td>&nbsp</td>
-<td><button type="submit" class="btn btn-primary" style="margin-left: 50%;width: 30%;">Submit</button></td><td>&nbsp&nbsp</td>
-</tr>
-
+<tr><td colspan="1"><label class="lbl">Number of Candidates:</label><br>
+<input class="input" type="number" name="noofstud" required></td><br><td></td>
+<td colspan="1"><br><button type="submit" class="btn btn-primary" style="width: 80%;">Submit</button></td></tr>
 </table>
 </form>
 </div>
-
+</div>
 @stop

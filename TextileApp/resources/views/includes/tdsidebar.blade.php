@@ -35,6 +35,6 @@
 </style>
 <div class="sidenav">
   <a href="/training_center_form">Create Training Centre</a>
-  <a href="#">Approve Batch</a>
+  <a href="/approvebatch">Approve Batch</a>
   <a href="#">Training Centre List</a>
 </div>

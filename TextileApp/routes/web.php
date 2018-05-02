@@ -62,6 +62,7 @@ Route::get('/training_center_form','TCfomController@tcform');
 Route::post('/training_center_form','TCfomController@insert');
 Route::get('batchcreate', 'batchcreateController@batch');
 Route::post('batchcreate', 'batchcreateController@batchinsert');
+Route::get('approvebatch', 'batchapprovalController@fetchbatchlist');
 
 
 // Route::post('/insertpftarget', function()
