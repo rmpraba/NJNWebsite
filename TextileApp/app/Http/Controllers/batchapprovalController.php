@@ -14,37 +14,27 @@ use App\batches;
 
 class batchapprovalController extends Controller
 {
-
+    public function fetchbatchlistview(Request $obj)
+    {
+     $batchinfo = DB::select('SELECT * FROM batches');  
+      return view('tcview.viewbatchlist')->with(array('batchinfo'=>$batchinfo));
+    }
     public function fetchbatchlist(Request $obj)
     {
-        $username=session()->get('username');
-        $password=session()->get('password');
-        // echo $username."----",$password;
-        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);        
-        $district=$info[0]->district;
-        $seqinfo = DB::select('SELECT * FROM sequences');
-        $batch_id=$seqinfo[0]->batch_id;
-        if($batch_id<10)
-            $batch_id="0".$batch_id;
-        $batch_prefix=$seqinfo[0]->batch_prefix;
-        $batch_code=$district.$batch_prefix.$batch_id;
-        // echo "Your batch id is here...".$district.$batch_prefix.$batch_id;
-    	$bat =new batches;
-    	$bat->batch_id=$batch_code;
-        $bat->batch_name=$obj->batchname;
-    	$bat->training_type=$obj->trainingtype;
-    	$bat->no_of_stud=$obj->noofstud;
-    	$bat->start_date=$obj->startdate;
-    	$bat->end_date=$obj->enddate;
-        $bat->status="Pending";
-    	$bat->save();
-    	if ($bat->save()) {
-    		// echo "inserted successfully";
-            return view('pages.success');
-    	}
-    	else
-    	{
-    		echo"insertion failed";
-    	}
+     $batchinfo = DB::select('SELECT * FROM batches WHERE status="Pending"');  
+      return view('tdview.viewbatch')->with(array('batchinfo'=>$batchinfo));
+    }
+    public function approveBatch($id)
+    {
+        DB::update('update batches set status="Approved" WHERE batch_id=?',[$id]); 
+        $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$id]);
+        $data1 = array("centre_id"=>$batchinfo[0]->centre_id,"batch_id"=>$batchinfo[0]->batch_id,"batch_name"=>$batchinfo[0]->batch_name,"status"=>$batchinfo[0]->status,"created_by"=>$batchinfo[0]->created_by,"batch_type"=>$batchinfo[0]->training_type);
+        DB::table('training_batches')->insert(array($data1));  
+        return view('pages.success');
+    }
+    public function rejectBatch($id)
+    { 
+        DB::update('update batches set status="Rejected" WHERE batch_id=?',[$id]); 
+        return view('pages.success');  
     }
 }

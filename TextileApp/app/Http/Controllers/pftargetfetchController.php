@@ -34,7 +34,7 @@ class pftargetfetchController extends BaseController
     public function getBatchInfo($id)
     {
       // echo "hi".$id;
-        $info = DB::select('SELECT * FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.id) join districts d on(d.district_code=t.district_id) WHERE b.id=?' , [$id]);
+        $info = DB::select('SELECT * FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.batch_id) join districts d on(d.district_code=t.district_id) WHERE b.batch_id=?' , [$id]);
         // echo "halo".$info[0]->batch_type;
         // $batchinfo = DB::table("batches")
         //             ->where("id",$id)
