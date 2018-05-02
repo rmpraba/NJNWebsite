@@ -34,7 +34,7 @@
 }
 </style>
 <div class="sidenav">
-  <a href="#">Create Batch</a>  
+  <a href="/batchcreate">Create Batch</a>  
   <a href="#">Batch List</a>
   <a href="/pftarget">Physical & Financial Target</a>
   <a href="/viewpftarget">View Target</a>

@@ -60,6 +60,10 @@ Route::get('/viewpftarget/batchajax/{id}','viewpftargetfetchController@viewgetBa
 
 Route::get('/training_center_form','TCfomController@tcform');
 Route::post('/training_center_form','TCfomController@insert');
+Route::get('batchcreate', 'batchcreateController@batch');
+Route::post('batchcreate', 'batchcreateController@batchinsert');
+
+
 // Route::post('/insertpftarget', function()
 // {
 //     echo "ya its working";
