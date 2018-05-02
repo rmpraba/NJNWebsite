@@ -41,7 +41,7 @@ class TCfomController extends Controller
     	$training_centre->centre_status=$req->status;
     	$training_centre->save();
     	if($training_centre->save()){
-    		echo "inserted successfuly..";
+            return view('pages.success');
     	}
     	else{
     		echo "insertion faild";

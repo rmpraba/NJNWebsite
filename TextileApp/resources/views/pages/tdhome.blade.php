@@ -1,6 +1,12 @@
 @extends('layouts.sidebar')
 @section('content')
- <div id="main" class="row">
+<style type="text/css">
+	#tdhomemain{
+		margin-top: 5%;
+		margin-bottom: 2%;
+	}
+</style>
+ <div id="tdhomemain" class="row">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-4">
             @include('includes.tdsidebar')
