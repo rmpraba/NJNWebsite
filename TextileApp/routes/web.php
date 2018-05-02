@@ -64,6 +64,8 @@ Route::get('batchcreate', 'batchcreateController@batch');
 Route::post('batchcreate', 'batchcreateController@batchinsert');
 Route::get('approvebatch', 'batchapprovalController@fetchbatchlist');
 
+Route::get('viewtc','viewtcController@fetchtclist');
+
 
 // Route::post('/insertpftarget', function()
 // {

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\training_centres;
 
+use DB;
+use Session;
+
 class TCfomController extends Controller
 {
     public function tcform(Request $ob)
@@ -13,10 +16,27 @@ class TCfomController extends Controller
     }
     
     public function insert(Request $req)
-    {
+    {    
+        $username=session()->get('username');
+        $password=session()->get('password');
+
+        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
+        $district=$info[0]->district;
+        $districtinfo = DB::select('SELECT * FROM districts WHERE district_name=?' , [$district]);
+        $district_code= $districtinfo[0]->district_code;
+        $seqinfo = DB::select('SELECT * FROM sequences');
+        $centre_id=$seqinfo[0]->centre_id;
+        if($centre_id<10)
+            $batch_id="0".$centre_id;
+        $centre_prefix=$seqinfo[0]->centre_prefix;
+        $centre_code=$district_code.$centre_prefix.$centre_id;
+        $newcentre_id=$centre_id+1;
+        DB::update('update sequences set centre_id = ?',[$newcentre_id]);
+
+
     	$training_centre = new training_centres;
     	$training_centre->name=$req->name;
-    	$training_centre->centre_id='data';
+    	$training_centre->centre_id=$centre_code;
     	$training_centre->centre_name=$req->centre_name;
     	$training_centre->district_id='data';
     	$training_centre->upload_pic='data';
