@@ -74,7 +74,7 @@
                   	  </div> 
                   	  <div style="float:left;width: 45%;margin-left: 10%" class="form-group">
                   		<label for="usr">Website ID</label>
-                			<input type="url" class="form-control" id="usr" name="websiteid" required>
+                			<input type="text" class="form-control" id="usr" name="websiteid" required>
                   	  </div>
             	  <div style="float:left;width: 45%;" class="form-group">
             		<label for="usr">PAN Card</label>
