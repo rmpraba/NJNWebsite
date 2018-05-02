@@ -60,12 +60,21 @@ Route::get('/viewpftarget/batchajax/{id}','viewpftargetfetchController@viewgetBa
 
 Route::get('/training_center_form','TCfomController@tcform');
 Route::post('/training_center_form','TCfomController@insert');
+<<<<<<< HEAD
 Route::get('batchcreate', 'batchcreateController@batch');
 Route::post('batchcreate', 'batchcreateController@batchinsert');
 Route::get('approvebatch', 'batchapprovalController@fetchbatchlist');
 
 Route::get('viewtc','viewtcController@fetchtclist');
 
+=======
+Route::get('/batchcreate', 'batchcreateController@batch');
+Route::post('/batchcreate', 'batchcreateController@batchinsert');
+Route::get('/approvebatch', 'batchapprovalController@fetchbatchlist');
+Route::post('/approvebatch/{id}','batchapprovalController@approveBatch');
+Route::post('/rejectbatch/{id}','batchapprovalController@rejectBatch');
+Route::get('/batchlist', 'batchapprovalController@fetchbatchlistview');
+>>>>>>> 86f48a28f83b9a3b411961fb5887ad0be2bec4f0
 
 // Route::post('/insertpftarget', function()
 // {

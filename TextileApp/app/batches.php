@@ -15,6 +15,7 @@ class batches extends Model
 				'end_date',
 				'status',
 				'district_id',
-				'created_by'
+				'created_by',
+				'centre_id'
     			];
 }

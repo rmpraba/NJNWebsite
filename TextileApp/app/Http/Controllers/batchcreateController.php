@@ -28,6 +28,7 @@ class batchcreateController extends Controller
         // echo $username."----",$password;
         $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
         $district=$info[0]->district;
+        $centreid=$info[0]->centre_id;
         $districtinfo = DB::select('SELECT * FROM districts WHERE district_name=?' , [$district]);
         $district_code= $districtinfo[0]->district_code;
         $seqinfo = DB::select('SELECT * FROM sequences');       
@@ -49,6 +50,7 @@ class batchcreateController extends Controller
     	$bat->start_date=$obj->startdate;
     	$bat->end_date=$obj->enddate;
         $bat->status="Pending";
+        $bat->centre_id=$centreid;
     	$bat->save();
     	if ($bat->save()) {
     		// echo "inserted successfully";
