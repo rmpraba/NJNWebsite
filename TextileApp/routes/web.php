@@ -43,6 +43,10 @@ Route::get('tchome', function()
 {
     return View::make('pages.tchome');
 });
+Route::get('training_center_form', function()
+{
+    return View::make('pages.tchome');
+});
 Route::post('/login', 'loginController@login');
 
 Route::get('/pftarget/ajax/{id}','pftargetfetchController@getBatchList');
@@ -53,6 +57,9 @@ Route::post('insertpftarget', 'insertpftargetController@insertpf');
 Route::get('/viewpftarget', 'viewpftargetfetchController@viewpftargetfetch');
 Route::get('/viewpftarget/ajax/{id}','viewpftargetfetchController@viewgetBatchList');
 Route::get('/viewpftarget/batchajax/{id}','viewpftargetfetchController@viewgetBatchInfo');
+
+Route::get('/training_center_form','TCfomController@tcform');
+Route::post('/training_center_form','TCfomController@insert');
 // Route::post('/insertpftarget', function()
 // {
 //     echo "ya its working";
