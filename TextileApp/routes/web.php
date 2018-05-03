@@ -77,6 +77,7 @@ Route::get('/batchlist', 'batchapprovalController@fetchbatchlistview');
 Route::post('/batch/{batchid}', 'batchcreateController@editbatchlist');
 Route::post('/updatebatchinfo', 'batchcreateController@batchupdate');
 Route::post('/deletebatchlist/{batchid}', 'batchcreateController@deletebatchlist');
+Route::post('/deletetcview/{centreid}', 'viewtcController@deletetcview');
 // Route::post('/insertpftarget', function()
 // {
 //     echo "ya its working";
