@@ -74,7 +74,9 @@ Route::get('/approvebatch', 'batchapprovalController@fetchbatchlist');
 Route::post('/approvebatch/{id}','batchapprovalController@approveBatch');
 Route::post('/rejectbatch/{id}','batchapprovalController@rejectBatch');
 Route::get('/batchlist', 'batchapprovalController@fetchbatchlistview');
-
+Route::post('/batch/{batchid}', 'batchcreateController@editbatchlist');
+Route::post('/updatebatchinfo', 'batchcreateController@batchupdate');
+Route::post('/deletebatchlist/{batchid}', 'batchcreateController@deletebatchlist');
 // Route::post('/insertpftarget', function()
 // {
 //     echo "ya its working";

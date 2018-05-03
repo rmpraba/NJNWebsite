@@ -61,4 +61,25 @@ class batchcreateController extends Controller
     		echo"insertion failed";
     	}
     }
+    public function editbatchlist($batchid)
+    {  
+        echo $batchid;
+        $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$batchid]);
+        $start = strtotime($batchinfo[0]->start_date);
+        $startdate = date('Y-m-d',$start);
+        $end = strtotime($batchinfo[0]->end_date);
+        $enddate = date('Y-m-d',$end);
+        // echo $newformat;
+        return view('tcview.editbatchlist',compact('batchinfo'),['startdate'=>$startdate,'enddate'=>$enddate]);
+    }
+     public function batchupdate(Request $req)
+    { 
+         DB::update('update batches set batch_name=?,training_type=?,start_date=?,end_date=?,no_of_stud=? WHERE batch_id=?',[$req->input('batchname'),$req->input('trainingtype'),$req->input('startdate'),$req->input('enddate'),$req->input('noofstud'),$req->input('batchid')]);
+         return view('pages.success');  
+    }
+     public function deletebatchlist($batchid)
+    { 
+         DB::delete('delete from batches WHERE batch_id=?',[$batchid]);
+         return view('pages.success');  
+    }
 }
