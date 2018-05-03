@@ -12,7 +12,24 @@ class TCfomController extends Controller
 {
     public function tcform(Request $ob)
     {
-    			return view('tdview.training_center_form');	
+        $username=session()->get('username');
+        $password=session()->get('password');
+
+
+        $valiueofemil=$ob->email;
+
+        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
+        $district=$info[0]->district;
+
+        $division = DB::select('SELECT * FROM districts WHERE district_name= ?' , [ $district ]);
+        $div=$division[0]->division;
+
+        $districts = DB::select('select * from districts');
+        $subjects = DB::select('select * from training_centre_subject');
+        $states = DB::select('select * from states');
+        $tocs = DB::select('select * from types_of_centres');
+        return view('tdview.training_center_form',compact('districts','states','tocs','district','div','subjects'));
+    	// return view('tdview.training_center_form',['districts'=>$districts],['toc'=>$tocs]);	
     }
     
     public function insert(Request $req)
