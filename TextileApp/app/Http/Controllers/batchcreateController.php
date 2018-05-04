@@ -64,12 +64,12 @@ class batchcreateController extends Controller
     public function editbatchlist($batchid)
     {  
         // echo $batchid;
-        $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$batchid]);
+        // $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$batchid]);
+        $batchinfo = batches::where('batch_id', $batchid)->get();
         $start = strtotime($batchinfo[0]->start_date);
         $startdate = date('Y-m-d',$start);
         $end = strtotime($batchinfo[0]->end_date);
         $enddate = date('Y-m-d',$end);
-        // echo $newformat;
         return view('tcview.editbatchlist',compact('batchinfo'),['startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function batchupdate(Request $req)
