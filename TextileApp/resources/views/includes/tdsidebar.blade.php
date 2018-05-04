@@ -1,11 +1,4 @@
- <!-- sidebar nav -->
-<!--     <nav id="sidebar-nav">
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav> -->
+
 <style type="text/css">
 .sidenav {
     /*width: 100%;*/
@@ -34,7 +27,7 @@
 }
 </style>
 <div class="sidenav">
-  <a href="/training_center_form">Training Centre</a>
-  <a href="/approvebatch">Approve Batch</a>
-  <a href="/viewtc">Training Centre List</a>
+  <a href="{{ URL::to('training_center_form') }}">Training Centre</a>
+  <a href="{{ URL::to('approvebatch') }}">Approve Batch</a>
+  <a href="{{ URL::to('viewtc') }}">Training Centre List</a>
 </div>

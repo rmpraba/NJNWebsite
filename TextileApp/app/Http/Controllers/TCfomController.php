@@ -75,7 +75,7 @@ class TCfomController extends Controller
     	$training_centre->adhar_card_image='data';
     	$training_centre->centre_type=$req->centre;
     	$training_centre->training=$req->training;
-    	$training_centre->centre_status=$req->status;
+    	$training_centre->centre_status="active";
     	$training_centre->save();
     	if($training_centre->save()){
             return view('pages.success');

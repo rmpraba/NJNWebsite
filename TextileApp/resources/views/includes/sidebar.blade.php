@@ -1,11 +1,4 @@
- <!-- sidebar nav -->
-<!--     <nav id="sidebar-nav">
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav> -->
+
 <style type="text/css">
 .sidenav {
     /*width: 100%;*/
@@ -34,8 +27,8 @@
 }
 </style>
 <div class="sidenav">
-  <a href="/batchcreate">Create Batch</a>  
-  <a href="/batchlist">Batch List</a>
-  <a href="/pftarget">Physical & Financial Target</a>
-  <a href="/viewpftarget">View Target</a>
+  <a href="{{ URL::to('batchcreate') }}">Create Batch</a>  
+  <a href="{{ URL::to('batchlist') }}">Batch List</a>
+  <a href="{{ URL::to('pftarget') }}">Physical & Financial Target</a>
+  <a href="{{ URL::to('viewpftarget') }}">View Target</a>
 </div>
