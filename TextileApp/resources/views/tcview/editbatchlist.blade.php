@@ -2,25 +2,6 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<!-- <style type="text/css">
-	.lbl{
-		font-weight: bold;
-		font-size: 17px;
-	}
-	#heading{
-		color:#b30000;
-	}
-	.input{
-		width: 250px;
-	}
-	.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #b30000 !important;
-    }
-    #editbatchlistcontainer{
-    	margin-top: 5%;
-    	margin-bottom: 2%;
-    }
-</style> -->
 <div class="row" id="editbatchlistcontainer">
 <div id="sidebar" class="col-md-3">
 @include('includes.sidebar')

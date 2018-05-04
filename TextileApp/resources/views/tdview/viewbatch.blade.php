@@ -1,12 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 @section('content')
-<!-- <style type="text/css">
-    #viewbatchcontainer{
-        margin-top: 5%;
-        margin-bottom: 2%;
-    }
-</style> -->
  <div class="row" id="viewbatchcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">

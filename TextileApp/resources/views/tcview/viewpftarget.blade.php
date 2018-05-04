@@ -1,19 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 @section('content')
-<!-- <style type="text/css">
-    .tinf
-    {
-        width:75px;
-    }
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #b30000 !important;
-    }
-    #viewtargetcontainer{
-        margin-top: 5%;
-        margin-bottom: 2%;
-    }
-</style> -->
+
  <div class="row" id="viewtargetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">

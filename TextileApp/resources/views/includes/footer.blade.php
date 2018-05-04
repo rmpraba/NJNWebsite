@@ -1,19 +1,3 @@
-<!-- <style type="text/css">
-    .footer{
-        background-color:#1f1f60;
-        width: 100%;
-}
-h4{
-    color:white;
-    font-size: 20px;
-}
-/*li a{
-    color:white;
-}*/
-.navbar-default .list-unstyled > li > a{
-     color: #FFFFFF ;
-}
-</style> -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 <nav class="navbar navbar-default footer">
 <div class="container">

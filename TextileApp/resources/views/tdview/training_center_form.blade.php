@@ -2,25 +2,6 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<!-- <style type="text/css">
-  .star{
-    color:red;
-    text-align: center;
-    font-size: 20px;
-   padding-top: 174%;
-   padding-bottom: -30%;
-  }
-  .star1{
-    padding-top: 350%;
-    padding-bottom: -30%;
-    color:red;
-    text-align: center;
-    font-size: 20px;
-  }
-  .dd{
-    padding-left: 70%;
-  }
-</style> -->
  <div class="row" id="trainingcentreformcontainer"> 
     <div class="col-md-4">
          @include('includes.tdsidebar')
