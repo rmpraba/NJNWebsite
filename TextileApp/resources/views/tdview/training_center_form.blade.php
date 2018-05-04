@@ -2,7 +2,7 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<style type="text/css">
+<!-- <style type="text/css">
   .star{
     color:red;
     text-align: center;
@@ -20,8 +20,8 @@
   .dd{
     padding-left: 70%;
   }
-</style>
- <div class="row"> 
+</style> -->
+ <div class="row" id="trainingcentreformcontainer"> 
     <div class="col-md-4">
          @include('includes.tdsidebar')
     </div>
