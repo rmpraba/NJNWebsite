@@ -17,7 +17,7 @@
         <h1 style="color: #b30000;">Training Centre List</h1>
         <table class="table table-bordered">
         <tr>
-            <th>ID</th><th>Owner Name</th><th>Center ID</th><th>District ID</th><th>Upload Picture</th><th>street</th><th>district</th><th>state</th><th>PIN Code</th><th>Email</th><th>Mobile number</th><th>landline</th><th>website_id</th><th>PAN Card</th><th>PAN image</th><th>GST</th><th>GST Image</th><th>Training_start</th><th>Training end</th><th>Adhar Card</th><th>Adhar Image</th><th>Center Type</th><th>Training Sub</th><th>Center Status</th><th>Created On</th><th>Updated On</th>
+            <th>ID</th><th>Owner Name</th><th>Center ID</th><th>District ID</th><th>Upload Picture</th><th>street</th><th>district</th><th>state</th><th>PIN Code</th><th>Email</th><th>Mobile number</th><th>landline</th><th>website_id</th><th>PAN Card</th><th>PAN image</th><th>GST</th><th>GST Image</th><th>Training_start</th><th>Adhar Card</th><th>Adhar Image</th><th>Center Type</th><th>Training Sub</th><th>Center Status</th><th>Created On</th><th>Updated On</th><th>Edit & delete</th>
         </tr>
             @foreach($tcinfo as $row)
             <tr>
@@ -39,14 +39,24 @@
                 <td>{{$row->gst}}</td>
                 <td>{{$row->gst_image}}</td>
                 <td>{{$row->training_start}}</td>
-                <td>{{$row->training_end}}</td>
                 <td>{{$row->adhar_card}}</td>
                 <td>{{$row->adhar_card_image}}</td>
+                <td>{{$row->centre_type}}</td>
                 <td>{{$row->training}}</td>
                 <td>{{$row->centre_status}}</td>
                 <td>{{$row->created_at}}</td>
                 <td>{{$row->updated_at}}</td>
-                             
+                <td>
+                     <i id="edit" class="glyphicon glyphicon-edit"></i>
+                    <form id="deleteform.{{$row->centre_id}}" action="{{ url('deletetcview/'.$row->centre_id) }}" method="POST">
+                    {{ csrf_field() }}
+                    <a onclick="document.getElementById('deleteform.{{$row->centre_id}}').submit();"><i class="glyphicon glyphicon-trash"></i></a></form>
+                    
+
+
+
+                    
+                </td>                     
             </tr>
             @endforeach
         </table>
