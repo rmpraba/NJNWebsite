@@ -1,7 +1,7 @@
-<!-- <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script> -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 @section('content')
-<style type="text/css">
+<!-- <style type="text/css">
     .tinf
     {
         width:75px;
@@ -13,7 +13,7 @@
         margin-top: 5%;
         margin-bottom: 2%;
     }
-</style>
+</style> -->
  <div class="row" id="targetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">

@@ -1,4 +1,4 @@
-
+<!-- 
 <style type="text/css">
 .sidenav {
     /*width: 100%;*/
@@ -25,7 +25,8 @@
 .sidenav a:hover {
     color: #b30000;
 }
-</style>
+</style> -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 <div class="sidenav">
   <a href="{{ URL::to('batchcreate') }}">Create Batch</a>  
   <a href="{{ URL::to('batchlist') }}">Batch List</a>

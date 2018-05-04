@@ -1,5 +1,5 @@
 
-<style type="text/css">
+<!-- <style type="text/css">
 	.navbar-nav.navbar-center {
     position: absolute;
     left: 15%;
@@ -114,7 +114,8 @@
 /*.outer{
   position: fixed;
 }*/
-</style>
+</style> -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 <div class="outer">
 <nav class="navbar">
   <div class="container-fluid">

@@ -1,5 +1,5 @@
 
-<style type="text/css">
+<!-- <style type="text/css">
 .sidenav {
     /*width: 100%;*/
     /*position: fixed;*/
@@ -25,7 +25,8 @@
 .sidenav a:hover {
     color: #b30000;
 }
-</style>
+</style> -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 <div class="sidenav">
   <a href="{{ URL::to('training_center_form') }}">Training Centre</a>
   <a href="{{ URL::to('approvebatch') }}">Approve Batch</a>

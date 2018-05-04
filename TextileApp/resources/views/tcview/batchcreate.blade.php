@@ -1,7 +1,8 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 
 @section('content')
-<style type="text/css">
+<!-- <style type="text/css">
 	.lbl{
 		font-weight: bold;
 		font-size: 17px;
@@ -19,7 +20,7 @@
     	margin-top: 5%;
     	margin-bottom: 2%;
     }
-</style>
+</style> -->
 <div class="row" id="batchcreatecontainer">
 <div id="sidebar" class="col-md-3">
 @include('includes.sidebar')

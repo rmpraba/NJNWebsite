@@ -1,4 +1,4 @@
-<style type="text/css">
+<!-- <style type="text/css">
     .footer{
         background-color:#1f1f60;
         width: 100%;
@@ -13,7 +13,8 @@ h4{
 .navbar-default .list-unstyled > li > a{
      color: #FFFFFF ;
 }
-</style>
+</style> -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 <nav class="navbar navbar-default footer">
 <div class="container">
 <div class="container-fluid">

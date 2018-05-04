@@ -1,6 +1,7 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 @section('content')
-<style type="text/css">
+<!-- <style type="text/css">
  .logincontainer {
   padding: 30px;
   max-width: 350px;
@@ -80,7 +81,7 @@
 #logincontent{
   margin-top: 5%;
 }
-</style>
+</style> -->
 <div id="logincontent">
     <div class="container logincontainer">
       <h1>Login to Your Account</h1><br>

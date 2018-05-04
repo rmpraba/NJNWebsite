@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" ref="{{ asset('css/style.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('includes.head')
 </head>
 <body>
-<style type="text/css">
+<!-- <style type="text/css">
     body {
         overflow: hidden;
     }
@@ -38,7 +38,7 @@ footer {
     position: fixed;
     bottom: 0;
 }
-</style>
+</style> -->
 <!-- <div> -->
 
     <header class="navbar-fixed-top" id="head">

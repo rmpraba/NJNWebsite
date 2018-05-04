@@ -1,11 +1,12 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 @extends('layouts.sidebar')
 @section('content')
-<style type="text/css">
+<!-- <style type="text/css">
 	#tchomemain{
 		margin-top: 5%;
 		margin-bottom: 2%;
 	}
-</style>
+</style> -->
  <div id="tchomemain" class="row">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">
