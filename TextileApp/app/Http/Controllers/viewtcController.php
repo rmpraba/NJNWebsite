@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\training_centres;
 use DB;
 use Session;
 
@@ -16,7 +16,9 @@ class viewtcController extends Controller
     }
      public function deletetcview($centreid)
     { 
-         DB::delete('delete from training_centres WHERE centre_id=?',[$centreid]);
-         return view('pages.success');  
+         // DB::delete('delete from training_centres WHERE centre_id=?',[$centreid]);
+        $tc = training_centres::where('centre_id', $centreid);
+        $tc->delete();
+        return view('pages.success');  
     }
 }

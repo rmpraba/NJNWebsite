@@ -63,7 +63,7 @@ class batchcreateController extends Controller
     }
     public function editbatchlist($batchid)
     {  
-        echo $batchid;
+        // echo $batchid;
         $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$batchid]);
         $start = strtotime($batchinfo[0]->start_date);
         $startdate = date('Y-m-d',$start);
@@ -74,12 +74,18 @@ class batchcreateController extends Controller
     }
      public function batchupdate(Request $req)
     { 
-         DB::update('update batches set batch_name=?,training_type=?,start_date=?,end_date=?,no_of_stud=? WHERE batch_id=?',[$req->input('batchname'),$req->input('trainingtype'),$req->input('startdate'),$req->input('enddate'),$req->input('noofstud'),$req->input('batchid')]);
-         return view('pages.success');  
+         // DB::update('update batches set batch_name=?,training_type=?,start_date=?,end_date=?,no_of_stud=? WHERE batch_id=?',[$req->input('batchname'),$req->input('trainingtype'),$req->input('startdate'),$req->input('enddate'),$req->input('noofstud'),$req->input('batchid')]);
+        // $batch = batches::where ('batch_id', $req->input('batchid')); 
+        $new_batch_data = array('batch_name'=>$req->input('batchname'),'training_type'=>$req->input('trainingtype'),'start_date'=>$req->input('startdate'),'end_date'=>$req->input('enddate'),'no_of_stud'=>$req->input('noofstud'));
+        $batch = batches::where ('batch_id', $req->input('batchid'))->update($new_batch_data);
+        return view('pages.success');  
     }
      public function deletebatchlist($batchid)
     { 
-         DB::delete('delete from batches WHERE batch_id=?',[$batchid]);
-         return view('pages.success');  
+         // DB::delete('delete from batches WHERE batch_id=?',[$batchid]);
+         // return view('pages.success');  
+        $tc = batches::where('batch_id', $batchid);
+        $tc->delete();
+        return view('pages.success'); 
     }
 }
