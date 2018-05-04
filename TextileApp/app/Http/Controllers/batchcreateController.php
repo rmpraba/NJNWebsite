@@ -77,15 +77,20 @@ class batchcreateController extends Controller
          // DB::update('update batches set batch_name=?,training_type=?,start_date=?,end_date=?,no_of_stud=? WHERE batch_id=?',[$req->input('batchname'),$req->input('trainingtype'),$req->input('startdate'),$req->input('enddate'),$req->input('noofstud'),$req->input('batchid')]);
         // $batch = batches::where ('batch_id', $req->input('batchid')); 
         $new_batch_data = array('batch_name'=>$req->input('batchname'),'training_type'=>$req->input('trainingtype'),'start_date'=>$req->input('startdate'),'end_date'=>$req->input('enddate'),'no_of_stud'=>$req->input('noofstud'));
-        $batch = batches::where ('batch_id', $req->input('batchid'))->update($new_batch_data);
+        $batchid = $req->input('batchid');
+        // $batch = batches::where ('batch_id', $req->input('batchid'))->update($new_batch_data);
+        $batch=new batches();
+        $batch->updateBatch($new_batch_data,$batchid);
         return view('pages.success');  
     }
      public function deletebatchlist($batchid)
     { 
          // DB::delete('delete from batches WHERE batch_id=?',[$batchid]);
-         // return view('pages.success');  
-        $tc = batches::where('batch_id', $batchid);
-        $tc->delete();
+         // return view('pages.success'); 
+        // $tc = batches::where('batch_id', $batchid);
+        // $tc->delete();
+        $batch=new batches();
+        $batch->deleteBatch($batchid);
         return view('pages.success'); 
     }
 }

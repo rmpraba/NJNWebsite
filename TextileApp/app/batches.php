@@ -18,4 +18,11 @@ class batches extends Model
 				'created_by',
 				'centre_id'
     			];
+    public function deleteBatch($batchid){
+    	$batch = batches::where('batch_id', $batchid);        
+        return $batch->delete();
+    }
+    public function updateBatch($new_batch_data,$batchid){
+    	$batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+    }
 }
