@@ -48,7 +48,7 @@
           <td>   
               <label for="usr">District</label>
               <select class="form-control" id="sel1" name="district" required>
-              <option value="" disabled selected>Select your District</option>
+              <option value="" disabled selected>{{$training_centres[0]->district}}</option>
               @foreach($districts as $itr)
               <option>{{ $itr->district_name }}</option>
               @endforeach
@@ -59,7 +59,7 @@
           <td>    
               <label for="usr">State</label>
               <select class="form-control" id="sel1" name="state" required>
-              <option value="" disabled selected>Select your State</option>
+              <option value="" disabled selected>{{$training_centres[0]->state}}</option>
               @foreach($states as $itr)
               <option>{{ $itr->state_names }}</option>
               @endforeach
@@ -114,7 +114,7 @@
         <tr>
           <td>           
               <label for="usr">Training centre started on</label>
-              <input type="date" class="form-control" id="usr" name="trainingstart" required>
+              <input type="date" class="form-control" id="usr" name="trainingstart" required value="{{$training_centres[0]->training_start}}">
           </td><td><p class="star">*</p></td>
           <td>      
               <label for="usr">Aadhar Card</label>
@@ -129,7 +129,7 @@
           <td>     
               <label for="usr">Type of centre</label>
               <select class="form-control" id="sel1" name="centre" required>
-              <option value="" disabled selected>Select centre type</option>
+              <option value="" disabled selected>{{$training_centres[0]->centre_type}}</option>
               @foreach($types_of_centres as $itr)
               <option>{{ $itr->types }}</option>
               @endforeach
@@ -140,7 +140,7 @@
           <td>        
               <label for="usr">Training subject</label>
               <select class="form-control" id="sel1" name="training">
-              <option value="" disabled selected>Select subject</option>
+              <option value="" disabled selected>{{$training_centres[0]->training}}</option>
               @foreach($training_centre_subjects as $itr)
               <option>{{ $itr->subjects }}</option>
               @endforeach  
