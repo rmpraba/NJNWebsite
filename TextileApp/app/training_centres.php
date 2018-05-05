@@ -32,4 +32,13 @@ class training_centres extends Model
 							'centre_status'
 
                      ];
+    public function fetchTcList(){
+    	$tc = training_centres::all(); 
+        return $tc;
+    }
+    public function deleteTc($centreid){
+    	$tc = training_centres::where('centre_id', $centreid);        
+        return $tc->delete();
+    }
+
 }

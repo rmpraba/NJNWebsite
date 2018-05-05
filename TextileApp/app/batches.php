@@ -24,4 +24,22 @@ class batches extends Model
     public function updateBatch($new_batch_data,$batchid){
     	$batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
     }
+    public function fetchBatchList(){
+        $batches = batches::all(); 
+        return $batches;
+    }
+    public function fetchPendingBatchList(){
+        $batches = batches::where('status','Pending')->get(); 
+        return $batches;
+    }
+    public function approveBatch($batchid,$new_batch_data){
+        $batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+    }
+    public function rejectBatch($batchid,$new_batch_data){
+        $batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+    }
+    public function fetchBatchSpecInfo($batchid){
+        $batchinfo = batches::where('batch_id', $batchid)->get(); 
+        return $batchinfo;
+    }
 }

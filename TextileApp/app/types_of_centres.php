@@ -9,4 +9,8 @@ class types_of_centres extends Model
          protected $fillable=[   
 							'types'
 							];
+	public function fetchCentreTypes(){
+    	$types = types_of_centres::all(); 
+        return $types;
+    }
 }

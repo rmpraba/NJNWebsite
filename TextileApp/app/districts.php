@@ -11,4 +11,12 @@ class districts extends Model
 							'district_code',
 							'division'
                      ];
+    public function fetchDivisionInfo($district){
+    	$division = districts::where('district_name',$district)->get(); 
+        return $division;
+    }
+    public function fetchDistrict(){
+    	$district = districts::all(); 
+        return $district;
+    }
 }

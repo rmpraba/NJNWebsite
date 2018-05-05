@@ -9,4 +9,8 @@ class training_centre_subjects extends Model
     protected $fillable=[   
 							'subjects'
 							];
+	public function fetchSubject(){
+    	$subjects = training_centre_subjects::all(); 
+        return $subjects;
+    }
 }

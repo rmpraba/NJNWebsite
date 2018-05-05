@@ -12,4 +12,11 @@ class sequences extends Model
 							'batch_prefix',
 							'centre_prefix'
 							];
+	public function fetchSequence(){
+    	$sequence = sequences::all(); 
+        return $sequence;
+    }
+    public function updateSequence($info){
+    	return batches::where ('id', '1')->update($info);
+    }
 }

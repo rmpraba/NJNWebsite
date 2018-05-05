@@ -11,7 +11,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use DB;
 use Session;
 use App\batches;
+use App\users;
 use App\training_centres;
+use App\districts;
+use App\training_centre_subjects;
+use App\states;
+use App\types_of_centres;
+use App\sequences;
+use App\training_batches;
 
 class TdController extends Controller
 {
@@ -20,21 +27,28 @@ class TdController extends Controller
         $username=session()->get('username');
         $password=session()->get('password');
 
-
         $valiueofemil=$ob->email;
-
-        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
+        
+        $usercall= new users();
+        $info = $usercall->fetchUserInfo($username,$password);
         $district=$info[0]->district;
 
-        $division = DB::select('SELECT * FROM districts WHERE district_name= ?' , [ $district ]);
+        $districtcall=new districts();
+        $division = $districtcall->fetchDivisionInfo($district);
         $div=$division[0]->division;
 
-        $districts = DB::select('select * from districts');
-        $subjects = DB::select('select * from training_centre_subjects');
-        $states = DB::select('select * from states');
-        $tocs = DB::select('select * from types_of_centres');
+        $districts = $districtcall->fetchDistrict();
+
+        $subjectcall= new training_centre_subjects();
+        $subjects = $subjectcall->fetchSubject();
+
+        $statecall = new states();
+        $states = $statecall->fetchState();
+
+        $centretypecall=new types_of_centres();
+        $tocs = $centretypecall->fetchCentreTypes();
+
         return view('tdview.training_center_form',compact('districts','states','tocs','district','div','subjects'));
-        // return view('tdview.training_center_form',['districts'=>$districts],['toc'=>$tocs]); 
     }
     
     public function insert(Request $req)
@@ -42,25 +56,31 @@ class TdController extends Controller
         $username=session()->get('username');
         $password=session()->get('password');
 
-        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
+        $usercall= new users();
+        $info = $usercall->fetchUserInfo($username,$password);
         $district=$info[0]->district;
-        $districtinfo = DB::select('SELECT * FROM districts WHERE district_name=?' , [$district]);
+
+        $districtcall=new districts();
+        $districtinfo = $districtcall->fetchDivisionInfo($district);
         $district_code= $districtinfo[0]->district_code;
-        $seqinfo = DB::select('SELECT * FROM sequences');
+
+        $seqcall = new sequences();
+        $seqinfo = $seqcall->fetchSequence();
         $centre_id=$seqinfo[0]->centre_id;
         if($centre_id<10)
-            $batch_id="0".$centre_id;
+            $centre_id="0".$centre_id;
         $centre_prefix=$seqinfo[0]->centre_prefix;
         $centre_code=$district_code.$centre_prefix.$centre_id;
         $newcentre_id=$centre_id+1;
-        DB::update('update sequences set centre_id = ?',[$newcentre_id]);
 
+        $newid = array('centre_id'=>$newcentre_id);
+        $seqcall->updateSequence($newid);
 
         $training_centre = new training_centres;
         $training_centre->name=$req->name;
         $training_centre->centre_id=$centre_code;
         $training_centre->centre_name=$req->centre_name;
-        $training_centre->district_id='data';
+        $training_centre->district_id=$district_code;
         $training_centre->upload_pic='data';
         $training_centre->street=$req->street;
         $training_centre->district=$req->district; 
@@ -93,47 +113,50 @@ class TdController extends Controller
 
     public function fetchtclist(Request $obj)
     {
-     $tcinfo = DB::select('SELECT * FROM training_centres');  
+      $tccall=new training_centres();
+      $tcinfo = $tccall->fetchTcList();  
       return view('tdview.viewtc')->with(array('tcinfo'=>$tcinfo));
     }
-     public function deletetcview($centreid)
+    public function deletetcview($centreid)
     { 
-         // DB::delete('delete from training_centres WHERE centre_id=?',[$centreid]);
-        $tc = training_centres::where('centre_id', $centreid);
-        $tc->delete();
+        $tccall=new training_centres();
+        $tc = $tccall->deleteTc($centreid);
         return view('pages.success');  
     }
 
 
-
     public function fetchbatchlistview(Request $obj)
     {
-     $batchinfo = DB::select('SELECT * FROM batches');  
-      return view('tcview.viewbatchlist')->with(array('batchinfo'=>$batchinfo));
+        $batchcall = new batches();
+        $batchinfo=$batchcall->fetchBatchList(); 
+        return view('tcview.viewbatchlist')->with(array('batchinfo'=>$batchinfo));
     }
     public function fetchbatchlist(Request $obj)
     {
-     // -- $batchinfo = DB::select('SELECT * FROM batches WHERE status="Pending"');  
-      $batchinfo = batches::where('status', "Pending")->get();
-      return view('tdview.viewbatch')->with(array('batchinfo'=>$batchinfo));
+        $batchcall = new batches();
+        $batchinfo = $batchcall->fetchPendingBatchList();
+        return view('tdview.viewbatch')->with(array('batchinfo'=>$batchinfo));
     }
     public function approveBatch($id)
     {
-        // DB::update('update batches set status="Approved" WHERE batch_id=?',[$id]); 
+        $batchcall = new batches();
         $new_batch_data = array('status'=>"Approved");
-        $batch = batches::where ('batch_id', $id)->update($new_batch_data);
-        $batchinfo = batches::where('batch_id', $id)->get();
-        // $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$id]);
+        $batch = $batchcall->approveBatch($id,$new_batch_data);
+
+        $batchinfo = $batchcall->fetchBatchSpecInfo($id);
+
         $data1 = array("centre_id"=>$batchinfo[0]->centre_id,"batch_id"=>$batchinfo[0]->batch_id,"batch_name"=>$batchinfo[0]->batch_name,"status"=>$batchinfo[0]->status,"created_by"=>$batchinfo[0]->created_by,"batch_type"=>$batchinfo[0]->training_type);
-        DB::table('training_batches')->insert(array($data1));  
+
+        $trainingbatchcall = new training_batches();
+        $tb=$trainingbatchcall->insertTrainingBatch($data1);
+        // DB::table('training_batches')->insert(array($data1));  
         return view('pages.success');
     }
     public function rejectBatch($id)
     { 
-        // DB::update('update batches set status="Rejected" WHERE batch_id=?',[$id]); 
+        $batchcall = new batches();
         $new_batch_data = array('status'=>"Rejected");
-        $batch = batches::where ('batch_id', $id)->update($new_batch_data);
-
+        $batch = $batchcall->rejectBatch($id,$new_batch_data);
         return view('pages.success');  
     }
 

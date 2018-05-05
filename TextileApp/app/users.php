@@ -12,4 +12,8 @@ class users extends Model
 							'password',
 							'centre_id'
 							];
+    public function fetchUserInfo($username,$password){
+    	$district = users::where('username', $username)->where('password', $password)->get();      
+        return $district;
+    }
 }
