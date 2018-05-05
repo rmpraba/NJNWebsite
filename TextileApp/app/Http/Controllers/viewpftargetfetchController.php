@@ -36,18 +36,18 @@ class viewpftargetfetchController extends BaseController
       // echo "hi".$id;
         // $info = DB::select('SELECT * FROM training_batches b join training_centre t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.id) join districts d on(d.district_code=t.district_id) WHERE b.id=?' , [$id]);
         $info = DB::select('SELECT ba.start_date,ba.end_date,b.batch_type,t.centre_type,d.district_name,d.district_code,d.division,
-p.general_male_target as genpm,p.general_female_target as genpf,p.general_target_total as genpt,p.tsp_male_target as tsppm
+p.general_male_target as genpm,p.general_female_target as genpf,p.general_total_target as genpt,p.tsp_male_target as tsppm
 ,p.tsp_female_target as tsppf,
-p.tsp_target_total as tsppt,p.scp_male_target as scppm,p.scp_female_target as scppf,
-p.scp_target_total as scppt,p.min_male_target as minpm,
-p.min_female_target as minpf,p.min_target_total as minpt,
-f.general_male_target as genfm,f.general_female_target as genff,f.general_target_total as genft ,
+p.tsp_total_target as tsppt,p.scp_male_target as scppm,p.scp_female_target as scppf,
+p.scp_total_target as scppt,p.min_male_target as minpm,
+p.min_female_target as minpf,p.min_total_target as minpt,
+f.general_male_target as genfm,f.general_female_target as genff,f.general_total_target as genft ,
 f.tsp_male_target as tspfm,f.tsp_female_target as tspff,
-f.tsp_target_total as tspft,f.scp_male_target as scpfm,f.scp_female_target as scpff,f.scp_target_total as scpft,
-f.min_male_target as minfm,f.min_female_target as minff,f.min_target_total as minft  
+f.tsp_total_target as tspft,f.scp_male_target as scpfm,f.scp_female_target as scpff,f.scp_total_target as scpft,
+f.min_male_target as minfm,f.min_female_target as minff,f.min_total_target as minft  
 FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba 
 on(b.batch_id=ba.batch_id) join districts d on(d.district_code=t.district_id)
-join physical_target p on(p.centre_id=b.centre_id) join financial_target f on(f.centre_id=b.centre_id)
+join physical_targets p on(p.centre_id=b.centre_id) join financial_targets f on(f.centre_id=b.centre_id)
  WHERE b.batch_id=? and p.batch_id=b.batch_id and f.batch_id=b.batch_id and f.batch_id=p.batch_id
  and f.centre_id=p.centre_id' , [$id]);
         return json_encode($info);          

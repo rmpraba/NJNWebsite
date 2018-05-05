@@ -15,7 +15,6 @@ class batches extends Model
 				'end_date',
 				'status',
 				'district_id',
-				'created_by',
 				'centre_id'
     			];
     public function deleteBatch($batchid){

@@ -19,7 +19,7 @@ class training_centres extends Model
 							'mobile_number',
 							'landline',
 							'website_id',
-							'pancard',
+							'pan_card',
 							'pan_card_image',
 							'gst',
 							'gst_image',

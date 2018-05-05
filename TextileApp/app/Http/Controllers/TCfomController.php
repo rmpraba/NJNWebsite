@@ -25,7 +25,7 @@ class TCfomController extends Controller
         $div=$division[0]->division;
 
         $districts = DB::select('select * from districts');
-        $subjects = DB::select('select * from training_centre_subject');
+        $subjects = DB::select('select * from training_centre_subjects');
         $states = DB::select('select * from states');
         $tocs = DB::select('select * from types_of_centres');
         return view('tdview.training_center_form',compact('districts','states','tocs','district','div','subjects'));

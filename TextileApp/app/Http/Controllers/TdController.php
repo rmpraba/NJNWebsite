@@ -12,7 +12,7 @@ use DB;
 use Session;
 use App\batches;
 
-class batchcreateController extends Controller
+class TdController extends Controller
 {
     public $district;
     public $batch_id;

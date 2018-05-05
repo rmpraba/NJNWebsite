@@ -51,11 +51,11 @@ class insertpftargetController extends BaseController
         // echo $batch."---".$type;
         // echo $genpm."---".$genpf;
         
-    	$data1 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genpm,"general_female_target"=>$genpf,"general_target_total"=>$genpt,"tsp_male_target"=>$tsppm,"tsp_female_target"=>$tsppf,"tsp_target_total"=>$tsppt,"scp_male_target"=>$scppm,"scp_female_target"=>$scppf,"scp_target_total"=>$scppt,"min_male_target"=>$minpm,"min_female_target"=>$minpf,"min_target_total"=>$minpt);
-        $data2 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genfm,"general_female_target"=>$genff,"general_target_total"=>$genft,"tsp_male_target"=>$tspfm,"tsp_female_target"=>$tspff,"tsp_target_total"=>$tspft,"scp_male_target"=>$scpfm,"scp_female_target"=>$scpff,"scp_target_total"=>$scpft,"min_male_target"=>$minfm,"min_female_target"=>$minff,"min_target_total"=>$minft);
+    	$data1 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genpm,"general_female_target"=>$genpf,"general_total_target"=>$genpt,"tsp_male_target"=>$tsppm,"tsp_female_target"=>$tsppf,"tsp_total_target"=>$tsppt,"scp_male_target"=>$scppm,"scp_female_target"=>$scppf,"scp_total_target"=>$scppt,"min_male_target"=>$minpm,"min_female_target"=>$minpf,"min_total_target"=>$minpt);
+        $data2 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genfm,"general_female_target"=>$genff,"general_total_target"=>$genft,"tsp_male_target"=>$tspfm,"tsp_female_target"=>$tspff,"tsp_total_target"=>$tspft,"scp_male_target"=>$scpfm,"scp_female_target"=>$scpff,"scp_total_target"=>$scpft,"min_male_target"=>$minfm,"min_female_target"=>$minff,"min_total_target"=>$minft);
         // $data2 = array("id"=>'2',"name"=>"demo.expertphp.in","details"=>"Find running example");
-        DB::table('physical_target')->insert(array($data1));
-        DB::table('financial_target')->insert(array($data2));
+        DB::table('physical_targets')->insert(array($data1));
+        DB::table('financial_targets')->insert(array($data2));
 
         return view('pages.success');
 
