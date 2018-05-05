@@ -20,6 +20,21 @@ use App\training_batches;
 
 class TdController extends Controller
 {
+
+     public function show($centreid)
+    {   
+        
+        $districts=districts::all();
+        $states=states::all();
+        $types_of_centres=types_of_centres::all();
+        $training_centre_subjects=training_centre_subjects::all();
+        
+        $training_centres['training_centres']=training_centres::where('centre_id',$centreid)->get();
+
+        return view('tdview.viewtcedit',$training_centres,compact('districts','states','types_of_centres','training_centre_subjects'));
+
+    }
+
      public function tcform(Request $ob)
     {
         $username=session()->get('username');

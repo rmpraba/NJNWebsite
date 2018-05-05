@@ -68,3 +68,5 @@ Route::post('/batch/{batchid}', 'TcController@editbatchlist');
 Route::post('/updatebatchinfo', 'TcController@batchupdate');
 Route::post('/deletebatchlist/{batchid}', 'TcController@deletebatchlist');
 Route::post('/deletetcview/{centreid}', 'TdController@deletetcview');
+
+Route::post('/viewtcedit/{centreid}','TdController@show');

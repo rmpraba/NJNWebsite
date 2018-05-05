@@ -3,10 +3,10 @@
 
 @section('content')
  <div class="row" id="trainingcentreformcontainer"> 
-    <div class="col-md-4">
+    <div class="col-md-3">
          @include('includes.tdsidebar')
     </div>
-     <div class="col-md-8">
+     <div class="col-md-9">
         <table>
       
               <form action="" method="post" >
@@ -142,7 +142,7 @@
               </select>            		
           </td><td><p class="star">*</p></td>
           <td>  	 
-              <label for="usr"></label>
+              <label for="usr">&nbsp</label>
               <input align="right" type="submit" class="btn btn-primary btn-block" id="usr">
           </td><td>&nbsp</td>
         </tr>      

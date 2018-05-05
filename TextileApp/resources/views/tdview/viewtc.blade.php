@@ -17,7 +17,7 @@
 
             
 
-            <th>ID</th><th>Owner Name</th><th>Center ID</th><th>District ID</th><th>Upload Picture</th><th>street</th><th>district</th><th>state</th><th>PIN Code</th><th>Email</th><th>Mobile number</th><th>landline</th><th>website_id</th><th>PAN Card</th><th>PAN image</th><th>GST</th><th>GST Image</th><th>Training_start</th><th>Adhar Card</th><th>Adhar Image</th><th>Center Type</th><th>Training Subject</th><th>Center Status</th><th>Update/Delete</th>
+            <th>ID</th><th>Owner Name</th><th>Center ID</th><th>District ID</th><th>Upload Picture</th><th>street</th><th>district</th><th>state</th><th>PIN Code</th><th>Email</th><th>Mobile number</th><th>landline</th><th>website_id</th><th>PAN Card</th><th>PAN image</th><th>GST</th><th>GST Image</th><th>Training_start</th><th>Adhar Card</th><th>Adhar Image</th><th>Center Type</th><th>Training Subject</th><th>Center Status</th><th>Update</th><th>Delete</th>
         </tr>
             @foreach($tcinfo as $row)
             <tr>
@@ -45,7 +45,10 @@
                 <td>{{$row->training}}</td>
                 <td>{{$row->centre_status}}</td>
                 <td>
-                    <i id="edit" class="glyphicon glyphicon-edit"></i>                    
+                    <form id="viewtcedit.{{$row->centre_id}}" action="{{ url('viewtcedit/'.$row->centre_id) }}" method="POST">
+                    {{ csrf_field() }}<a onclick="document.getElementById('viewtcedit.{{$row->centre_id}}').submit();"><i class="glyphicon glyphicon-edit"></i></a></form>
+                </td>
+                <td>
                     <form id="deleteform.{{$row->centre_id}}" action="{{ url('deletetcview/'.$row->centre_id) }}" method="POST">
                     {{ csrf_field() }}<a onclick="document.getElementById('deleteform.{{$row->centre_id}}').submit();"><i class="glyphicon glyphicon-trash"></i></a></form>                    
                 </td>           
