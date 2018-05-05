@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function()
 {
     return View::make('pages.login');
@@ -49,36 +45,26 @@ Route::get('training_center_form', function()
 });
 Route::post('/login', 'loginController@login');
 
-Route::get('/pftarget/ajax/{id}','pftargetfetchController@getBatchList');
-Route::get('/pftarget/batchajax/{id}','pftargetfetchController@getBatchInfo');
-Route::get('/pftarget', 'pftargetfetchController@pftargetfetch');
-Route::post('insertpftarget', 'insertpftargetController@insertpf');
+Route::get('/pftarget/ajax/{id}','TcController@getBatchList');
+Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');
+Route::get('/pftarget', 'TcController@pftargetfetch');
+Route::post('insertpftarget', 'TcController@insertpf');
 
-Route::get('/viewpftarget', 'viewpftargetfetchController@viewpftargetfetch');
-Route::get('/viewpftarget/ajax/{id}','viewpftargetfetchController@viewgetBatchList');
-Route::get('/viewpftarget/batchajax/{id}','viewpftargetfetchController@viewgetBatchInfo');
+Route::get('/viewpftarget', 'TcController@viewpftargetfetch');
+Route::get('/viewpftarget/ajax/{id}','TcController@viewgetBatchList');
+Route::get('/viewpftarget/batchajax/{id}','TcController@viewgetBatchInfo');
 
-Route::get('/training_center_form','TCfomController@tcform');
-Route::post('/training_center_form','TCfomController@insert');
+Route::get('/training_center_form','TdController@tcform');
+Route::post('/training_center_form','TdController@insert');
 
-// Route::get('batchcreate', 'batchcreateController@batch');
-// Route::post('batchcreate', 'batchcreateController@batchinsert');
-// Route::get('approvebatch', 'batchapprovalController@fetchbatchlist');
-
-Route::get('viewtc','viewtcController@fetchtclist');
-
-
-Route::get('/batchcreate', 'batchcreateController@batch');
-Route::post('/batchcreate', 'batchcreateController@batchinsert');
-Route::get('/approvebatch', 'batchapprovalController@fetchbatchlist');
-Route::post('/approvebatch/{id}','batchapprovalController@approveBatch');
-Route::post('/rejectbatch/{id}','batchapprovalController@rejectBatch');
-Route::get('/batchlist', 'batchapprovalController@fetchbatchlistview');
-Route::post('/batch/{batchid}', 'batchcreateController@editbatchlist');
-Route::post('/updatebatchinfo', 'batchcreateController@batchupdate');
-Route::post('/deletebatchlist/{batchid}', 'batchcreateController@deletebatchlist');
-Route::post('/deletetcview/{centreid}', 'viewtcController@deletetcview');
-// Route::post('/insertpftarget', function()
-// {
-//     echo "ya its working";
-// });
+Route::get('viewtc','TdController@fetchtclist');
+Route::get('/batchcreate', 'TcController@batch');
+Route::post('/batchcreate', 'TcController@batchinsert');
+Route::get('/approvebatch', 'TdController@fetchbatchlist');
+Route::post('/approvebatch/{id}','TdController@approveBatch');
+Route::post('/rejectbatch/{id}','TdController@rejectBatch');
+Route::get('/batchlist', 'TdController@fetchbatchlistview');
+Route::post('/batch/{batchid}', 'TcController@editbatchlist');
+Route::post('/updatebatchinfo', 'TcController@batchupdate');
+Route::post('/deletebatchlist/{batchid}', 'TcController@deletebatchlist');
+Route::post('/deletetcview/{centreid}', 'TdController@deletetcview');
