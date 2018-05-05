@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -11,12 +9,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use DB;
 use Session;
 use App\batches;
+use App\users;
+use App\training_centres;
+use App\districts;
+use App\training_centre_subjects;
+use App\states;
+use App\types_of_centres;
+use App\sequences;
+use App\training_batches;
 
 class TcController extends Controller
 {
-    public $district;
-    public $batch_id;
-    public $batch_prefix;
     public function batch()
     {        
         return view('tcview.batchcreate');
@@ -25,21 +28,28 @@ class TcController extends Controller
     {
         $username=session()->get('username');
         $password=session()->get('password');
-        // echo $username."----",$password;
-        $info = DB::select('SELECT * FROM users WHERE username = ? AND password = ?' , [$username,$password]);
+        
+        $usercall= new users();
+        $info = $usercall->fetchUserInfo($username,$password);
         $district=$info[0]->district;
         $centreid=$info[0]->centre_id;
-        $districtinfo = DB::select('SELECT * FROM districts WHERE district_name=?' , [$district]);
+
+        $districtcall=new districts();
+        $districtinfo = $districtcall->fetchDivisionInfo($district);
         $district_code= $districtinfo[0]->district_code;
-        $seqinfo = DB::select('SELECT * FROM sequences');       
+
+        $seqcall = new sequences();
+        $seqinfo = $seqcall->fetchSequence();      
         $batch_id=$seqinfo[0]->batch_id;
         if($batch_id<10)
             $batch_id="0".$batch_id;
         $batch_prefix=$seqinfo[0]->batch_prefix;
         $batch_code=$district_code.$batch_prefix.$batch_id;
         $newbatch_id=$batch_id+1;
-        DB::update('update sequences set batch_id = ?',[$newbatch_id]);
-        // echo "Your batch id is here...".$district.$batch_prefix.$batch_id;
+
+        $newid = array('batch_id'=>$newbatch_id);
+        $seqcall->updateSequence($newid);
+        
         $bat =new batches;
         $bat->batch_id=$batch_code;
         $bat->district_id=$district_code;
@@ -52,7 +62,6 @@ class TcController extends Controller
         $bat->centre_id=$centreid;
         $bat->save();
         if ($bat->save()) {
-            // echo "inserted successfully";
             return view('pages.success');
         }
         else
@@ -62,9 +71,8 @@ class TcController extends Controller
     }
     public function editbatchlist($batchid)
     {  
-        // echo $batchid;
-        // $batchinfo = DB::select('SELECT * FROM batches WHERE batch_id= ? ',[$batchid]);
-        $batchinfo = batches::where('batch_id', $batchid)->get();
+        $batchcall=new batches();        
+        $batchinfo = $batchcall->fetchBatchSpecInfo($batchid);
         $start = strtotime($batchinfo[0]->start_date);
         $startdate = date('Y-m-d',$start);
         $end = strtotime($batchinfo[0]->end_date);
@@ -87,23 +95,20 @@ class TcController extends Controller
         return view('pages.success'); 
     }
 
-
     public function pftargetfetch(Request $req)
     {
-      $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
+        $tc = new training_centres();
+        $tcs =  $tc->fetchtcforList();
         return view('tcview.pftarget',compact('tcs'));
     }
     public function getBatchList($id)
     {
-      // echo "hi".$id;
-        $batches = DB::table("training_batches")
-                    ->where("centre_id",$id)
-                    ->pluck("batch_name","batch_id");
+        $tb = new training_batches();
+        $batches=$tb->fetchtrainingBatch($id);
         return json_encode($batches);
     } 
     public function getBatchInfo($id)
     {
-      // echo "hi".$id;
         $info = DB::select('SELECT * FROM training_batches b join training_centres t on(b.centre_id=t.centre_id) join batches ba on(b.batch_id=ba.batch_id) join districts d on(d.district_code=t.district_id) WHERE b.batch_id=?' , [$id]);
         return json_encode($info);          
     }  
@@ -111,15 +116,14 @@ class TcController extends Controller
 
      public function viewpftargetfetch(Request $req)
     {
-      $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
+        $tc = new training_centres();
+        $tcs =  $tc->fetchtcforList();
         return view('tcview.viewpftarget',compact('tcs'));
     }
     public function viewgetBatchList($id)
     {
-      // echo "hi".$id;
-        $batches = DB::table("training_batches")
-                    ->where("centre_id",$id)
-                    ->pluck("batch_name","batch_id");
+        $tb = new training_batches();
+        $batches=$tb->fetchtrainingBatch($id);
         return json_encode($batches);
     } 
     public function viewgetBatchInfo($id)

@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -149,7 +147,6 @@ class TdController extends Controller
 
         $trainingbatchcall = new training_batches();
         $tb=$trainingbatchcall->insertTrainingBatch($data1);
-        // DB::table('training_batches')->insert(array($data1));  
         return view('pages.success');
     }
     public function rejectBatch($id)

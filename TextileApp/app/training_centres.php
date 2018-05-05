@@ -40,5 +40,9 @@ class training_centres extends Model
     	$tc = training_centres::where('centre_id', $centreid);        
         return $tc->delete();
     }
+    public function fetchtcforList(){
+    	$tc = training_centres::pluck('centre_name','centre_id');        
+        return $tc;
+    }
 
 }

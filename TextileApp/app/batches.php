@@ -23,6 +23,7 @@ class batches extends Model
     }
     public function updateBatch($new_batch_data,$batchid){
     	$batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+        return $batch;
     }
     public function fetchBatchList(){
         $batches = batches::all(); 
@@ -34,9 +35,11 @@ class batches extends Model
     }
     public function approveBatch($batchid,$new_batch_data){
         $batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+        return $batch;
     }
     public function rejectBatch($batchid,$new_batch_data){
         $batch = batches::where ('batch_id', $batchid)->update($new_batch_data);
+        return $batch;
     }
     public function fetchBatchSpecInfo($batchid){
         $batchinfo = batches::where('batch_id', $batchid)->get(); 

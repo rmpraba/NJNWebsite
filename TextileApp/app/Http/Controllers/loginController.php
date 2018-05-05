@@ -20,13 +20,8 @@ class loginController extends BaseController
     	$password = $req->input('pass');
         session()->put('username',$username);
         session()->put('password',$password);
-    	// echo $username."----".$password;
-    	if(DB::connection()->getDatabaseName())
-        {
-     	// echo "connected successfully to database ".DB::connection()->getDatabaseName();
-   		}
+
    		$userrole = DB::select('SELECT * FROM user_roles WHERE user_id in(SELECT id FROM users WHERE username = ? AND password = ?)' , [$username,$password]);
-    	// $checkLogin = DB::table('users')->where(['username'=>$username,'password'=>$password])->get();
     	if(count($userrole) > 0){
     		if($userrole[0]->role_id =='TD')  
     		return view('pages.tdhome');       
@@ -34,7 +29,6 @@ class loginController extends BaseController
     		return view('pages.tchome');			    		
     	}
     	else{
-    		// echo "Login Fail";
     		return view('pages.loginfail');
     	}
     }

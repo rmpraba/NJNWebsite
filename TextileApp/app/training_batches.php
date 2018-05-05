@@ -19,4 +19,8 @@ class training_batches extends Model
     	$batch = training_batches::create( $array );        
         return $batch;
     } 
+    public function fetchtrainingBatch($centreid){
+    	$batch = training_batches::where("centre_id",$centreid)->pluck('batch_name','batch_id');
+        return $batch;
+    }
 }
