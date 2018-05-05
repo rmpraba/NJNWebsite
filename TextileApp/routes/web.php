@@ -70,3 +70,4 @@ Route::post('/deletebatchlist/{batchid}', 'TcController@deletebatchlist');
 Route::post('/deletetcview/{centreid}', 'TdController@deletetcview');
 
 Route::post('/viewtcedit/{centreid}','TdController@show');
+Route::post('/viewtcupdate','TdController@updatetc');

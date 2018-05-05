@@ -4,20 +4,21 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<div class="container">
-  <div class="col-md-2">
-     
+<div class="container" id="edittccontainer">
+  <div class="col-md-3">
+     @include('includes.tdsidebar')
   </div>
-  <div class="col-md-10">
+  <div class="col-md-9">
     <table>
       <form action="/viewtcupdate" method="post" >
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <input type="hidden" name="id" value="{{$training_centres[0]->id}}">
+      <input type="hidden" name="centreid" value="{{$training_centres[0]->centre_id}}">
       <tr>
           <td colspan="4">
             <center><label for="usr">&nbsp</label></center>  
             <center><label for="usr">&nbsp</label></center>  
-            <center><label for="usr">UPDATE</label></center>  
+            <center><h1 for="usr" style="color: #b30000">Update Training Centre</h1></center>  
               
           </td>
              
