@@ -39,8 +39,9 @@ class loginController extends BaseController
          if (Auth::attempt($userdata)) {
             $user=new Users();
             $userinfo=$user->fetchUserId($username);
+            // echo $userinfo[0]->user_id;
             $userrole=new user_roles();
-            $role=$userrole->fetchRole($userinfo[0]->id);
+            $role=$userrole->fetchRole($userinfo[0]->user_id);
             if($role[0]->role_id =='TD')  
                 return view('pages.tdhome');       
             if($role[0]->role_id =='TC')  

@@ -12,7 +12,8 @@ class users extends Authenticatable
 							'district',
 							'username',
 							'password',
-							'centre_id'
+							'centre_id',
+							'user_id'
 							];
 	protected $hidden = [
         'password', 'remember_token',
