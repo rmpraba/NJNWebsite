@@ -44,6 +44,7 @@ Route::get('training_center_form', function()
     return View::make('pages.tchome');
 });
 Route::post('/login', 'loginController@login');
+Route::get('/logout', 'loginController@logout');
 
 Route::get('/pftarget/ajax/{id}','TcController@getBatchList');
 Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');

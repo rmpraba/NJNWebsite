@@ -7,9 +7,13 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Session;
-// use Illuminate\Support\Facades\DB;
+use App\users;
+use Hash;
+use App\user_roles;
+
 
 
 class loginController extends BaseController
@@ -20,16 +24,36 @@ class loginController extends BaseController
     	$password = $req->input('pass');
         session()->put('username',$username);
         session()->put('password',$password);
+        // $userdata = array(
+        // 'centre_id' => '',
+        // 'district' => 'Mysore',
+        // 'username'     => $username,
+        // 'password'  => Hash::make($password)
+        // );
+        // users::insert($userdata);
+        $userdata = array(            
+        'username'     => $username,
+        'password'  => $password
+        );
 
-   		$userrole = DB::select('SELECT * FROM user_roles WHERE user_id in(SELECT id FROM users WHERE username = ? AND password = ?)' , [$username,$password]);
-    	if(count($userrole) > 0){
-    		if($userrole[0]->role_id =='TD')  
-    		return view('pages.tdhome');       
-			if($userrole[0]->role_id =='TC')  
-    		return view('pages.tchome');			    		
-    	}
-    	else{
-    		return view('pages.loginfail');
-    	}
+         if (Auth::attempt($userdata)) {
+            $user=new Users();
+            $userinfo=$user->fetchUserId($username);
+            $userrole=new user_roles();
+            $role=$userrole->fetchRole($userinfo[0]->id);
+            if($role[0]->role_id =='TD')  
+                return view('pages.tdhome');       
+            if($role[0]->role_id =='TC')  
+                return view('pages.tchome');
+         }
+         else{
+             return view('pages.loginfail');
+         }
+    }
+    public function logout(Request $req)
+    {
+        Auth::logout();
+        Session::flush();
+        return view('pages.login');
     }
 }

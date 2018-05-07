@@ -16,7 +16,8 @@
           <li><a href="#">Kannada</a></li>
         </ul>
       </li>
-      <li><a  href="{{ URL::to('logout') }}" data-target="#login-modal" id="loginlogout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a  href="#" data-target="#login-modal" id="loginlogout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
@@ -40,3 +41,22 @@
   </div>
 </nav>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;margin-top: 10%;">
+    	<div class="modal-dialog">
+				<div class="loginmodal-container">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1>Login to Your Account</h1><br>
+				  <form action="/login" method="post">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="text" name="user" placeholder="Username">
+					<input type="password" name="pass" placeholder="Password">
+					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+				  </form>					
+				  <div class="login-help">
+					<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				  </div>
+				</div>
+		</div>
+</div>
+ 
