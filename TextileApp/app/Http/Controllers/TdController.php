@@ -113,7 +113,7 @@ class TdController extends Controller
         $training_centre->adhar_card_image='data';
         $training_centre->centre_type=$req->centre;
         $training_centre->training=$req->training;
-        $training_centre->centre_status="active";
+        $training_centre->centre_status="created";
         $training_centre->save();
         if($training_centre->save()){
             return view('pages.success');
@@ -150,6 +150,13 @@ class TdController extends Controller
         $batchinfo = $batchcall->fetchPendingBatchList();
         return view('tdview.viewbatch')->with(array('batchinfo'=>$batchinfo));
     }
+    public function fetchTrainingCentreList(Request $obj)
+    {
+        $tccall =new training_centres();
+        $tcinfo =$tccall->fetchPendingTcList();
+        return view('tdview.approvetcview')->with(array('tcinfo'=>$tcinfo));
+    }
+
     public function approveBatch($id)
     {
         $batchcall = new batches();
@@ -164,13 +171,31 @@ class TdController extends Controller
         $tb=$trainingbatchcall->insertTrainingBatch($data1);
         return view('pages.success');
     }
-    public function rejectBatch($id)
+    public function Approvetc($id)
+    {  
+       $tccall =new training_centres();
+       $new_tc_data =array('centre_status'=>"Approved");
+       $tc=$tccall->approveTc($id,$new_tc_data);
+       return view('pages.success');  
+    }
+         public function rejectTc($id)
+    { 
+        $tccall = new training_centres();
+        $new_tc_data = array('centre_status'=>"Rejected");
+        $tc = $tccall->rejectTc($id,$new_tc_data);
+        return view('pages.success');  
+    }
+
+   
+       public function rejectBatch($id)
     { 
         $batchcall = new batches();
         $new_batch_data = array('status'=>"Rejected");
         $batch = $batchcall->rejectBatch($id,$new_batch_data);
         return view('pages.success');  
     }
+   
+   
 
     public function updatetc(Request $req)
     {    

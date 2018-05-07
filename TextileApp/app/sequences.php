@@ -17,6 +17,6 @@ class sequences extends Model
         return $sequence;
     }
     public function updateSequence($info){
-    	return batches::where ('id', '1')->update($info);
+    	return sequences::where ('id', '1')->update($info);
     }
 }

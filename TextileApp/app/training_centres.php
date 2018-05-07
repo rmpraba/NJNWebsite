@@ -48,6 +48,23 @@ class training_centres extends Model
     	$tc = training_centres::where('centre_id', $centreid);        
         return $tc->delete();
     }
+    public function fetchPendingTcList(){
+        $training_centres = training_centres::where('centre_status','created')->get(); 
+        return $training_centres;
+    }
+    public function approveTc($centreid,$new_tc_data){
+        $training_centres = training_centres::where ('centre_id', $centreid)->update($new_tc_data);
+        return $training_centres;
+    }
+     public function rejectTc($centreid,$new_tc_data){
+        $tc = training_centres::where ('centre_id', $centreid)->update($new_tc_data);
+        return $tc;
+    }
+
+    public function fetchTcSpecInfo($tcid){
+        $tcinfo = training_centres::where('centre_id', $tcid)->get(); 
+        return $tcinfo;
+    }
 
 
 }

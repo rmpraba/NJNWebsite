@@ -60,9 +60,11 @@ Route::post('/training_center_form','TdController@insert');
 Route::get('viewtc','TdController@fetchtclist');
 Route::get('/batchcreate', 'TcController@batch');
 Route::post('/batchcreate', 'TcController@batchinsert');
+
 Route::get('/approvebatch', 'TdController@fetchbatchlist');
 Route::post('/approvebatch/{id}','TdController@approveBatch');
 Route::post('/rejectbatch/{id}','TdController@rejectBatch');
+
 Route::get('/batchlist', 'TdController@fetchbatchlistview');
 Route::post('/batch/{batchid}', 'TcController@editbatchlist');
 Route::post('/updatebatchinfo', 'TcController@batchupdate');
@@ -71,3 +73,8 @@ Route::post('/deletetcview/{centreid}', 'TdController@deletetcview');
 
 Route::post('/viewtcedit/{centreid}','TdController@show');
 Route::post('/viewtcupdate','TdController@updatetc');
+
+Route::get('/approvetcview', 'TdController@fetchTrainingCentreList');
+Route::post('/approvetcview/{id}','TdController@fetchTrainingCentreList');
+Route::post('/approvetc/{id}','TdController@Approvetc');
+Route::post('/rejecttc/{id}','TdController@rejectTc');
