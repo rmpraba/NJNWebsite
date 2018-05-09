@@ -5,7 +5,7 @@
  <div class="row" id="targetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">
-            @include('includes.sidebar')
+            @include('includes.tdsidebar')
         </div>
         <!-- main content -->
         <div id="targetcontent" class="col-md-9">
@@ -34,20 +34,7 @@
     </td>
     </tr>   
 </table> <br><br>
-
-<table class="table table-bordered">
-        <tr>
-            <th>Centre&nbspID</th>
-            <th>Centre&nbspName</th>
-            <th>Owner&nbspName</th>
-            <th>District</th>
-            <th>Type&nbspof&nbspcentre</th>
-            <th>Subject</th>
-            <th>Save</th>
-        </tr>
-
-    </table>
-
+<div id="view"></div>
 </div>
 </div>    
 <script type="text/javascript">
@@ -59,13 +46,36 @@
                     url: '/fetchdistrictwisetc/ajax/'+district,
                     type: "GET",
                     dataType: "json",
-                    success:function(data) {                       
-                        
+                    success:function(data) {  
+                         var row = '<table>';
+                $.each(data, function (i, item) {
+                    row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td><button class="btn btn-xs btn-danger deleteTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
+
+                });
+                row+='</table>';
+                $('#view').html('');
+                $('#view').append(row);
                     }
                 });
             }else{
-                // $('select[name="batch"]').empty();
             }
+        });
+        $(document).on('click', '.deleteTest', function () {
+            var id = $(this).attr('data-id');
+            alert(id);
+            var Delete = $(this).parent().parent();
+            $.ajax({
+                url: 'test/' + id,
+                type: "DELETE",
+                data: id,
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    Delete.remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
         });
         });
 </script>
