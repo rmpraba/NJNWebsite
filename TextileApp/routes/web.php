@@ -79,3 +79,5 @@ Route::get('/approvetcview', 'TdController@fetchTrainingCentreList');
 Route::post('/approvetcview/{id}','TdController@fetchTrainingCentreList');
 Route::post('/approvetc/{id}','TdController@Approvetc');
 Route::post('/rejecttc/{id}','TdController@rejectTc');
+Route::get('/credential','TdController@credentialCreation');
+Route::get('/fetchdistrictwisetc/ajax/{id}','TdController@getDistrictwiseTCList');

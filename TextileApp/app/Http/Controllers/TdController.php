@@ -233,5 +233,19 @@ class TdController extends Controller
             echo "insertion faild";
         }
     }
+
+    public function credentialCreation()
+    {  
+       $districts=districts::all(); 
+       return view('tdview.credential',compact('districts'));  
+        // return view('tdview.credential');
+    }
+
+    public function getDistrictwiseTCList($id)
+    {
+        $tccall=new training_centres();
+        $tcinfo=$tccall->fetchDistrictwiseTc($id);
+        return json_encode($tcinfo);
+    }
    
 }
