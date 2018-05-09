@@ -47,9 +47,9 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {  
-                         var row = '<table>';
+                         var row = '<table border="1"><tr><th>Centre ID</th><th>Centre Name</th><th>Owner Name</th><th>District</th><th>Type of centre</th><th>Subject</th><th>User name</th><th>Password</th><th>Save</th></tr>';
                 $.each(data, function (i, item) {
-                    row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td><button class="btn btn-xs btn-danger deleteTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
+                    row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td>'+item.name+'</td><td>'+item.district+'</td><td>'+item.centre_type+'</td><td>'+item.training+'</td><td><input type="text"></td><td><input type="text"></td><td><button class="btn btn-xs btn-danger deleteTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
 
                 });
                 row+='</table>';
