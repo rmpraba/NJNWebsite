@@ -50,6 +50,7 @@
                          var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Center Id</th><th>Centre Name</th><th>District</th><th>Username</th><th>Password</th><th></th></tr>';
                 $.each(data, function (i, item) {
                     row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td>' + item.district + '</td><td hidden><input type="text" class="form-control" id="credentialdistrict' + item.centre_id + '" name="district" value="' + item.district + '"></<td><td><input type="text" class="form-control" id="credentialuser' + item.centre_id + '" name="username"></<td><td><input type="text" class="form-control" id="credentialpass' + item.centre_id + '" name="password"></<td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
+
                 });
                 row+='</table>';
                 $('#view').html('');
