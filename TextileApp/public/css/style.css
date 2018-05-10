@@ -462,7 +462,11 @@ h4{
         margin-bottom: 2%;
   }
 
+/* Batches */
 
+.batchbtn {
+  width: 100px;
+}
 
 
 

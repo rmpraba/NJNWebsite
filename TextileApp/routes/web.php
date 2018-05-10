@@ -50,6 +50,8 @@ Route::get('/pftarget/ajax/{id}','TcController@getBatchList');
 Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');
 Route::get('/pftarget', 'TcController@pftargetfetch');
 Route::post('insertpftarget', 'TcController@insertpf');
+Route::get('/batchexpense', 'TcController@batchexpenseview');
+
 
 Route::get('/viewpftarget', 'TcController@viewpftargetfetch');
 Route::get('/viewpftarget/ajax/{id}','TcController@viewgetBatchList');
@@ -68,6 +70,8 @@ Route::post('/rejectbatch/{id}','TdController@rejectBatch');
 
 Route::get('/batchlist', 'TdController@fetchbatchlistview');
 Route::post('/batch/{batchid}', 'TcController@editbatchlist');
+Route::post('/batchAction/{batchid}/{action}', 'TcController@editBatchAction');
+
 Route::post('/updatebatchinfo', 'TcController@batchupdate');
 Route::post('/deletebatchlist/{batchid}', 'TcController@deletebatchlist');
 Route::post('/deletetcview/{centreid}', 'TdController@deletetcview');

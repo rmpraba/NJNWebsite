@@ -90,7 +90,14 @@ class TcController extends Controller
         $batch->updateBatch($new_batch_data,$batchid);
         return view('pages.success');  
     }
-     public function deletebatchlist($batchid)
+     public function editBatchAction($batchid,$action)
+    { 
+        $batch=new training_batches();
+        $batch->editBatchAction($batchid,$action);
+        return redirect()->back()->with('message', 'Success!!');
+    }
+
+    public function deletebatchlist($batchid)
     { 
         $batch=new batches();
         $batch->deleteBatch($batchid);
@@ -178,6 +185,13 @@ class TcController extends Controller
         $ft->insertFinancialTarget($data2);
         return view('pages.success');
 
+    }
+
+    public function batchexpenseview(Request $obj)
+    {
+        $batchcall = new training_batches();
+        $batchinfo=$batchcall->fetchBatchList(); 
+        return view('tcview.viewbatchlistexpense')->with(array('batchinfo'=>$batchinfo));
     }
    
 }

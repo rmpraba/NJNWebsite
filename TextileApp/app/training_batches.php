@@ -23,4 +23,13 @@ class training_batches extends Model
     	$batch = training_batches::where("centre_id",$centreid)->pluck('batch_name','batch_id');
         return $batch;
     }
+
+    public function editBatchAction($batchid,$action){
+        $data = training_batches::where ('batch_id', $batchid)->update(array('action' => $action));
+        return $data;
+    }
+    public function fetchBatchList(){
+        $batches = training_batches::all(); 
+        return $batches;
+    }
 }
