@@ -32,7 +32,7 @@ class TcController extends Controller
         $password=session()->get('password');
         
         $usercall= new users();
-        $info = $usercall->fetchUserInfo($username,$password);
+        $info = $usercall->fetchUserInfo($username);
         $district=$info[0]->district;
         $centreid=$info[0]->centre_id;
 

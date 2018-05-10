@@ -47,33 +47,31 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {  
-                         var row = '<table>';
+                         var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Center Id</th><th>Centre Name</th><th>District</th><th>Username</th><th>Password</th><th></th></tr>';
                 $.each(data, function (i, item) {
-                    row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td><button class="btn btn-xs btn-danger deleteTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
-
+                    row += '<tr><td>' + item.centre_id + '</td><td>' + item.centre_name + '</td><td>' + item.district + '</td><td hidden><input type="text" class="form-control" id="credentialdistrict' + item.centre_id + '" name="district" value="' + item.district + '"></<td><td><input type="text" class="form-control" id="credentialuser' + item.centre_id + '" name="username"></<td><td><input type="text" class="form-control" id="credentialpass' + item.centre_id + '" name="password"></<td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.centre_id + '">Save</button></td></tr>';
                 });
                 row+='</table>';
                 $('#view').html('');
                 $('#view').append(row);
-                    }
+                }
                 });
             }else{
             }
         });
-        $(document).on('click', '.deleteTest', function () {
+        $(document).on('click', '.saveTest', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var id = $(this).attr('data-id');
-            alert(id);
-            var Delete = $(this).parent().parent();
+            var username = $('#credentialuser'+id).val();
+            var password = $('#credentialpass'+id).val();
+            // alert($('#credentialuser'+id).val()+"   "+$('#credentialpass'+id).val()+"   "+$('#credentialdistrict'+id).val());
             $.ajax({
-                url: 'test/' + id,
-                type: "DELETE",
-                data: id,
+                url: '/fetchdistrictwisetc',
+                type: "POST",
+                data: {_token: CSRF_TOKEN , type: 'TC',username: $('#credentialuser'+id).val() , password: $('#credentialpass'+id).val() , district: $('#credentialdistrict'+id).val() ,centreid: $(this).attr('data-id')},
                 dataType: "json",
-                success: function (data, textStatus, jqXHR) {
-                    Delete.remove();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(textStatus);
+                success: function (data) {
+                    // alert('success'+data.msg);
                 }
             });
         });

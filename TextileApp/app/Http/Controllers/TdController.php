@@ -10,6 +10,7 @@ use DB;
 use Session;
 use App\batches;
 use App\users;
+use App\user_roles;
 use App\training_centres;
 use App\districts;
 use App\training_centre_subjects;
@@ -17,6 +18,7 @@ use App\states;
 use App\types_of_centres;
 use App\sequences;
 use App\training_batches;
+use Hash;
 
 class TdController extends Controller
 {
@@ -40,10 +42,12 @@ class TdController extends Controller
         $username=session()->get('username');
         $password=session()->get('password');
 
+        // echo $username;
+
         $valiueofemil=$ob->email;
         
         $usercall= new users();
-        $info = $usercall->fetchUserInfo($username,$password);
+        $info = $usercall->fetchUserInfo($username);
         $district=$info[0]->district;
 
         $districtcall=new districts();
@@ -70,7 +74,7 @@ class TdController extends Controller
         $password=session()->get('password');
 
         $usercall= new users();
-        $info = $usercall->fetchUserInfo($username,$password);
+        $info = $usercall->fetchUserInfo($username);
         $district=$info[0]->district;
 
         $districtcall=new districts();
@@ -246,6 +250,23 @@ class TdController extends Controller
         $tccall=new training_centres();
         $tcinfo=$tccall->fetchDistrictwiseTc($id);
         return json_encode($tcinfo);
+    }
+    
+    public function saveCredential(Request $req)
+    {
+        $usercall = new users();
+        $info=$usercall->findId($req->username,$req->centreid);
+        if(count($info)>0){
+        $array = array("password"=>Hash::make($req->password)); 
+        $updateinfo=$usercall->updateUser($req->username,$req->centreid,$array);
+        }
+        else{
+        $userrole=new user_roles();
+        $userinfo=$userrole->fetchUserId($req->type);
+        $data = array("centre_id"=>$req->centreid,"user_id"=>$userinfo[0]->user_id,"district"=>$req->district,"username"=>$req->username,"password"=>Hash::make($req->password));        
+        $user=$usercall->insertUser($data);
+        }
+        return view('pages.success',compact('user'));
     }
    
 }

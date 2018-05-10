@@ -16,4 +16,8 @@ class user_roles extends Model
     	$user = user_roles::where('user_id', $userid)->get();     
         return $user;
     }
+    public function fetchUserId($roleid){
+    	$user = user_roles::where('role_id', $roleid)->get();     
+        return $user;
+    }
 }

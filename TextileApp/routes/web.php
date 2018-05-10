@@ -39,10 +39,6 @@ Route::get('tchome', function()
 {
     return View::make('pages.tchome');
 });
-Route::get('training_center_form', function()
-{
-    return View::make('pages.tchome');
-});
 Route::post('/login', 'loginController@login');
 Route::get('/logout', 'loginController@logout');
 
@@ -81,3 +77,4 @@ Route::post('/approvetc/{id}','TdController@Approvetc');
 Route::post('/rejecttc/{id}','TdController@rejectTc');
 Route::get('/credential','TdController@credentialCreation');
 Route::get('/fetchdistrictwisetc/ajax/{id}','TdController@getDistrictwiseTCList');
+Route::post('/fetchdistrictwisetc','TdController@saveCredential');
