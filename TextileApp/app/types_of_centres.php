@@ -13,4 +13,8 @@ class types_of_centres extends Model
     	$types = types_of_centres::all(); 
         return $types;
     }
+    public function insertCentreType($array){
+    	$types = types_of_centres::create($array); 
+        return $types;
+    }
 }

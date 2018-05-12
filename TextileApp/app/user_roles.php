@@ -20,4 +20,8 @@ class user_roles extends Model
     	$user = user_roles::where('role_id', $roleid)->get();     
         return $user;
     }
+    public function insertRole($array){
+        $role = user_roles::create( $array );        
+        return $role;
+    }
 }

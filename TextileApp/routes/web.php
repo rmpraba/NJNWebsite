@@ -78,3 +78,10 @@ Route::post('/rejecttc/{id}','TdController@rejectTc');
 Route::get('/credential','TdController@credentialCreation');
 Route::get('/fetchdistrictwisetc/ajax/{id}','TdController@getDistrictwiseTCList');
 Route::post('/fetchdistrictwisetc','TdController@saveCredential');
+
+Route::get('/role', 'TdController@showRoleview');
+Route::post('/createRole', 'TdController@createRole');
+Route::get('/centretype', 'TdController@showCentreType');
+Route::post('/createcentretype', 'TdController@createCentreType');
+Route::get('/subject', 'TdController@showTrainingSubject');
+Route::post('/createsubject', 'TdController@createTrainingSubject');
