@@ -85,3 +85,14 @@ Route::get('/centretype', 'TdController@showCentreType');
 Route::post('/createcentretype', 'TdController@createCentreType');
 Route::get('/subject', 'TdController@showTrainingSubject');
 Route::post('/createsubject', 'TdController@createTrainingSubject');
+
+Route::get('/candidateupload', 'TcController@candidateUpload');
+Route::get('/candidatemapping', 'TcController@candidateMappingView');
+Route::get('/candidate/ajax/{id}','TcController@getTrainingSubject');
+Route::get('/candidate/batchajax/{id}','TcController@getSubjectBatch');
+Route::post('/batchcandidatemapping', 'TcController@batchCandidateMapping');
+
+Route::get('/candidatelist', 'TcController@candidateListView');
+Route::get('/candidatelist/ajax/{id}','TcController@getTrainingSubjectList');
+Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
+Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');

@@ -19,6 +19,8 @@ use App\sequences;
 use App\training_batches;
 use App\physical_target;
 use App\financial_target;
+use App\candidates;
+use App\batch_candidates;
 
 class TcController extends Controller
 {
@@ -177,7 +179,103 @@ class TcController extends Controller
         $pt->insertPhysicalTarget($data1);
         $ft->insertFinancialTarget($data2);
         return view('pages.success');
+    }
 
+    public function candidateMappingView(){
+        $username = session()->get('username');
+        $password = session()->get('password');
+        // echo $username."   ".$password;
+        $usercall = new users();
+        $info=$usercall->fetchTrainingCentreId($username,$password);
+        // echo "string".$info[0]->centre_id;
+        session()->put('centreid',$info[0]->centre_id);
+        $tbcall = new training_batches();
+        $tbinfo = $tbcall->fetchtrainingType($info[0]->centre_id);
+        return view('tcview.candidatemapping',compact('tbinfo'));
+    }
+    public function getTrainingSubject($id){
+        $centreid = session()->get('centreid');
+        $tbcall = new training_batches();
+        session()->put('batchtype',$id);
+        $info=$tbcall->fetchTypeBatch($centreid,$id);
+        return json_encode($info);    
+    }
+    public function getSubjectBatch($id){
+        session()->put('batchid',$id);
+        $info = DB::table('training_batches')->join('training_centres','training_centres.centre_id','=','training_batches.centre_id')->join('batches','batches.batch_id','=','training_batches.batch_id')->join('districts','districts.district_code','=','training_centres.district_id')->where('training_batches.batch_id','=',$id)->select('training_batches.batch_type','training_centres.centre_type','batches.start_date','batches.end_date','districts.district_name','districts.division',
+            'districts.district_code')->get();
+        $type = session()->get('batchtype');
+        $candidatecall = new candidates();
+        $candidate = $candidatecall->fetchCandidate();
+        $info[0]->candidate = $candidate;
+        return json_encode($info);
+        // return json_encode(['info' =>  $info,'candidate' => $candidate]);    
+    }
+    public function batchCandidateMapping(Request $req){
+        $id = $req->candidateid;
+        $centreid = session()->get('centreid');
+        $type = session()->get('batchtype');
+        $batchid = session()->get('batchid');
+        $bccall = new batch_candidates();
+        $candidatecall = new candidates();
+        $candidateinfo = $bccall -> checkCandidate($id);
+        if(count($candidateinfo)==0){
+        $data1 = array('status' => 'Mapped' );       
+        $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
+        $info = $bccall -> createbatchCandidate($data);    
+         $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+        return json_encode($info);
+        }        
+    }
+
+    public function getTrainingSubjectList($id){
+        $centreid = session()->get('centreid');
+        $tbcall = new training_batches();
+        session()->put('batchtype',$id);
+        $info=$tbcall->fetchTypeBatch($centreid,$id);
+        return json_encode($info);    
+    }
+    public function getSubjectBatchList($id){
+        session()->put('batchid',$id);
+        $info = DB::table('training_batches')->join('training_centres','training_centres.centre_id','=','training_batches.centre_id')->join('batches','batches.batch_id','=','training_batches.batch_id')->join('districts','districts.district_code','=','training_centres.district_id')->where('training_batches.batch_id','=',$id)->select('training_batches.batch_type','training_centres.centre_type','batches.start_date','batches.end_date','districts.district_name','districts.division',
+            'districts.district_code')->get();
+        $centreid = session()->get('centreid');
+        $type = session()->get('batchtype');
+        $candidatecall = new candidates();
+        $candidate = $candidatecall->fetchCandidateMappedList($centreid,$id,$type);
+        $info[0]->candidate = $candidate;
+        return json_encode($info);
+        // return json_encode(['info' =>  $info,'candidate' => $candidate]);    
+    }
+
+    public function candidateListView(){
+        $username = session()->get('username');
+        $password = session()->get('password');
+        // echo $username."   ".$password;
+        $usercall = new users();
+        $info=$usercall->fetchTrainingCentreId($username,$password);
+        // echo "string".$info[0]->centre_id;
+        session()->put('centreid',$info[0]->centre_id);
+        $tbcall = new training_batches();
+        $tbinfo = $tbcall->fetchtrainingType($info[0]->centre_id);
+        return view('tcview.batchcandidate_list',compact('tbinfo'));
+    }
+   
+    public function batchCandidateDelete(Request $req){
+        $id = $req->candidateid;
+        $centreid = session()->get('centreid');
+        $type = session()->get('batchtype');
+        $batchid = session()->get('batchid');
+        $bccall = new batch_candidates();
+        $candidatecall = new candidates();
+        $candidateinfo = $bccall -> checkCandidate($id);
+        if(count($candidateinfo)>0){
+        $data1 = array('status' => 'Created' );       
+        $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
+        $info = $bccall -> deletebatchCandidate($data);    
+         $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+        return json_encode($info);
+        }        
     }
    
 }
