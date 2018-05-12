@@ -114,7 +114,7 @@
 
                     var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
                     $.each(data[0].candidate, function (i, item) {
-                    row += '<tr><td>' + item.serial_no + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.serial_no+ '">delete</button></td></tr>';
+                    row += '<tr><td>' + item.serial_no + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.serial_no+ '">Remove</button></td></tr>';
 
                 });
                 row+='</table>';
