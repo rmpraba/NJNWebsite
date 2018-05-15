@@ -296,7 +296,7 @@ class TcController extends Controller
                 ];
                 }
                 if(!empty($insert)){
-                    echo ''.json_encode($insert);
+                    // echo ''.json_encode($insert);
                     $candidateobj = new candidates();
                     $candidateobj->createCandidate($insert);
                     // DB::table('candidates')->insert($insert);
