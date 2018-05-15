@@ -21,6 +21,8 @@ use App\physical_target;
 use App\financial_target;
 use App\candidates;
 use App\batch_candidates;
+use Illuminate\Support\Facades\Input;
+use Excel;
 
 class TcController extends Controller
 {
@@ -276,6 +278,34 @@ class TcController extends Controller
          $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
         return json_encode($info);
         }        
+    }
+
+    public function candidateUpload(){
+        return view('tcview.candidateupload');
+    }
+
+    public function importExcel()
+    {
+        if(Input::hasFile('import_file')){
+            $path = Input::file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {
+            })->get();
+            if(!empty($data) && $data->count()){
+                foreach ($data as $key => $value) {
+                    $insert[] = ['serial_no' => $value->serial_no, 'first_name' => $value->first_name,'last_name' => $value->last_name,'phone_no' => $value->phone_no,'email' => $value->email,'dob' => $value->dob,'aadhar_no' => $value->aadhar_no,'gender' => $value->gender,'marital_status' => $value->marital_status,'religion' => $value->religion,'category' => $value->category,'relationship' => $value->relationship,'relation_firstname' => $value->relation_firstname,'relation_lastname' => $value->relation_lastname,'current_location' => $value->current_location,'current_street' => $value->current_street,'current_city' => $value->current_city,'current_state' => $value->current_state,'current_district' => $value->current_district,'current_taluk' => $value->current_taluk,'current_village' => $value->current_village,'current_pincode' => $value->current_pincode,'permanent_location' => $value->permanent_location,'permanent_street' => $value->permanent_street,'permanent_city' => $value->permanent_city,'permanent_state' => $value->permanent_state,'permanent_district' => $value->permanent_district,'permanent_taluk' => $value->permanent_taluk,'permanent_village' => $value->permanent_village,'permanent_pincode' => $value->permanent_pincode,'education' => $value->education,'subject' => $value->subject,'yearofpassing' => $value->yearofpassing,'physically_challenged' => $value->physically_challenged,'skill' => $value->skill,'apprentiseship' => $value->apprentiseship,'perviously_employed' => $value->perviously_employed,'willing_migrate' => $value->willing_migrate,'expected_salary_outside' => $value->expected_salary_outside,'expected_salary_within' => $value->expected_salary_within,'preferred_training_period' => $value->preferred_training_period,'status' => $value->status
+                ];
+                }
+                if(!empty($insert)){
+                    echo ''.json_encode($insert);
+                    $candidateobj = new candidates();
+                    $candidateobj->createCandidate($insert);
+                    // DB::table('candidates')->insert($insert);
+                    // dd('Insert Record successfully.');
+                    return view('pages.success');
+                }
+            }
+        }
+        return view('pages.success');
     }
    
 }

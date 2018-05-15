@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class candidates extends Model
 {
      protected $fillable=[   
-     						'candidate_id',
+     						
     						'serial_no',
 							'first_name',
 							'last_name',
@@ -48,10 +48,14 @@ class candidates extends Model
 							'willing_migrate',
 							'expected_salary_outside',
 							'expected_salary_within',
-							'preferred-training_period',
+							'preferred_training_period',
 							'status'
 
                      ];
+    public function createCandidate($insert){
+    	$candidates = candidates::insert($insert);     
+        return $candidates;
+    }
     public function fetchCandidate(){
     	$candidates = candidates::where('status','Created')->get();     
         return $candidates;

@@ -15,9 +15,8 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('candidate_id');
-            $table->string('serial_no');
-            $table->string('first_name');
+            $table->string('serial_no')->nullable();
+            $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone_no')->nullable();
             $table->string('email')->nullable();
@@ -56,7 +55,7 @@ class CreateCandidatesTable extends Migration
             $table->string('willing_migrate')->nullable();
             $table->string('expected_salary_outside')->nullable();
             $table->string('expected_salary_within')->nullable();
-            $table->string('preferred-training_period')->nullable();
+            $table->string('preferred_training_period')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
