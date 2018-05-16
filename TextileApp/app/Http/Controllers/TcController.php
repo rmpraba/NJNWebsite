@@ -257,7 +257,7 @@ class TcController extends Controller
         $data1 = array('status' => 'Mapped' );       
         $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
         $info = $bccall -> createbatchCandidate($data);    
-         $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+        $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
         return json_encode($info);
         }        
     }
@@ -316,8 +316,9 @@ class TcController extends Controller
         return view('tcview.candidateupload');
     }
 
-    public function importExcel()
+    public function importExcel($id)
     {
+        // echo $id;
         if(Input::hasFile('import_file')){
             $path = Input::file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
@@ -331,8 +332,33 @@ class TcController extends Controller
                     // echo ''.json_encode($insert);
                     $candidateobj = new candidates();
                     $candidateobj->createCandidate($insert);
-                    // DB::table('candidates')->insert($insert);
-                    // dd('Insert Record successfully.');
+
+                    $batchobj = new training_batches();
+                    $batchinfo = $batchobj->fetchBatchSpecInfo($id);
+
+                    $centreid = $batchinfo[0]->centre_id;
+                    $type = $batchinfo[0]->batch_type;
+                    $batchid = $batchinfo[0]->batch_id;
+                    $academicyear = $batchinfo[0]->batch_academic_year;
+                    
+                    $bccall = new batch_candidates();
+                    $candidatecall = new candidates();
+
+                    foreach ($data as $key => $value) {
+                      $candidateinsert[] = ['candidate_id' => $value->serial_no,'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid , 'academic_year' => $academicyear];                        
+                    }
+
+                    // $candidateinfo = $bccall -> checkCandidate($id);
+                    // if(count($candidateinfo)==0){
+                    // $data1 = array('status' => 'Mapped' );       
+                    // $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
+                    $info = $bccall -> createbatchCandidate($candidateinsert);    
+                    // $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+                    // }
+                    foreach ($data as $key => $value) {
+                        $data1 = array('status' => 'Mapped' ); 
+                        $updateinfo = $candidatecall -> updateCandidateStatus($value->serial_no,$data1);    
+                    }
                     return view('pages.success');
                 }
             }

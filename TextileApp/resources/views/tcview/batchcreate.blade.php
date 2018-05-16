@@ -34,7 +34,7 @@
 <td><label>Training Type:</label><br>
 <input  class="form-control" type="text" name="trainingtype" required><br></td></tr>
 <tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td colspan="1"><br><button type="submit" class="btn btn-primary">Submit</button></td></tr>
+<td colspan="1"><br><button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button></td></tr>
 </table>
 </form>
 </div>

@@ -97,4 +97,4 @@ Route::get('/candidatelist/ajax/{id}','TcController@getTrainingSubjectList');
 Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
 Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
 
-Route::post('importExcel', 'TcController@importExcel');
+Route::post('/importExcel/{id}', 'TcController@importExcel');
