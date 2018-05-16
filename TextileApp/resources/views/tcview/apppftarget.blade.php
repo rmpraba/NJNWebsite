@@ -2,29 +2,38 @@
 @extends('layouts.sidebar')
 @section('content')
 
- <div class="row" id="targetcontainer">
+ <div class="row" id="viewtargetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">
-            @include('includes.tdsidebar')
+            @include('includes.sidebar')
         </div>
         <!-- main content -->
-        <div id="targetcontent" class="col-md-9">
+        <div id="viewtargetcontent" class="col-md-9">
     <center><h1 style="color: #b30000;"> Physical & Financial Target Approve</h1></center>
-    <form action="/insertpftarget" method="post">
+    @if(session()->has('message'))
+  <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {{ session()->get('message') }}
+              </div>
+@endif
+    <form action="/approvetargets" method="post" id="form_id">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="districtcode" hidden>
+    <input type="hidden" name="vdistrictcode" hidden>
+    <input type="hidden" name="batchid" id ="batchid" value="">
+    <input type="hidden" name="status" id ="status" value="">
+
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
     <table style="width: 100%;">
     <tr>
-        <td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="district" id="district" name="district"></span>
-        <br>Division:<span data-field="division" id="division" name="division"></span></th>
+        <td ></td><td>&nbsp&nbsp&nbsp&nbsp</td><th style="text-align: right;">District:<span data-field="vdistrict" id="dvistrict" name="vdistrict"></span>
+        <br>Division:<span data-field="vdivision" id="vdivision" name="vdivision"></span></th>
     </tr>
     <tr><td>&nbsp</td><td>&nbsp&nbsp&nbsp&nbsp</td><td>&nbsp</td></tr>
     <tr>
     <td>
     <div class="form-group">
         <label>Financial Year:</label><br>
-        <select class="form-control" id="sel1" name="fiscalyear" required>
+        <select class="form-control" id="vsel1" name="vfiscalyear" required>
         <option value="">-----Select Academic Year-----</option>
         <option value="2018-2019">2018-2019</option>
         <option value="2019-2020">2019-2020</option>
@@ -34,7 +43,7 @@
     <td>
         <div class="form-group">
                 <label>Select Training Centre:</label><br>
-                <select name="tc" class="form-control" style="width:350px" required>
+                <select name="vtc" class="form-control" style="width:350px" required>
                     <option value="">--- Select TC ---</option>
                     @foreach ($tcs as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
@@ -47,7 +56,7 @@
         <td>
             <div class="form-group">
                 <label>Select Batch:</label><br>
-                <select name="batch" class="form-control" style="width:350px" required>
+                <select name="vbatch" class="form-control" style="width:350px" required>
                 <!-- <option value="">--- Select Batch ---</option> -->
                 </select>
             </div>
@@ -56,116 +65,141 @@
         <th><div class="form-group">
         <label>Batch Timing:</label><br>
         <!-- <span data-field="timing"></span> -->
-        <input type="text" class="form-control" id="timing" name="timing" required readonly>
+        <input type="text" class="form-control" id="vtiming" name="vtiming" required readonly>
         </div>
         </th>
     </tr>
     <tr><td>&nbsp</td><td></td><td>&nbsp</td></tr>
     <tr>
-        <th>Category Type:<span data-field="type" id="type" name="type"></span>
+        <th>Category Type:<span data-field="vtype" id="vtype" name="vtype"></span>
         </th><td></td>
-        <th>Training Subject:<span data-field="subject" id="subject" name="subject"></th>
+        <th>Training Subject:<span data-field="vsubject" id="vsubject" name="vsubject"></th>
     </tr>    
 </table> <br><br>
 
 <table class="table table-bordered" >
     <tr>
-        <th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th><th colspan="3">Finacial target in Rs</th>
+        <th rowspan="2">Sl no</th><th rowspan="2">Category type</th><th colspan="3">Physical target in no</th>
     </tr>
     <tr>
-        <td>Male</td><td>Female</td><td>Total</td><td>Male</td><td>Female</td><td>Total</td>
+        <td>Male</td><td>Female</td><td>Total</td>
     </tr>
     <tr>
         <td>1</td><th>General</th>
-        <td><input required class="tinf" type="number" name="genpm" id="one" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genpf" id="two" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genpt" id="avvy" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="genfm" id="three" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genff" id="four" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genft" id=avvy1 value="" readonly></td>    
+        <td><input required readonly class="tinf" type="number" name="vgenpm" id="vone" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vgenpf" id="vtwo" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vgenpt" id="vavvy" value="" readonly></td>
+         
     </tr>
     <tr>
         <td>2</td><th>SCP</th>
-        <td><input required class="tinf" type="number" name="scppm" id="five" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scppf" id="six" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scppt" id="avvy2" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="scpfm" id="seven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scpff" id="eight" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scpft" id="avvy3" value="" readonly></td>      
+        <td><input required readonly class="tinf" type="number" name="vscppm" id="vfive" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vscppf" id="vsix" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vscppt" id="vavvy2" value="" readonly></td>
+           
     </tr>
     <tr>
         <td>3</td><th>TSP</th>
-        <td><input required class="tinf" type="number" name="tsppm" id="nine" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tsppf" id="ten" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tsppt" id="avvy4" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="tspfm" id="leven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tspff" id="twel" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tspft" id="avvy5" value="" readonly></td>      
+        <td><input required readonly class="tinf" type="number" name="vtsppm" id="vnine" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vtsppf" id="vten" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtsppt" id="vavvy4" value="" readonly></td>
+         
     </tr>
     <tr>
         <td>4</td><th>Minorities</th>
-        <td><input required class="tinf" type="number" name="minpm" id="thirteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minpf" id="fourteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minpt" id="avvy6" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="minfm" id="fifteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minff" id="sixteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minft" id="avvy7" value="" readonly></td>      
+        <td><input required readonly class="tinf" type="number" name="vminpm" id="vthirteen" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vminpf" id="vfourteen" OnChange="av(this)"></td>
+        <td><input required readonly class="tinf" type="number" name="vminpt" id="vavvy6" value="" readonly></td>
+        
     </tr>
     <tr>
         <td></td><th>Total</th>
-        <td><input required class="tinf" type="number" name="totpm" id="t0" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totpf" id="t1" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totpt" id="t2" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totfm" id="t3" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totff" id="t4" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totft" id="t5" value="" readonly></td>     
+        <td><input required readonly class="tinf" type="number" name="vtotpm" id="vt0" value="" readonly></td>
+        <td><input required readonly class="tinf" type="number" name="vtotpf" id="vt1" value="" readonly></td>
+        <td><input required readonly class="tinf" type="number" name="vtotpt" id="vt2" value="" readonly></td>
+      
     </tr>
 </table>
 <div align="right">
-    <button type="submit" class="btn btn-success">Approve</button>
-    <button type="submit" class="btn btn-primary" >Reject</button>
+    <button type="submit" class="btn btn-success sub" onclick="myFunction('approve')">Approve</button>
+    <button type="submit" class="btn btn-primary sub"  onclick="myFunction('reject')">Reject</button>
 </div>
-
 </form>
 </div>
 </div>    
 <script type="text/javascript">
     $(document).ready(function() {
-        $('select[name="tc"]').on('change', function() {
+        $('select[name="vtc"]').on('change', function() {
             var tc = $(this).val();
             if(tc) {
                 $.ajax({
-                    url: '/pftarget/ajax/'+tc,
+                    url: '/viewpftarget/ajax/'+tc,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
-                        $('select[name="batch"]').empty();
+                        $('select[name="vbatch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
                         $.each(data, function(key, value) {
-                            $('select[name="batch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            $('select[name="vbatch"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                     }
 
                 });
             }else{
-                $('select[name="batch"]').empty();
+                $('select[name="vbatch"]').empty();
             }
         });
-        $('select[name="batch"]').on('change', function() {
+        $('select[name="vbatch"]').on('change', function() {
 
             var batch = $(this).val();
+            document.getElementById("batchid").value = batch;
             if(batch) {
                 $.ajax({
-                    url: '/pftarget/batchajax/'+batch,
+                    url: '/viewpftarget/batchajax/'+batch,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {  
-                    $("input[name='timing']").val("From: "+ data[0].start_date+" To: "+data[0].end_date);
-                    $("[data-field='subject']").text(data[0].batch_type);
-                    $("[data-field='type']").text(data[0].centre_type);
-                    $("[data-field='district']").text(data[0].district_name);
-                    $("[data-field='division']").text(data[0].division);
-                    $("input[name='districtcode']").val(data[0].district_id);
+                        // alert('success');
+                    $("input[name='vtiming']").val("From: "+ data[0].start_date+" To: "+data[0].end_date);
+                    $("[data-field='vsubject']").text(data[0].batch_type);
+                    $("[data-field='vtype']").text(data[0].centre_type);
+                    $("[data-field='vdistrict']").text(data[0].district_name);
+                    $("[data-field='vdivision']").text(data[0].division);
+                    $("input[name='vdistrictcode']").val(data[0].district_id);
+                    $("input[name='vgenpm']").val(data[0].genpm);
+                    $("input[name='vgenpf']").val(data[0].genpf);
+                    $("input[name='vgenpt']").val(data[0].genpt);
+                    $("input[name='vtsppm']").val(data[0].tsppm);
+                    $("input[name='vtsppf']").val(data[0].tsppf);
+                    $("input[name='vtsppt']").val(data[0].tsppt);
+                     $("input[name='vscppm']").val(data[0].scppm);
+                    $("input[name='vscppf']").val(data[0].scppf);
+                    $("input[name='vscppt']").val(data[0].scppt);
+                     $("input[name='vminpm']").val(data[0].minpm);
+                    $("input[name='vminpf']").val(data[0].minpf);
+                    $("input[name='vminpt']").val(data[0].minpt);
+
+                     $("input[name='vgenfm']").val(data[0].genfm);
+                    $("input[name='vgenff']").val(data[0].genff);
+                    $("input[name='vgenft']").val(data[0].genft);
+                    $("input[name='vtspfm']").val(data[0].tspfm);
+                    $("input[name='vtspff']").val(data[0].tspff);
+                    $("input[name='vtspft']").val(data[0].tspft);
+                     $("input[name='vscpfm']").val(data[0].scpfm);
+                    $("input[name='vscpff']").val(data[0].scpff);
+                    $("input[name='vscpft']").val(data[0].scpft);
+                    $("input[name='vminfm']").val(data[0].minfm);
+                    $("input[name='vminff']").val(data[0].minff);
+                    $("input[name='vminft']").val(data[0].minft);
+
+
+                    $("input[name='vtotpm']").val(parseInt(data[0].genpm)+parseInt(data[0].tsppm)+parseInt(data[0].scppm)+parseInt(data[0].minpm));
+                    $("input[name='vtotpf']").val(parseInt(data[0].genpf)+parseInt(data[0].tsppf)+parseInt(data[0].scppf)+parseInt(data[0].minpf));
+                    $("input[name='vtotpt']").val(parseInt(data[0].genpt)+parseInt(data[0].tsppt)+parseInt(data[0].scppt)+parseInt(data[0].minpt));
+
+                    $("input[name='vtotfm']").val(parseInt(data[0].genfm)+parseInt(data[0].tspfm)+parseInt(data[0].scpfm)+parseInt(data[0].minfm));
+                    $("input[name='vtotff']").val(parseInt(data[0].genff)+parseInt(data[0].tspff)+parseInt(data[0].scpff)+parseInt(data[0].minff));
+                    $("input[name='vtotft']").val(parseInt(data[0].genft)+parseInt(data[0].tspft)+parseInt(data[0].scpft)+parseInt(data[0].minft));
                     },
                     error: function(e) {
                         // alert('fail');
@@ -173,71 +207,17 @@
                     }
                 });
             }else{
-                $('select[name="batch"]').empty();
+                $('select[name="vbatch"]').empty();
             }
         });
     });
-</script>
-<script type="text/javascript">
-function av(avSelect)
-{
-var one=avSelect.form.one.value;
-var two=avSelect.form.two.value;
-var avvy=parseFloat(one)+parseFloat(two);
-avSelect.form.avvy.value=avvy;
+function myFunction(status){
 
-var three=avSelect.form.three.value;
-var four=avSelect.form.four.value;
-var avvy1=parseFloat(three)+parseFloat(four);
-avSelect.form.avvy1.value=avvy1;
+document.getElementById("status").value = status;
+document.getElementById("form_id").submit();// Form submission
 
-var five=avSelect.form.five.value;
-var six=avSelect.form.six.value;
-var avvy2=parseFloat(five)+parseFloat(six);
-avSelect.form.avvy2.value=avvy2;
 
-var seven=avSelect.form.seven.value;
-var eight=avSelect.form.eight.value;
-var avvy3=parseFloat(seven)+parseFloat(eight);
-avSelect.form.avvy3.value=avvy3;
-
-var nine=avSelect.form.nine.value;
-var ten=avSelect.form.ten.value;
-var avvy4=parseFloat(nine)+parseFloat(ten);
-avSelect.form.avvy4.value=avvy4;
-
-var leven=avSelect.form.leven.value;
-var twel=avSelect.form.twel.value;
-var avvy5=parseFloat(leven)+parseFloat(twel);
-avSelect.form.avvy5.value=avvy5;
-
-var thirteen=avSelect.form.thirteen.value;
-var fourteen=avSelect.form.fourteen.value;
-var avvy6=parseFloat(thirteen)+parseFloat(fourteen);
-avSelect.form.avvy6.value=avvy6;
-
-var fifteen=avSelect.form.fifteen.value;
-var sixteen=avSelect.form.sixteen.value;
-var avvy7=parseFloat(fifteen)+parseFloat(sixteen);
-avSelect.form.avvy7.value=avvy7;
-
-var tot0=parseFloat(one)+parseInt(five)+parseFloat(nine)+parseFloat(thirteen);
-avSelect.form.t0.value=tot0;
-
-var tot1=parseFloat(two)+parseInt(six)+parseFloat(ten)+parseFloat(fourteen);
-avSelect.form.t1.value=tot1;
-
-var tot2=parseFloat(avvy)+parseFloat(avvy2)+parseFloat(avvy4)+parseFloat(avvy6);
-avSelect.form.t2.value=tot2;
-
-var tot3=parseFloat(three)+parseFloat(seven)+parseFloat(leven)+parseFloat(fifteen);
-avSelect.form.t3.value=tot3;
-
-var tot4=parseFloat(four)+parseFloat(eight)+parseFloat(twel)+parseFloat(sixteen);
-avSelect.form.t4.value=tot4;
-
-var tot5=parseFloat(avvy1)+parseFloat(avvy3)+parseFloat(avvy5)+parseFloat(avvy7);
-avSelect.form.t5.value=tot5;
 }
 </script>
+
 @stop

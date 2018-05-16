@@ -13,4 +13,8 @@ class training_centre_subjects extends Model
     	$subjects = training_centre_subjects::all(); 
         return $subjects;
     }
+    public function insertSubject($array){
+    	$types = training_centre_subjects::create($array); 
+        return $types;
+    }
 }

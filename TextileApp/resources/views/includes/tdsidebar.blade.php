@@ -5,7 +5,10 @@
   <a href="{{ URL::to('approvebatch') }}">Approve Batch</a>
   <a href="{{ URL::to('approvetcview')}}">Approve TC</a>
   <a href="{{ URL::to('approvetargets')}}">Approve Targets</a>
-  <a href="{{ URL::to('approvetcview')}}">Approve TC</a>
+  <a href="{{ URL::to('approvebatchexpense')}}">Approve Batch Expense</a>
   <a href="{{ URL::to('viewtc') }}">Training Centre List</a>
-  <a href="{{ URL::to('credential') }}">TC Credential</a>
+  <a href="{{ URL::to('credential') }}">Credential</a>
+  <a href="{{ URL::to('role') }}">Create Role</a>
+  <a href="{{ URL::to('centretype') }}">Centre Type</a>
+  <a href="{{ URL::to('subject') }}">Training Subject</a>
 </div>

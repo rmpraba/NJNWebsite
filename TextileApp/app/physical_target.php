@@ -29,4 +29,13 @@ class physical_target extends Model
     	$target = physical_target::create( $array );        
         return $target;
     } 
+
+    public function approvePhyTarget($array){
+    	$target = physical_target::where('batch_id', $array['vbatch'])
+    								->where('financial_year', $array['vfiscalyear'])
+    								->where('centre_id', $array['vtc'])
+    								->update(array('status' => $array['status']));
+		return $target;
+    } 
+    
 }

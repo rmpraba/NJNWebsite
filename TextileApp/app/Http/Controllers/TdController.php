@@ -18,7 +18,11 @@ use App\states;
 use App\types_of_centres;
 use App\sequences;
 use App\training_batches;
+use App\physical_target;
+use App\roles;
 use Hash;
+use Illuminate\Support\Facades\Input;
+
 
 class TdController extends Controller
 {
@@ -275,5 +279,68 @@ class TdController extends Controller
         }
         return view('pages.success',compact('user'));
     }
-   
+
+    public function showRoleview(){
+        return view('tdview.rolecreation');
+    }
+
+    public function createRole(Request $req){
+        $id = $req->input('roleid');
+        $name = $req->input('rolename');
+        $data = array("role_id"=>$id,"role_type"=>$name);
+        $roleobj = new roles();
+        $info = $roleobj->fetchRole($id);
+        if(count($info)==0){
+        $roleobj->insertRole($data);
+        $info1 = $roleobj->fetchID($id,$name);
+        $data1 = array("role_id"=>$id,"user_id"=>$info1[0]->id,"role_type"=>$name,"status"=>"active");
+        $userroleobj = new user_roles();
+        $userroleobj -> insertRole($data1);
+        }        
+        return view('pages.success');
+    }
+    public function showCentreType(){
+        return view('tdview.centretype_creation');
+    }
+    public function createCentreType(Request $req){
+        $name = $req->input('typename');
+        $typecall=new types_of_centres();
+        $data= array("types"=>$name);
+        $typecall->insertCentreType($data);
+        return view('pages.success');
+    }
+    public function showTrainingSubject(){
+        return view('tdview.training_subject');
+    }
+    public function createTrainingSubject(Request $req){
+        $name = $req->input('subjectname');
+        $typecall=new training_centre_subjects();
+        $data= array("subjects"=>$name);
+        $typecall->insertsubject($data);
+        return view('pages.success');
+    }
+
+    public function saveBatchtarget(Request $req)
+    {
+        $data = array();
+        $data['batchid'] = Input::get('batchid');
+        $data['vfiscalyear'] = Input::get('vfiscalyear');
+        $data['vtc'] = Input::get('vtc');
+        $data['vbatch'] = Input::get('vbatch');
+        $data['status'] = Input::get('status');
+        $data['vdistrictcode'] = Input::get('vdistrictcode');
+
+        $physical_targets= new physical_target();
+        $data = $physical_targets->approvePhyTarget($data);
+        return redirect()->back()->with('message', 'Success!!');
+    }
+
+    public function approvebatchexpense(Request $req)
+    {
+        $batchcall = new training_batches();
+        $batchinfo=$batchcall->fetchCompletedBatchList(); 
+        return view('tdview.appbatchexpense')->with(array('batchinfo'=>$batchinfo));
+    }
+ 
+
 }

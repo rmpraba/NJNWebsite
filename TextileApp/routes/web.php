@@ -64,6 +64,8 @@ Route::get('/approvebatch', 'TdController@fetchbatchlist');
 Route::post('/approvebatch/{id}','TdController@approveBatch');
 Route::post('/rejectbatch/{id}','TdController@rejectBatch');
 Route::get('/approvetargets','TdController@approveBatchtarget');
+Route::post('/approvetargets','TdController@saveBatchtarget');
+Route::get('/approvebatchexpense','TdController@approvebatchexpense');
 
 Route::get('/batchlist', 'TdController@fetchbatchlistview');
 Route::post('/batch/{batchid}', 'TcController@editbatchlist');
@@ -83,3 +85,23 @@ Route::post('/rejecttc/{id}','TdController@rejectTc');
 Route::get('/credential','TdController@credentialCreation');
 Route::get('/fetchdistrictwisetc/ajax/{id}','TdController@getDistrictwiseTCList');
 Route::post('/fetchdistrictwisetc','TdController@saveCredential');
+
+Route::get('/role', 'TdController@showRoleview');
+Route::post('/createRole', 'TdController@createRole');
+Route::get('/centretype', 'TdController@showCentreType');
+Route::post('/createcentretype', 'TdController@createCentreType');
+Route::get('/subject', 'TdController@showTrainingSubject');
+Route::post('/createsubject', 'TdController@createTrainingSubject');
+
+Route::get('/candidateupload', 'TcController@candidateUpload');
+Route::get('/candidatemapping', 'TcController@candidateMappingView');
+Route::get('/candidate/ajax/{id}','TcController@getTrainingSubject');
+Route::get('/candidate/batchajax/{id}','TcController@getSubjectBatch');
+Route::post('/batchcandidatemapping', 'TcController@batchCandidateMapping');
+
+Route::get('/candidatelist', 'TcController@candidateListView');
+Route::get('/candidatelist/ajax/{id}','TcController@getTrainingSubjectList');
+Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
+Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
+
+Route::post('importExcel', 'TcController@importExcel');
