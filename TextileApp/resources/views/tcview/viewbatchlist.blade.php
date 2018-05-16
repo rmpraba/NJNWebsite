@@ -11,6 +11,9 @@
         </div>
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
         <h1 style="color: #b30000;">List Of Batches</h1>
         <table class="table table-bordered">
         <tr><th>Batch Id</th><th>Batch Name</th><th>Batch Type</th><th>Start Date</th><th>End Date</th><th>No Of Candidate</th><th>Status</th><th>Candidate Upload</th><th>Update/Delete</th></tr>
