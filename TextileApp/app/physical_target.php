@@ -29,4 +29,13 @@ class physical_target extends Model
     	$target = physical_target::create( $array );        
         return $target;
     } 
+    public function checkPhysicalTarget($districtid,$year,$tc,$batch,$type){
+    	$target = physical_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->get();
+    	return $target;
+
+    }
+    public function updatePhysicalTarget($districtid,$year,$tc,$batch,$type,$array){
+    	$target = physical_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
+        return $target;
+    }
 }

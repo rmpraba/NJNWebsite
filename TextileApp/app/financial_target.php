@@ -29,4 +29,13 @@ class financial_target extends Model
     	$target = financial_target::create( $array );        
         return $target;
     }
+     public function checkFinancialTarget($districtid,$year,$tc,$batch,$type){
+    	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->get();
+    	return $target;
+
+    }
+    public function updateFinancialTarget($districtid,$year,$tc,$batch,$type,$array){
+    	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
+        return $target;
+    }
 }

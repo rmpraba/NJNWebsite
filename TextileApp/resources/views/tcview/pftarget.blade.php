@@ -157,12 +157,47 @@
                     dataType: "json",
                     success:function(data) {  
                         // alert('success');
+                    
                     $("input[name='timing']").val("From: "+ data[0].start_date+" To: "+data[0].end_date);
                     $("[data-field='subject']").text(data[0].batch_type);
                     $("[data-field='type']").text(data[0].centre_type);
                     $("[data-field='district']").text(data[0].district_name);
                     $("[data-field='division']").text(data[0].division);
                     $("input[name='districtcode']").val(data[0].district_id);
+                    $("input[name='genpm']").val(data[0].genpm);
+                    $("input[name='genpf']").val(data[0].genpf);
+                    $("input[name='genpt']").val(data[0].genpt);
+                    $("input[name='tsppm']").val(data[0].tsppm);
+                    $("input[name='tsppf']").val(data[0].tsppf);
+                    $("input[name='tsppt']").val(data[0].tsppt);
+                     $("input[name='scppm']").val(data[0].scppm);
+                    $("input[name='scppf']").val(data[0].scppf);
+                    $("input[name='scppt']").val(data[0].scppt);
+                     $("input[name='minpm']").val(data[0].minpm);
+                    $("input[name='minpf']").val(data[0].minpf);
+                    $("input[name='minpt']").val(data[0].minpt);
+
+                     $("input[name='genfm']").val(data[0].genfm);
+                    $("input[name='genff']").val(data[0].genff);
+                    $("input[name='genft']").val(data[0].genft);
+                    $("input[name='tspfm']").val(data[0].tspfm);
+                    $("input[name='tspff']").val(data[0].tspff);
+                    $("input[name='tspft']").val(data[0].tspft);
+                     $("input[name='scpfm']").val(data[0].scpfm);
+                    $("input[name='scpff']").val(data[0].scpff);
+                    $("input[name='scpft']").val(data[0].scpft);
+                    $("input[name='minfm']").val(data[0].minfm);
+                    $("input[name='minff']").val(data[0].minff);
+                    $("input[name='minft']").val(data[0].minft);
+
+
+                    $("input[name='totpm']").val(parseInt(data[0].genpm)+parseInt(data[0].tsppm)+parseInt(data[0].scppm)+parseInt(data[0].minpm));
+                    $("input[name='totpf']").val(parseInt(data[0].genpf)+parseInt(data[0].tsppf)+parseInt(data[0].scppf)+parseInt(data[0].minpf));
+                    $("input[name='totpt']").val(parseInt(data[0].genpt)+parseInt(data[0].tsppt)+parseInt(data[0].scppt)+parseInt(data[0].minpt));
+
+                    $("input[name='totfm']").val(parseInt(data[0].genfm)+parseInt(data[0].tspfm)+parseInt(data[0].scpfm)+parseInt(data[0].minfm));
+                    $("input[name='totff']").val(parseInt(data[0].genff)+parseInt(data[0].tspff)+parseInt(data[0].scpff)+parseInt(data[0].minff));
+                    $("input[name='totft']").val(parseInt(data[0].genft)+parseInt(data[0].tspft)+parseInt(data[0].scpft)+parseInt(data[0].minft));
                     },
                     error: function(e) {
                         // alert('fail');
