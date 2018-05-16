@@ -35,24 +35,26 @@
                 </td>
                 <td>
                     @if($row->status == "Approved" && $row->action != "Completed" && $row->action != "Start")
-                        <form id="actionstartform.{{$row->batch_id}}" action="{{ url('batchAction/'.$row->batch_id.'/Start') }}" method="POST">
-                    {{ csrf_field() }}<a onclick="document.getElementById('actionstartform.{{$row->batch_id}}').submit();" class="btn btn-primary batchbtn" href="#"><span text-primary"></span>Start</a><br><br></form>
+                        <form id="actionstartform.{{$row->id}}" action="{{ url('batchAction/'.$row->id.'/Start') }}" method="POST">
+                    {{ csrf_field() }}<a onclick="document.getElementById('actionstartform.{{$row->id}}').submit();" class="btn btn-primary batchbtn" href="#"><span text-primary"></span>Start</a><br><br></form>
                     @else
                          <a disabled class="btn btn-primary batchbtn" href="#"><span text-primary"></span>Start</a><br><br>
                     @endif
 
                     @if($row->status == "Approved")
-                    <form id="actionholdform.{{$row->batch_id}}" action="{{ url('batchAction/'.$row->batch_id.'/Hold') }}" method="POST">
+                    <form id="actionholdform.{{$row->id}}" action="{{ url('batchAction/'.$row->id.'/Hold') }}" method="POST">
                     {{ csrf_field() }}
-                        <a onclick="document.getElementById('actionholdform.{{$row->batch_id}}').submit();" class="btn btn-warning batchbtn" href="#"><span text-primary"></span>Hold</a><br><br></form>
+                        <a onclick="document.getElementById('actionholdform.{{$row->id}}').submit();" class="btn btn-warning batchbtn" href="#"><span text-primary"></span>Hold</a><br><br></form>
                     @else
                         <a disabled class="btn btn-warning batchbtn" href="#"><span text-primary"></span>Hold</a><br><br>
                     @endif
 
-                    @if($row->status == "Approved" && ($row->action == "Start" || $row->action == "Hold"))
-                        <a  class="btn btn-success batchbtn" href="#"><span text-primary"></span>Completed</a>
+                    @if($row->status == "Approved")
+                    <form id="actioncompletedform.{{$row->id}}" action="{{ url('batchAction/'.$row->id.'/Completed') }}" method="POST">
+                    {{ csrf_field() }}
+                        <a onclick="document.getElementById('actioncompletedform.{{$row->id}}').submit();" class="btn btn-success batchbtn" href="#"><span text-primary"></span>Completed</a><br><br></form>
                     @else
-                        <a  disabled class="btn btn-success batchbtn" href="#"><span text-primary"></span>Completed</a>
+                        <a disabled class="btn btn-success batchbtn" href="#"><span text-primary"></span>Completed</a><br><br>
                     @endif
                 </td>         
             </tr>

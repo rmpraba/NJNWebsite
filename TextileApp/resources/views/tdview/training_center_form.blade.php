@@ -73,7 +73,7 @@
          </td><td><p class="star">*</p></td>
          <td>  
             	<label for="usr">Moblie number</label>
-          		<input type="number" class="form-control" id="usr"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number"maxlength = "10" name="mobile" required>
+          		<input type="number" class="form-control" id="usr" type = "number" maxlength = "10" name="mobile" required>
          </td><td><p class="star1">*</p></td>
         </tr>
         <tr>

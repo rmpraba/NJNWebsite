@@ -13,9 +13,7 @@
         <div id="viewtargetcontent" class="col-md-9">
         <h1 style="color: #b30000;">Training Centre List</h1>
         <table class="table table-bordered">
-        <tr>
-
-            
+        <tr>           
 
             <th>ID</th><th>Owner Name</th><th>Center ID</th><th>District ID</th><th>Upload Picture</th><th>street</th><th>district</th><th>state</th><th>PIN Code</th><th>Email</th><th>Mobile number</th><th>landline</th><th>website_id</th><th>PAN Card</th><th>PAN image</th><th>GST</th><th>GST Image</th><th>Training_start</th><th>Adhar Card</th><th>Adhar Image</th><th>Center Type</th><th>Training Subject</th><th>Center Status</th><th>Update</th><th>Delete</th>
         </tr>

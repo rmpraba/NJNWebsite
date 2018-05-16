@@ -18,5 +18,5 @@ class districts extends Model
     public function fetchDistrict(){
     	$district = districts::all(); 
         return $district;
-    }
+    }    
 }

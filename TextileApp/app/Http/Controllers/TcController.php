@@ -19,6 +19,7 @@ use App\sequences;
 use App\training_batches;
 use App\physical_target;
 use App\financial_target;
+use Illuminate\Support\Facades\Input;
 
 class TcController extends Controller
 {
@@ -32,7 +33,7 @@ class TcController extends Controller
         $password=session()->get('password');
         
         $usercall= new users();
-        $info = $usercall->fetchUserInfo($username,$password);
+        $info = $usercall->fetchUserInfo($username);
         $district=$info[0]->district;
         $centreid=$info[0]->centre_id;
 
@@ -144,7 +145,7 @@ class TcController extends Controller
 
      public function insertpf(Request $req)
     {
-        $districtid = $req->input('districtcode');
+        $districtid = "KLR";
         $year = $req->input('fiscalyear');
         $tc = $req->input('tc');
         $batch = $req->input('batch');
@@ -190,8 +191,24 @@ class TcController extends Controller
     public function batchexpenseview(Request $obj)
     {
         $batchcall = new training_batches();
-        $batchinfo=$batchcall->fetchBatchList(); 
+        $batchinfo=$batchcall->fetchCompletedBatchList(); 
         return view('tcview.viewbatchlistexpense')->with(array('batchinfo'=>$batchinfo));
     }
+
+    public function insertbatchexpense(Request $obj)
+    {
+        $data = array();
+        $data['stipend'] = Input::get('stipend');
+        $data['raw_material'] = Input::get('raw_material');
+        $data['inst_exp'] = Input::get('inst_exp');
+        $data['total_expense'] = Input::get('total');
+        $data['id'] = Input::get('id');
+
+        $batchcall = new training_batches();
+        $batchinfo=$batchcall->updateBatchExpense($data);
+
+        return redirect()->back()->with('message', 'Success!!');
+    }
+    
    
 }

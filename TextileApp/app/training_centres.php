@@ -66,5 +66,10 @@ class training_centres extends Model
         return $tcinfo;
     }
 
+    public function fetchDistrictwiseTc($districtid){
+        $tc = training_centres::where('district_id',$districtid)->get();        
+        return $tc;
+    }
+
 
 }

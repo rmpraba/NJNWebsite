@@ -18,12 +18,24 @@ class users extends Authenticatable
 	protected $hidden = [
         'password', 'remember_token',
     ];
-    public function fetchUserInfo($username,$password){
-    	$district = users::where('username', $username)->where('password', $password)->get();     
+    public function fetchUserInfo($username){
+    	$district = users::where('username', $username)->get();     
         return $district;
     }
     public function fetchUserId($username){
     	$user = users::where('username', $username)->get();     
+        return $user;
+    }
+    public function insertUser($array){
+        $user = users::create( $array );        
+        return $user;
+    }
+    public function findId($username,$centreid){
+        $user = users::where('username', $username)->where('centre_id', $centreid)->get();     
+        return $user;
+    }
+    public function updateUser($username,$centreid,$array){
+        $user = users::where('username', $username)->where('centre_id', $centreid)->update( $array );       
         return $user;
     }
 }

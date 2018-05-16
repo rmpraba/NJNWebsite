@@ -39,10 +39,6 @@ Route::get('tchome', function()
 {
     return View::make('pages.tchome');
 });
-Route::get('training_center_form', function()
-{
-    return View::make('pages.tchome');
-});
 Route::post('/login', 'loginController@login');
 Route::get('/logout', 'loginController@logout');
 
@@ -51,7 +47,7 @@ Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');
 Route::get('/pftarget', 'TcController@pftargetfetch');
 Route::post('insertpftarget', 'TcController@insertpf');
 Route::get('/batchexpense', 'TcController@batchexpenseview');
-
+Route::post('batchexpensetotal/{id}', 'TcController@insertbatchexpense');
 
 Route::get('/viewpftarget', 'TcController@viewpftargetfetch');
 Route::get('/viewpftarget/ajax/{id}','TcController@viewgetBatchList');
@@ -67,6 +63,7 @@ Route::post('/batchcreate', 'TcController@batchinsert');
 Route::get('/approvebatch', 'TdController@fetchbatchlist');
 Route::post('/approvebatch/{id}','TdController@approveBatch');
 Route::post('/rejectbatch/{id}','TdController@rejectBatch');
+Route::get('/approvetargets','TdController@approveBatchtarget');
 
 Route::get('/batchlist', 'TdController@fetchbatchlistview');
 Route::post('/batch/{batchid}', 'TcController@editbatchlist');
@@ -83,3 +80,6 @@ Route::get('/approvetcview', 'TdController@fetchTrainingCentreList');
 Route::post('/approvetcview/{id}','TdController@fetchTrainingCentreList');
 Route::post('/approvetc/{id}','TdController@Approvetc');
 Route::post('/rejecttc/{id}','TdController@rejectTc');
+Route::get('/credential','TdController@credentialCreation');
+Route::get('/fetchdistrictwisetc/ajax/{id}','TdController@getDistrictwiseTCList');
+Route::post('/fetchdistrictwisetc','TdController@saveCredential');
