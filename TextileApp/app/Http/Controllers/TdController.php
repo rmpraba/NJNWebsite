@@ -173,7 +173,7 @@ class TdController extends Controller
 
         $batchinfo = $batchcall->fetchBatchSpecInfo($id);
 
-        $data1 = array("centre_id"=>$batchinfo[0]->centre_id,"batch_id"=>$batchinfo[0]->batch_id,"batch_name"=>$batchinfo[0]->batch_name,"status"=>$batchinfo[0]->status,"created_by"=>$batchinfo[0]->created_by,"batch_type"=>$batchinfo[0]->training_type);
+        $data1 = array("centre_id"=>$batchinfo[0]->centre_id,"batch_id"=>$batchinfo[0]->batch_id,"batch_name"=>$batchinfo[0]->batch_name,"status"=>$batchinfo[0]->status,"created_by"=>$batchinfo[0]->created_by,"batch_type"=>$batchinfo[0]->training_type,"batch_academic_year"=>$batchinfo[0]->academic_year);
 
         $trainingbatchcall = new training_batches();
         $tb=$trainingbatchcall->insertTrainingBatch($data1);

@@ -15,7 +15,8 @@ class batches extends Model
 				'end_date',
 				'status',
 				'district_id',
-				'centre_id'
+				'centre_id',
+                'academic_year'
     			];
     public function deleteBatch($batchid){
     	$batch = batches::where('batch_id', $batchid);        

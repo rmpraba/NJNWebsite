@@ -11,22 +11,30 @@
 {{csrf_field()}}
 <table style="width: 80%;" cellspacing="15">
 <tr>
-<td><label class="lbl">Batch Name:</label><br>
-<input class="input" type="text" name="batchname" required><br></td>
-<td></td>
-<td><label  class="lbl">Training Type:</label><br>
-<input  class="input" type="text" name="trainingtype" required><br></td>
+<td>
+        <label>Financial Year:</label><br>
+        <select class="form-control" id="sel1" name="fiscalyear" required>
+        <option value="">-----Select Academic Year-----</option>
+        <option value="2018-2019">2018-2019</option>
+        <option value="2019-2020">2019-2020</option>
+        </select>    
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><label>Batch Name:</label><br>
+<input class="form-control" type="text" name="batchname" required><br></td>
 </tr>
 <tr>
-<td><label  class="lbl">Start Date:</label><br>
-<input  class="input" type="date" name="startdate" required><br></td>	
-<td></td>
-<td><label  class="lbl">End Date:</label><br>
-<input  class="input" type="date" name="enddate" required><br></td>
+<td><label>Start Date:</label><br>
+<input  class="form-control" type="date" name="startdate" required><br></td>	
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><label>End Date:</label><br>
+<input  class="form-control" type="date" name="enddate" required><br></td>
 </tr>
-<tr><td colspan="1"><label class="lbl">Number of Candidates:</label><br>
-<input class="input" type="number" name="noofstud" required></td><br><td></td>
-<td colspan="1"><br><button type="submit" class="btn btn-primary" style="width: 80%;">Submit</button></td></tr>
+<tr><td colspan="1"><label>Number of Candidates:</label><br>
+<input class="form-control" type="number" name="noofstud" required></td><br><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><label>Training Type:</label><br>
+<input  class="form-control" type="text" name="trainingtype" required><br></td></tr>
+<tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td colspan="1"><br><button type="submit" class="btn btn-primary">Submit</button></td></tr>
 </table>
 </form>
 </div>

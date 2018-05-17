@@ -13,7 +13,7 @@ class training_batches extends Model
 							'created_by',
 							'batch_type',
 							'batch_name',
-							'academic_year'
+							'batch_academic_year'
                      ];
     public function insertTrainingBatch($array){
     	$batch = training_batches::create( $array );        

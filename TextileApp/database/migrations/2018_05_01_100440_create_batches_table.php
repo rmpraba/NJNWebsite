@@ -23,7 +23,8 @@ class CreateBatchesTable extends Migration
              $table->string('centre_id');
              $table->string('start_date');
              $table->string('end_date');
-             $table->string('status');             
+             $table->string('status'); 
+             $table->string('academic_year');             
             $table->timestamps();
         });
     }
