@@ -69,4 +69,8 @@ class training_batches extends Model
         $batch = training_batches::where("centre_id",$centreid)->where("batch_type",$type)->pluck('batch_name','batch_id');
         return $batch;
     }
+    public function fetchBatchSpecInfo($batchid){
+        $batchinfo = training_batches::where('batch_id', $batchid)->get(); 
+        return $batchinfo;
+    }
 }

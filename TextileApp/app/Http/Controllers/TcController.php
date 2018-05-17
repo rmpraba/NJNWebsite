@@ -22,6 +22,7 @@ use App\financial_target;
 use App\candidates;
 use App\batch_candidates;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Excel;
 
 class TcController extends Controller
@@ -264,7 +265,7 @@ class TcController extends Controller
         $data1 = array('status' => 'Mapped' );       
         $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
         $info = $bccall -> createbatchCandidate($data);    
-         $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+        $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
         return json_encode($info);
         }        
     }
@@ -323,12 +324,27 @@ class TcController extends Controller
         return view('tcview.candidateupload');
     }
 
-    public function importExcel()
+    public function importExcel($id)
     {
+        // echo $id;
+        $batchcall = new batches();
+        $batchres = $batchcall -> fetchBatchSpecInfo($id);
+        $noofcandidate=$batchres[0]->no_of_stud;
+        $status=$batchres[0]->status;
+        if($status=="Approved"){
         if(Input::hasFile('import_file')){
             $path = Input::file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
             })->get();
+            // echo $data->count()."  ".$noofcandidate;
+            // echo $data->count()>$noofcandidate;
+            if($data->count()>$noofcandidate){
+                // echo "success";
+                Session::flash("success", "You can't upload more than batch size!!");
+                return Redirect::back();
+            }
+            else{
+                // echo "fail";
             if(!empty($data) && $data->count()){
                 foreach ($data as $key => $value) {
                     $insert[] = ['serial_no' => $value->serial_no, 'first_name' => $value->first_name,'last_name' => $value->last_name,'phone_no' => $value->phone_no,'email' => $value->email,'dob' => $value->dob,'aadhar_no' => $value->aadhar_no,'gender' => $value->gender,'marital_status' => $value->marital_status,'religion' => $value->religion,'category' => $value->category,'relationship' => $value->relationship,'relation_firstname' => $value->relation_firstname,'relation_lastname' => $value->relation_lastname,'current_location' => $value->current_location,'current_street' => $value->current_street,'current_city' => $value->current_city,'current_state' => $value->current_state,'current_district' => $value->current_district,'current_taluk' => $value->current_taluk,'current_village' => $value->current_village,'current_pincode' => $value->current_pincode,'permanent_location' => $value->permanent_location,'permanent_street' => $value->permanent_street,'permanent_city' => $value->permanent_city,'permanent_state' => $value->permanent_state,'permanent_district' => $value->permanent_district,'permanent_taluk' => $value->permanent_taluk,'permanent_village' => $value->permanent_village,'permanent_pincode' => $value->permanent_pincode,'education' => $value->education,'subject' => $value->subject,'yearofpassing' => $value->yearofpassing,'physically_challenged' => $value->physically_challenged,'skill' => $value->skill,'apprentiseship' => $value->apprentiseship,'perviously_employed' => $value->perviously_employed,'willing_migrate' => $value->willing_migrate,'expected_salary_outside' => $value->expected_salary_outside,'expected_salary_within' => $value->expected_salary_within,'preferred_training_period' => $value->preferred_training_period,'status' => $value->status
@@ -338,13 +354,46 @@ class TcController extends Controller
                     // echo ''.json_encode($insert);
                     $candidateobj = new candidates();
                     $candidateobj->createCandidate($insert);
-                    // DB::table('candidates')->insert($insert);
-                    // dd('Insert Record successfully.');
+
+                    $batchobj = new training_batches();
+                    $batchinfo = $batchobj->fetchBatchSpecInfo($id);
+
+                    $centreid = $batchinfo[0]->centre_id;
+                    $type = $batchinfo[0]->batch_type;
+                    $batchid = $batchinfo[0]->batch_id;
+                    $academicyear = $batchinfo[0]->batch_academic_year;
+                    
+                    $bccall = new batch_candidates();
+                    $candidatecall = new candidates();
+
+                    foreach ($data as $key => $value) {
+                      $candidateinsert[] = ['candidate_id' => $value->serial_no,'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid , 'academic_year' => $academicyear];                        
+                    }
+
+                    // $candidateinfo = $bccall -> checkCandidate($id);
+                    // if(count($candidateinfo)==0){
+                    // $data1 = array('status' => 'Mapped' );       
+                    // $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
+                    $info = $bccall -> createbatchCandidate($candidateinsert);    
+                    // $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
+                    // }
+                    foreach ($data as $key => $value) {
+                        $data1 = array('status' => 'Mapped' ); 
+                        $updateinfo = $candidatecall -> updateCandidateStatus($value->serial_no,$data1);    
+                    }
                     return view('pages.success');
                 }
             }
         }
-        return view('pages.success');
+
+        }
+
+        }
+        else{
+            Session::flash("success", "Can't upload candidates before batch approval!!");
+            return Redirect::back();
+        }
+        // return view('pages.success');
     }
 
     public function batchexpenseview(Request $obj)

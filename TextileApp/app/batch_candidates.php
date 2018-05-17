@@ -14,7 +14,7 @@ class batch_candidates extends Model
 							'candidate_id'
 							];
 	public function createbatchCandidate($array){
-    	$candidates = batch_candidates::create($array);     
+    	$candidates = batch_candidates::insert($array);     
         return $candidates;
     }	
     public function checkCandidate($id){
