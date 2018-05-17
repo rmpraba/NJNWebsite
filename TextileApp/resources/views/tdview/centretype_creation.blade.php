@@ -6,6 +6,9 @@
 @include('includes.tdsidebar')
 </div>
 <div id="targetcontent" class="col-md-9">
+		@if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
 <h1 id="heading">Create Centre Type</h1>
 <form action="/createcentretype" method="post">
 {{csrf_field()}}

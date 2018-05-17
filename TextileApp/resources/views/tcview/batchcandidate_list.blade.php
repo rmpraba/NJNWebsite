@@ -9,6 +9,9 @@
         </div>
         <!-- main content -->
         <div id="targetcontent" class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
     <center><h1 style="color: #b30000;"> Batch - Candidate List </h1></center>
     <!-- <form action="" method="post"> -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -142,6 +145,7 @@
                 dataType: "json",
                 success: function (data) {
                     // alert('success'+data.msg);
+                    alert('Removed successfully!!');
                 }
             });
         });

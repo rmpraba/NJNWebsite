@@ -7,6 +7,9 @@
          @include('includes.tdsidebar')
     </div>
      <div class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
         <table>
       
               <form action="" method="post" >
