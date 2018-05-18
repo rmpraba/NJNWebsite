@@ -10,12 +10,16 @@
         <!-- main content -->
         <div id="targetcontent" class="col-md-9">
         @if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}
+        <button type="button" class="close" data-dismiss="alert">×</button></em>
+        </div>
         @endif
     <center><h1 style="color: #b30000;"> Physical & Financial Target </h1></center>
     <form action="/insertpftarget" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="districtcode" hidden>
+    <input type="hidden" name="candidatecount" hidden>
+    <input type="hidden" name="batchcandidate" hidden>
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
     <table style="width: 100%;">
     <tr>
@@ -37,12 +41,10 @@
     <td>
         <div class="form-group">
                 <label>Select Training Centre:</label><br>
-                <select name="tc" class="form-control" style="width:350px" required>
-                    <option value="">--- Select TC ---</option>
-                    @foreach ($tcs as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
+                @foreach ($tcname as $tc)
+                <input type="hidden" class="form-control" id="tc" name="tc" value="{{ $tc->centre_id}}" required readonly>
+                <input type="text" class="form-control" id="tcname" name="tcname" value="{{ $tc->centre_name}}" required readonly>
+                @endforeach                
         </div>
     </td>
     </tr>
@@ -51,8 +53,14 @@
             <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="batch" class="form-control" style="width:350px" required>
-                <!-- <option value="">--- Select Batch ---</option> -->
+                    <option value="">--- Select Batch ---</option>
+                    @foreach ($batches as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
                 </select>
+                <!-- <select name="batch" class="form-control" style="width:350px" required>
+                <option value="">--- Select Batch ---</option>
+                </select> -->
             </div>
         </td>
         <td></td>
@@ -153,6 +161,48 @@
         $('select[name="batch"]').on('change', function() {
             var batch = $(this).val();
             // alert(batch);
+                    $("input[name='timing']").val("");
+                    $("[data-field='subject']").text("");
+                    $("[data-field='type']").text("");
+                    $("[data-field='district']").text("");
+                    $("[data-field='division']").text("");
+                    $("input[name='districtcode']").val("");
+                    $("input[name='batchcandidate']").val("");
+                    $("input[name='candidatecount']").val("");
+                    $("input[name='genpm']").val("");
+                    $("input[name='genpf']").val("");
+                    $("input[name='genpt']").val("");
+                    $("input[name='tsppm']").val("");
+                    $("input[name='tsppf']").val("");
+                    $("input[name='tsppt']").val("");
+                    $("input[name='scppm']").val("");
+                    $("input[name='scppf']").val("");
+                    $("input[name='scppt']").val("");
+                    $("input[name='minpm']").val("");
+                    $("input[name='minpf']").val("");
+                    $("input[name='minpt']").val("");
+
+                    $("input[name='genfm']").val("");
+                    $("input[name='genff']").val("");
+                    $("input[name='genft']").val("");
+                    $("input[name='tspfm']").val("");
+                    $("input[name='tspff']").val("");
+                    $("input[name='tspft']").val("");
+                    $("input[name='scpfm']").val("");
+                    $("input[name='scpff']").val("");
+                    $("input[name='scpft']").val("");
+                    $("input[name='minfm']").val("");
+                    $("input[name='minff']").val("");
+                    $("input[name='minft']").val("");
+
+
+                    $("input[name='totpm']").val("");
+                    $("input[name='totpf']").val("");
+                    $("input[name='totpt']").val("");
+
+                    $("input[name='totfm']").val("");
+                    $("input[name='totff']").val("");
+                    $("input[name='totft']").val("");
             if(batch) {
                 $.ajax({
                     url: '/pftarget/batchajax/'+batch,
@@ -167,20 +217,22 @@
                     $("[data-field='district']").text(data[0].district_name);
                     $("[data-field='division']").text(data[0].division);
                     $("input[name='districtcode']").val(data[0].district_id);
+                    $("input[name='batchcandidate']").val(data[0].no_of_stud);
+                    $("input[name='candidatecount']").val(data[0].candidate_count);
                     $("input[name='genpm']").val(data[0].genpm);
                     $("input[name='genpf']").val(data[0].genpf);
                     $("input[name='genpt']").val(data[0].genpt);
                     $("input[name='tsppm']").val(data[0].tsppm);
                     $("input[name='tsppf']").val(data[0].tsppf);
                     $("input[name='tsppt']").val(data[0].tsppt);
-                     $("input[name='scppm']").val(data[0].scppm);
+                    $("input[name='scppm']").val(data[0].scppm);
                     $("input[name='scppf']").val(data[0].scppf);
                     $("input[name='scppt']").val(data[0].scppt);
-                     $("input[name='minpm']").val(data[0].minpm);
+                    $("input[name='minpm']").val(data[0].minpm);
                     $("input[name='minpf']").val(data[0].minpf);
                     $("input[name='minpt']").val(data[0].minpt);
 
-                     $("input[name='genfm']").val(data[0].genfm);
+                    $("input[name='genfm']").val(data[0].genfm);
                     $("input[name='genff']").val(data[0].genff);
                     $("input[name='genft']").val(data[0].genft);
                     $("input[name='tspfm']").val(data[0].tspfm);
@@ -216,10 +268,19 @@
 <script type="text/javascript">
 function av(avSelect)
 {
+$batchcandidaate = $("input[name='batchcandidate']").val();
+$candidatecount = $("input[name='candidatecount']").val();
+// alert($batchcandidaate+"  "+$candidatecount);
 var one=avSelect.form.one.value;
 var two=avSelect.form.two.value;
 var avvy=parseFloat(one)+parseFloat(two);
-avSelect.form.avvy.value=avvy;
+if(avvy<=$candidatecount)
+  avSelect.form.avvy.value=avvy;
+else{
+  avSelect.form.two.value=0;
+  avSelect.form.two.focus();
+  // alert("Sorry!!You can't exceed the limit.."+ $candidatecount);  
+}
 
 var three=avSelect.form.three.value;
 var four=avSelect.form.four.value;
@@ -229,7 +290,14 @@ avSelect.form.avvy1.value=avvy1;
 var five=avSelect.form.five.value;
 var six=avSelect.form.six.value;
 var avvy2=parseFloat(five)+parseFloat(six);
-avSelect.form.avvy2.value=avvy2;
+// avSelect.form.avvy2.value=avvy2;
+if(avvy2<=$candidatecount)
+  avSelect.form.avvy2.value=avvy2;
+else{
+  avSelect.form.six.value=0;
+  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+}
+
 
 var seven=avSelect.form.seven.value;
 var eight=avSelect.form.eight.value;
@@ -239,7 +307,12 @@ avSelect.form.avvy3.value=avvy3;
 var nine=avSelect.form.nine.value;
 var ten=avSelect.form.ten.value;
 var avvy4=parseFloat(nine)+parseFloat(ten);
-avSelect.form.avvy4.value=avvy4;
+if(avvy4<=$candidatecount)
+  avSelect.form.avvy4.value=avvy4;
+else{
+  avSelect.form.ten.value=0;
+  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+}
 
 var leven=avSelect.form.leven.value;
 var twel=avSelect.form.twel.value;
@@ -249,7 +322,12 @@ avSelect.form.avvy5.value=avvy5;
 var thirteen=avSelect.form.thirteen.value;
 var fourteen=avSelect.form.fourteen.value;
 var avvy6=parseFloat(thirteen)+parseFloat(fourteen);
-avSelect.form.avvy6.value=avvy6;
+if(avvy6<=$candidatecount)
+  avSelect.form.avvy6.value=avvy6;
+else{
+  avSelect.form.fourteen.value=0;
+  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+}
 
 var fifteen=avSelect.form.fifteen.value;
 var sixteen=avSelect.form.sixteen.value;

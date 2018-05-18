@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrainingCentreSubjectsTable extends Migration
+class CreateSubjectCandidatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTrainingCentreSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('training_centre_subjects', function (Blueprint $table) {
+        Schema::create('subject_candidates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('subjects');
             $table->string('academic_year');
-            $table->string('no_of_candidates');
+            $table->string('subject');
+            $table->string('no_of_candidate')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTrainingCentreSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('training_centre_subjects');
+        Schema::dropIfExists('subject_candidates');
     }
 }

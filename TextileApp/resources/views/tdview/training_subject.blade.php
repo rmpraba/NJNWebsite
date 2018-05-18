@@ -7,18 +7,28 @@
 </div>
 <div id="targetcontent" class="col-md-9">
 		@if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
         @endif
 <h1 id="heading">Create Training Subject</h1>
 <form action="/createsubject" method="post">
 {{csrf_field()}}
-<table style="width: 80%;" cellspacing="15">
+<table style="width: 40%;" cellspacing="15">
 <tr>
-<td><label class="lbl">Subject Name:</label><br>
-<input id="ctname" class="input" type="text" name="subjectname" required ><br></td>
+<td>
+        <label>Financial Year:</label><br>
+        <select class="form-control" id="sel1" name="fiscalyear" required>
+        <option value="">-----Select Financial Year-----</option>
+        <option value="2018-2019">2018-2019</option>
+        <option value="2019-2020">2019-2020</option>
+        </select>    
+</td></tr>
+<tr><td><label class="lbl">Subject Name:</label><br>
+<input id="ctname" class="form-control" type="text" name="subjectname" required ><br></td></tr>
+<tr><td><label class="lbl">No Of Candidate:</label><br>
+<input id="ctname" class="form-control" type="text" name="candidate" required ><br></td>
 </tr>
 <tr>
-<td colspan="1"><br><button type="submit" class="btn btn-primary" width="100%">Submit</button></td></tr>
+<td><br><button type="submit" class="btn btn-primary" style="width:100%">Submit</button></td></tr>
 </table>
 </form>
 </div>

@@ -34,12 +34,10 @@
     <td>
         <div class="form-group">
                 <label>Select Training Centre:</label><br>
-                <select name="vtc" class="form-control" style="width:350px" required>
-                    <option value="">--- Select TC ---</option>
-                    @foreach ($tcs as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
+                @foreach ($tcname as $tc)
+                <input type="hidden" class="form-control" id="vtc" name="vtc" value="{{ $tc->centre_id}}" required readonly>
+                <input type="text" class="form-control" id="vtcname" name="vtcname" value="{{ $tc->centre_name}}" required readonly>
+                @endforeach     
         </div>
     </td>
     </tr>
@@ -48,8 +46,14 @@
             <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="vbatch" class="form-control" style="width:350px" required>
-                <!-- <option value="">--- Select Batch ---</option> -->
+                    <option value="">--- Select Batch ---</option>
+                    @foreach ($batches as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
                 </select>
+                <!-- <select name="vbatch" class="form-control" style="width:350px" required>
+                <option value="">--- Select Batch ---</option>
+                </select> -->
             </div>
         </td>
         <td></td>
@@ -150,6 +154,46 @@
         $('select[name="vbatch"]').on('change', function() {
             var batch = $(this).val();
             // alert(batch);
+             $("input[name='vtiming']").val("");
+                    $("[data-field='vsubject']").text("");
+                    $("[data-field='vtype']").text("");
+                    $("[data-field='vdistrict']").text("");
+                    $("[data-field='vdivision']").text("");
+                    $("input[name='vdistrictcode']").val("");
+                    $("input[name='vgenpm']").val("");
+                    $("input[name='vgenpf']").val("");
+                    $("input[name='vgenpt']").val("");
+                    $("input[name='vtsppm']").val("");
+                    $("input[name='vtsppf']").val("");
+                    $("input[name='vtsppt']").val("");
+                    $("input[name='vscppm']").val("");
+                    $("input[name='vscppf']").val("");
+                    $("input[name='vscppt']").val("");
+                    $("input[name='vminpm']").val("");
+                    $("input[name='vminpf']").val("");
+                    $("input[name='vminpt']").val("");
+
+                    $("input[name='vgenfm']").val("");
+                    $("input[name='vgenff']").val("");
+                    $("input[name='vgenft']").val("");
+                    $("input[name='vtspfm']").val("");
+                    $("input[name='vtspff']").val("");
+                    $("input[name='vtspft']").val("");
+                    $("input[name='vscpfm']").val("");
+                    $("input[name='vscpff']").val("");
+                    $("input[name='vscpft']").val("");
+                    $("input[name='vminfm']").val("");
+                    $("input[name='vminff']").val("");
+                    $("input[name='vminft']").val("");
+
+
+                    $("input[name='vtotpm']").val("");
+                    $("input[name='vtotpf']").val("");
+                    $("input[name='vtotpt']").val("");
+
+                    $("input[name='vtotfm']").val("");
+                    $("input[name='vtotff']").val("");
+                    $("input[name='vtotft']").val("");
             if(batch) {
                 $.ajax({
                     url: '/viewpftarget/batchajax/'+batch,

@@ -9,12 +9,9 @@
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
         @if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
-        @endif
-        @if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
         @elseif(Session::has('fail'))
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-ok"></span><em> {!! session('fail') !!}</em></div>
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-ok"></span><em> {!! session('fail') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
         @endif
         <h1 style="color: #b30000;">Batch Approval</h1>
         <table class="table table-bordered">

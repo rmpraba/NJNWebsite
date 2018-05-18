@@ -262,7 +262,7 @@ class TdController extends Controller
             // return Redirect::back();
         }
         else{
-            echo "Update faild";
+            echo "Update failed";
             // Session::flash("success", "Unable to update!!");
             // return Redirect::back();
         }
@@ -337,8 +337,10 @@ class TdController extends Controller
     }
     public function createTrainingSubject(Request $req){
         $name = $req->input('subjectname');
+        $fiscalyear = $req->input('fiscalyear');
+        $candidate = $req->input('candidate');
         $typecall=new training_centre_subjects();
-        $data= array("subjects"=>$name);
+        $data= array("subjects"=>$name,"academic_year"=>$fiscalyear,"no_of_candidate"=>$candidate);
         $typecall->insertsubject($data);
         // return view('pages.success');
         Session::flash("success", "Created successfully!!");

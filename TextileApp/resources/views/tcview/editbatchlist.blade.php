@@ -8,7 +8,7 @@
 </div>
 <div id="targetcontent" class="col-md-9">
 		@if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
         @endif
 <h1 id="heading">Update Batch List</h1>
 <form action="/updatebatchinfo" method="post">
