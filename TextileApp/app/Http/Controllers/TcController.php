@@ -29,7 +29,15 @@ class TcController extends Controller
 {
     public function batch()
     {        
-        return view('tcview.batchcreate');
+        $tcobj=new training_centre_subjects();
+        $trainingtype=$tcobj->fetchSubject();
+        return view('tcview.batchcreate',compact('trainingtype'));
+    }
+    public function batchstrength($type)
+    {
+        $tcobj=new training_centre_subjects();
+        $info = $tcobj -> fetchspecSubject($type);
+        return json_encode($info);
     }
     public function batchinsert(Request $obj)
     {
