@@ -56,8 +56,8 @@ class loginController extends BaseController
     }
     public function logout(Request $req)
     {
-        Auth::logout();
         Session::flush();
+        Auth::logout();
         return view('pages.login');
     }
 }
