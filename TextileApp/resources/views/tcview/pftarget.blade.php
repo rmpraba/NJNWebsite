@@ -270,16 +270,37 @@ function av(avSelect)
 {
 $batchcandidaate = $("input[name='batchcandidate']").val();
 $candidatecount = $("input[name='candidatecount']").val();
+// var id = $(avSelect).attr('id');
+// alert(avSelect.id);
 // alert($batchcandidaate+"  "+$candidatecount);
 var one=avSelect.form.one.value;
 var two=avSelect.form.two.value;
 var avvy=parseFloat(one)+parseFloat(two);
+if(avSelect.id=="one"||avSelect.id=="two"){
 if(avvy<=$candidatecount)
   avSelect.form.avvy.value=avvy;
 else{
+  if(isNaN(avvy)){}
+  else{
+  if(avSelect.id=="one"){  
+  avSelect.form.one.value=0;
+  one=avSelect.form.one.value;
+  two=avSelect.form.two.value;
+  avvy=parseFloat(one)+parseFloat(two);
+  avSelect.form.avvy.value=avvy;
+  avSelect.form.one.focus();
+  }
+  if(avSelect.id=="two"){  
   avSelect.form.two.value=0;
+  one=avSelect.form.one.value;
+  two=avSelect.form.two.value;
+  avvy=parseFloat(one)+parseFloat(two);
+  avSelect.form.avvy.value=avvy;
   avSelect.form.two.focus();
-  // alert("Sorry!!You can't exceed the limit.."+ $candidatecount);  
+  }
+  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+  }
+}
 }
 
 var three=avSelect.form.three.value;
@@ -290,12 +311,31 @@ avSelect.form.avvy1.value=avvy1;
 var five=avSelect.form.five.value;
 var six=avSelect.form.six.value;
 var avvy2=parseFloat(five)+parseFloat(six);
-// avSelect.form.avvy2.value=avvy2;
+if(avSelect.id=="five"||avSelect.id=="six"){
 if(avvy2<=$candidatecount)
   avSelect.form.avvy2.value=avvy2;
 else{
+  if(isNaN(avvy2)){}
+  else{
+  if(avSelect.id=="five"){  
+  avSelect.form.five.value=0;
+  five=avSelect.form.five.value;
+  six=avSelect.form.six.value;
+  avvy2=parseFloat(five)+parseFloat(six);
+  avSelect.form.avvy2.value=avvy2;
+  avSelect.form.five.focus();
+  }
+  if(avSelect.id=="six"){  
   avSelect.form.six.value=0;
-  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+  five=avSelect.form.five.value;
+  six=avSelect.form.six.value;
+  avvy2=parseFloat(five)+parseFloat(six);
+  avSelect.form.avvy2.value=avvy2;
+  avSelect.form.six.focus();
+  }
+  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+  }
+}
 }
 
 
@@ -307,11 +347,31 @@ avSelect.form.avvy3.value=avvy3;
 var nine=avSelect.form.nine.value;
 var ten=avSelect.form.ten.value;
 var avvy4=parseFloat(nine)+parseFloat(ten);
+if(avSelect.id=="nine"||avSelect.id=="ten"){
 if(avvy4<=$candidatecount)
   avSelect.form.avvy4.value=avvy4;
 else{
+  if(isNaN(avvy4)){}
+  else{
+  if(avSelect.id=="nine"){  
+  avSelect.form.nine.value=0;
+  nine=avSelect.form.nine.value;
+  ten=avSelect.form.ten.value;
+  avvy4=parseFloat(nine)+parseFloat(ten);
+  avSelect.form.avvy4.value=avvy4;
+  avSelect.form.nine.focus();
+  }
+  if(avSelect.id=="ten"){  
   avSelect.form.ten.value=0;
-  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+  nine=avSelect.form.nine.value;
+  ten=avSelect.form.ten.value;
+  avvy4=parseFloat(nine)+parseFloat(ten);
+  avSelect.form.avvy4.value=avvy4;
+  avSelect.form.ten.focus();
+  }
+  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+  }
+}
 }
 
 var leven=avSelect.form.leven.value;
@@ -322,11 +382,31 @@ avSelect.form.avvy5.value=avvy5;
 var thirteen=avSelect.form.thirteen.value;
 var fourteen=avSelect.form.fourteen.value;
 var avvy6=parseFloat(thirteen)+parseFloat(fourteen);
+if(avSelect.id=="thirteen"||avSelect.id=="fourteen"){
 if(avvy6<=$candidatecount)
   avSelect.form.avvy6.value=avvy6;
 else{
+  if(isNaN(avvy6)){}
+  else{
+  if(avSelect.id=="thirteen"){  
+  avSelect.form.thirteen.value=0;
+  thirteen=avSelect.form.thirteen.value;
+  fourteen=avSelect.form.fourteen.value;
+  avvy6=parseFloat(thirteen)+parseFloat(fourteen);
+  avSelect.form.avvy6.value=avvy6;
+  avSelect.form.thirteen.focus();
+  }
+  if(avSelect.id=="fourteen"){  
   avSelect.form.fourteen.value=0;
-  // alert("Sorry!!You can't exceed the limit"+ $candidatecount);  
+  thirteen=avSelect.form.thirteen.value;
+  fourteen=avSelect.form.fourteen.value;
+  avvy6=parseFloat(thirteen)+parseFloat(fourteen);
+  avSelect.form.avvy6.value=avvy6;
+  avSelect.form.fourteen.focus();
+  }
+  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+  }
+}
 }
 
 var fifteen=avSelect.form.fifteen.value;
