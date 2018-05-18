@@ -70,11 +70,15 @@ class TcController extends Controller
         $bat->centre_id=$centreid;
         $bat->save();
         if ($bat->save()) {
-            return view('pages.success');
+            // return view('pages.success');
+            Session::flash("success", "Batch created successfully!!");
+            return Redirect::back();
         }
         else
         {
-            echo"insertion failed";
+            // echo"insertion failed";
+            Session::flash("success", "Batch creation failed!!");
+            return Redirect::back();
         }
     }
     public function editbatchlist($batchid)
@@ -95,6 +99,8 @@ class TcController extends Controller
         $batch=new batches();
         $batch->updateBatch($new_batch_data,$batchid);
         return view('pages.success');  
+        // Session::flash("success", "Batch updated successfully!!");
+        // return Redirect::back();
     }
      public function editBatchAction($batchid,$action)
     { 
@@ -107,7 +113,9 @@ class TcController extends Controller
     { 
         $batch=new batches();
         $batch->deleteBatch($batchid);
-        return view('pages.success'); 
+        // return view('pages.success'); 
+        Session::flash("success", "Batch deleted successfully!!");
+        return Redirect::back();
     }
 
     public function pftargetfetch(Request $req)
@@ -220,7 +228,15 @@ class TcController extends Controller
         else{
         $ft->insertFinancialTarget($data2);
         }      
-        return view('pages.success');
+        // return view('pages.success');
+        if(count($ptobj)>0){
+        Session::flash("success", "Updated successfully!!");
+        return Redirect::back();
+        }
+        else{
+        Session::flash("success", "Added successfully!!");
+        return Redirect::back();
+        }
     }
 
     public function candidateMappingView(){
@@ -316,7 +332,9 @@ class TcController extends Controller
         $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
         $info = $bccall -> deletebatchCandidate($data);    
          $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
-        return json_encode($info);
+        // return json_encode($info);
+         Session::flash("success", "Removed successfully!!");
+         return Redirect::back();
         }        
     }
 
@@ -340,7 +358,7 @@ class TcController extends Controller
             // echo $data->count()>$noofcandidate;
             if($data->count()>$noofcandidate){
                 // echo "success";
-                Session::flash("success", "You can't upload more than batch size!!");
+                Session::flash("fail", "You can't upload more than batch size!!");
                 return Redirect::back();
             }
             else{
@@ -381,7 +399,9 @@ class TcController extends Controller
                         $data1 = array('status' => 'Mapped' ); 
                         $updateinfo = $candidatecall -> updateCandidateStatus($value->serial_no,$data1);    
                     }
-                    return view('pages.success');
+                    // return view('pages.success');
+                    Session::flash("success", "Uploaded successfully!!");
+                    return Redirect::back();
                 }
             }
         }
@@ -390,7 +410,7 @@ class TcController extends Controller
 
         }
         else{
-            Session::flash("success", "Can't upload candidates before batch approval!!");
+            Session::flash("fail", "Can't upload candidates before batch approval!!");
             return Redirect::back();
         }
         // return view('pages.success');
@@ -416,6 +436,11 @@ class TcController extends Controller
         $batchinfo=$batchcall->updateBatchExpense($data);
 
         return redirect()->back()->with('message', 'Success!!');
+    }
+    public function employmentExpense()
+    {
+        $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
+        return view('tcview.employment_expense',compact('tcs'));
     }
     
    

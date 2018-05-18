@@ -41,12 +41,14 @@
         </tr>
        
             @foreach($batchinfo as $row)
+
              <form action="{{ url('batchexpensetotal', $row->id) }}" method="post">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ $row->id }}">
 
-            <?php $stipend = "stipend".$row->id;
+            <?php 
+            $stipend = "stipend".$row->id;
                     $raw = "raw".$row->id;
                     $inst_exp = "inst_exp".$row->id;
                     $total = "total".$row->id;
@@ -56,11 +58,11 @@
                 <td>{{$row->batch_name}}</td>
                 <td>{{$row->batch_type}}</td>
                 <td>{{$row->action}}</td> 
-                <td> <input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" name="stipend" id="{{ $stipend }}" value="{{ $row->stipend }}"></td>
-                <td><input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" name="raw_material" id = "{{ $raw }}" value="{{ $row->raw_material }}"></td>
-                <td><input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" name="inst_exp" id = "{{ $inst_exp }}" value="{{ $row->inst_exp }}"></td>
+                <td> <input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" readonly name="stipend" id="{{ $stipend }}" value="{{ $row->stipend }}"></td>
+                <td><input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" readonly name="raw_material" id = "{{ $raw }}" value="{{ $row->raw_material }}"></td>
+                <td><input OnChange="av(<?php echo $row->id; ?>)" class="tinf" type="number" readonly name="inst_exp" id = "{{ $inst_exp }}" value="{{ $row->inst_exp }}"></td>
                 <td><input required class="tinf" type="number" name="total" id="{{ $total }}" value="{{ $row->total_expense }}" readonly> </td>
-                    <td><input class="btn btn-primary" type="submit" name="Submit" value="Submit" ></td>
+                    <td><input class="btn btn-primary" type="submit" name="Submit" value="Accept" ></td>
 </td>         
             </tr>
                </form>
@@ -69,20 +71,5 @@
         </table>
         </div>
 </div> 
-<script type="text/javascript">
-function av(avSelect)
-{
-    
-    var one=document.getElementById("stipend"+avSelect).value;
-    var two=document.getElementById("raw"+avSelect).value;
-    var three=document.getElementById("inst_exp"+avSelect).value;
-    var avvy=Number(one)+Number(two)+Number(three);
-    document.getElementById("total"+avSelect).value = avvy;
 
-
-}
-
-
-
-</script>  
 @stop

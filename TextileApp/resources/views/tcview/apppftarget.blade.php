@@ -5,7 +5,7 @@
  <div class="row" id="viewtargetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">
-            @include('includes.sidebar')
+            @include('includes.tdsidebar')
         </div>
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">

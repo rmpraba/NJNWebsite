@@ -6,6 +6,9 @@
 @include('includes.sidebar')
 </div>
 <div id="targetcontent" class="col-md-9">
+		@if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
 <h1 id="heading">Batch Creation</h1>
 <form action="" method="post">
 {{csrf_field()}}
@@ -19,14 +22,14 @@
         <option value="2019-2020">2019-2020</option>
         </select>    
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td><label>Batch Name:</label><br>
+<td><br><label>Batch Name:</label><br>
 <input class="form-control" type="text" name="batchname" required><br></td>
 </tr>
 <tr>
-<td><label>Start Date:</label><br>
+<td><br><label>Start Date:</label><br>
 <input  class="form-control" type="date" name="startdate" required><br></td>	
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td><label>End Date:</label><br>
+<td><br><label>End Date:</label><br>
 <input  class="form-control" type="date" name="enddate" required><br></td>
 </tr>
 <tr><td colspan="1"><label>Number of Candidates:</label><br>
@@ -38,6 +41,7 @@
   <option value="PLM">PLM(Power Loom)</option>
 </select>
 <br></td></tr>
+
 <tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td colspan="1"><br><button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button></td></tr>
 </table>

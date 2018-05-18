@@ -9,6 +9,9 @@
         </div>
         <!-- main content -->
         <div id="targetcontent" class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
     <center><h1 style="color: #b30000;"> Physical & Financial Target </h1></center>
     <form action="/insertpftarget" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">

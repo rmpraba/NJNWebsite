@@ -47,6 +47,8 @@ Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');
 Route::get('/pftarget', 'TcController@pftargetfetch');
 Route::post('insertpftarget', 'TcController@insertpf');
 Route::get('/batchexpense', 'TcController@batchexpenseview');
+Route::get('/employementexpense', 'TcController@employmentExpense');
+
 Route::post('batchexpensetotal/{id}', 'TcController@insertbatchexpense');
 
 Route::get('/viewpftarget', 'TcController@viewpftargetfetch');

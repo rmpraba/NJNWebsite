@@ -23,6 +23,7 @@ use App\roles;
 use Hash;
 use Illuminate\Support\Facades\Input;
 
+use Illuminate\Support\Facades\Redirect;
 
 class TdController extends Controller
 {
@@ -124,10 +125,14 @@ class TdController extends Controller
         $training_centre->centre_status="created";
         $training_centre->save();
         if($training_centre->save()){
-            return view('pages.success');
+            // return view('pages.success');
+            Session::flash("success", "Training Centre created successfully!!");
+            return Redirect::back();
         }
         else{
-            echo "insertion faild";
+            // echo "insertion faild";
+            Session::flash("success", "Training Centre creation failed!!");
+            return Redirect::back();
         }
     }
 
@@ -142,7 +147,9 @@ class TdController extends Controller
     { 
         $tccall=new training_centres();
         $tc = $tccall->deleteTc($centreid);
-        return view('pages.success');  
+        // return view('pages.success');  
+        Session::flash("success", "Deleted successfully!!");
+        return Redirect::back();
     }
 
 
@@ -177,7 +184,9 @@ class TdController extends Controller
 
         $trainingbatchcall = new training_batches();
         $tb=$trainingbatchcall->insertTrainingBatch($data1);
-        return view('pages.success');
+        // return view('pages.success');
+        Session::flash("success", "Batch approved successfully!!");
+        return Redirect::back();
     }
     public function approveBatchtarget()
     {
@@ -191,14 +200,18 @@ class TdController extends Controller
        $tccall =new training_centres();
        $new_tc_data =array('centre_status'=>"Approved");
        $tc=$tccall->approveTc($id,$new_tc_data);
-       return view('pages.success');  
+       // return view('pages.success'); 
+       Session::flash("success", "Training Centre approved successfully!!");
+       return Redirect::back(); 
     }
          public function rejectTc($id)
     { 
         $tccall = new training_centres();
         $new_tc_data = array('centre_status'=>"Rejected");
         $tc = $tccall->rejectTc($id,$new_tc_data);
-        return view('pages.success');  
+        // return view('pages.success');
+        Session::flash("success", "Training Centre rejected successfully!!");
+        return Redirect::back();  
     }
 
    
@@ -207,7 +220,9 @@ class TdController extends Controller
         $batchcall = new batches();
         $new_batch_data = array('status'=>"Rejected");
         $batch = $batchcall->rejectBatch($id,$new_batch_data);
-        return view('pages.success');  
+        // return view('pages.success');  
+        Session::flash("success", "Batch rejected successfully!!");
+        return Redirect::back();
     }
    
    
@@ -243,9 +258,13 @@ class TdController extends Controller
         $training_centre->save();
         if($training_centre->save()){
             return view('pages.success');
+            // Session::flash("success", "Updated successfully!!");
+            // return Redirect::back();
         }
         else{
-            echo "insertion faild";
+            echo "Update faild";
+            // Session::flash("success", "Unable to update!!");
+            // return Redirect::back();
         }
     }
 
@@ -297,7 +316,9 @@ class TdController extends Controller
         $userroleobj = new user_roles();
         $userroleobj -> insertRole($data1);
         }        
-        return view('pages.success');
+        // return view('pages.success');
+        Session::flash("success", "Created successfully!!");
+        return Redirect::back();
     }
     public function showCentreType(){
         return view('tdview.centretype_creation');
@@ -307,7 +328,9 @@ class TdController extends Controller
         $typecall=new types_of_centres();
         $data= array("types"=>$name);
         $typecall->insertCentreType($data);
-        return view('pages.success');
+        // return view('pages.success');
+        Session::flash("success", "Created successfully!!");
+        return Redirect::back();
     }
     public function showTrainingSubject(){
         return view('tdview.training_subject');
@@ -317,7 +340,9 @@ class TdController extends Controller
         $typecall=new training_centre_subjects();
         $data= array("subjects"=>$name);
         $typecall->insertsubject($data);
-        return view('pages.success');
+        // return view('pages.success');
+        Session::flash("success", "Created successfully!!");
+        return Redirect::back();
     }
 
     public function saveBatchtarget(Request $req)

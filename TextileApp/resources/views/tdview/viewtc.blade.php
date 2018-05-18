@@ -11,6 +11,9 @@
         </div>
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+        @endif
         <h1 style="color: #b30000;">Training Centre List</h1>
         <table class="table table-bordered">
         <tr>           

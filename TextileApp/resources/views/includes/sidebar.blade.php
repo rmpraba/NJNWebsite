@@ -6,7 +6,8 @@
   <a href="{{ URL::to('pftarget') }}">Physical & Financial Target</a>
   <a href="{{ URL::to('batchexpense') }}">Batch Expense</a>
   <a href="{{ URL::to('viewpftarget') }}">View Target</a>
-  <a href="{{ URL::to('candidateupload') }}">Candidate Upload</a>
-  <a href="{{ URL::to('candidatemapping') }}">Candidate Mapping</a>
+  <!-- <a href="{{ URL::to('candidateupload') }}">Candidate Upload</a> -->
+  <!-- <a href="{{ URL::to('candidatemapping') }}">Candidate Mapping</a> -->
   <a href="{{ URL::to('candidatelist') }}">Candidate List</a>
+  <a href="/employementexpense">Employment Status and Expenses</a>
 </div>
