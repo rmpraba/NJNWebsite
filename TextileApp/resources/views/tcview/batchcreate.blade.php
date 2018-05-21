@@ -35,17 +35,47 @@
 <tr><td colspan="1"><label>Number of Candidates:</label><br>
 <input class="form-control" type="number" name="noofstud" required></td><br><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td><label>Training Type:</label><br>
-<select name ="trainingtype" >
-  <option value="SMO">SMO(Sewing Machine Operator)</option>
-  <option value="HL">HL(Handloom)</option>
-  <option value="PLM">PLM(Power Loom)</option>
-</select>
-<br></td></tr>
 
+<!-- <div class="form-group"> -->
+                <!-- <label>Select Batch:</label><br> -->
+                <select name="trainingtype" class="form-control" style="width:350px" required>
+                    <option value="">--- Select TrainingType ---</option>
+                    @foreach ($trainingtype as $key )
+                    <option value="{{ $key->subjects }}">{{ $key->subjects }}</option>
+                    @endforeach
+                </select>               
+<!-- </div> -->
+<!-- <input  class="form-control" type="text" name="trainingtype" required><br></td></tr> -->
 <tr><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td colspan="1"><br><button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button></td></tr>
 </table>
 </form>
 </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="trainingtype"]').on('change', function() {
+            var type = $(this).val();
+            if(type) {
+                $.ajax({
+                    url: '/batchcreate/'+type,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {    
+                    	var no = $("input[name='noofstud']").val();   
+                    	// alert(no +"  "+data[0].no_of_candidate);                
+                    	if(parseFloat(no)>parseFloat(data[0].no_of_candidate))
+                    	{
+                    		alert("Batch size shouldn't exceed..."+data[0].no_of_candidate);
+                    		$("input[name='noofstud']").val("")
+                    	}
+                    }
+
+                });
+            }else{
+                $('select[name="trainingtype"]').empty();
+            }
+        });
+});
+</script>
 @stop

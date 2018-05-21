@@ -60,6 +60,7 @@ Route::post('/training_center_form','TdController@insert');
 
 Route::get('viewtc','TdController@fetchtclist');
 Route::get('/batchcreate', 'TcController@batch');
+Route::get('/batchcreate/{type}', 'TcController@batchstrength');
 Route::post('/batchcreate', 'TcController@batchinsert');
 
 Route::get('/approvebatch', 'TdController@fetchbatchlist');

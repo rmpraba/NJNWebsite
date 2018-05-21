@@ -20,6 +20,8 @@
     <input type="hidden" name="districtcode" hidden>
     <input type="hidden" name="candidatecount" hidden>
     <input type="hidden" name="batchcandidate" hidden>
+    <input type="hidden" name="totalcandidate" value="0" hidden>
+    <input type="hidden" name="previousinput" value="0" hidden>
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
     <table style="width: 100%;">
     <tr>
@@ -88,48 +90,48 @@
     </tr>
     <tr>
         <td>1</td><th>General</th>
-        <td><input required class="tinf" type="number" name="genpm" id="one" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genpf" id="two" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genpt" id="avvy" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="genfm" id="three" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genff" id="four" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="genft" id=avvy1 value="" readonly></td>    
+        <td><input required class="tinf" type="number" value="0" name="genpm" id="one" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="genpf" id="two" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="genpt" id="avvy" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="genfm" id="three" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="genff" id="four" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="genft" id=avvy1 value="" readonly></td>    
     </tr>
     <tr>
         <td>2</td><th>SCP</th>
-        <td><input required class="tinf" type="number" name="scppm" id="five" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scppf" id="six" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scppt" id="avvy2" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="scpfm" id="seven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scpff" id="eight" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="scpft" id="avvy3" value="" readonly></td>      
+        <td><input required class="tinf" type="number" value="0" name="scppm" id="five" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="scppf" id="six" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="scppt" id="avvy2" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="scpfm" id="seven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="scpff" id="eight" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="scpft" id="avvy3" value="" readonly></td>      
     </tr>
     <tr>
         <td>3</td><th>TSP</th>
-        <td><input required class="tinf" type="number" name="tsppm" id="nine" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tsppf" id="ten" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tsppt" id="avvy4" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="tspfm" id="leven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tspff" id="twel" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="tspft" id="avvy5" value="" readonly></td>      
+        <td><input required class="tinf" type="number" value="0" name="tsppm" id="nine" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="tsppf" id="ten" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="tsppt" id="avvy4" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="tspfm" id="leven" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="tspff" id="twel" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="tspft" id="avvy5" value="" readonly></td>      
     </tr>
     <tr>
         <td>4</td><th>Minorities</th>
-        <td><input required class="tinf" type="number" name="minpm" id="thirteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minpf" id="fourteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minpt" id="avvy6" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="minfm" id="fifteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minff" id="sixteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="minft" id="avvy7" value="" readonly></td>      
+        <td><input required class="tinf" type="number" value="0" name="minpm" id="thirteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="minpf" id="fourteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="minpt" id="avvy6" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="minfm" id="fifteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="minff" id="sixteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" value="0" name="minft" id="avvy7" value="" readonly></td>      
     </tr>
     <tr>
         <td></td><th>Total</th>
-        <td><input required class="tinf" type="number" name="totpm" id="t0" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totpf" id="t1" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totpt" id="t2" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totfm" id="t3" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totff" id="t4" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="totft" id="t5" value="" readonly></td>     
+        <td><input required class="tinf" type="number" value="0" name="totpm" id="t0" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="totpf" id="t1" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="totpt" id="t2" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="totfm" id="t3" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="totff" id="t4" value="" readonly></td>
+        <td><input required class="tinf" type="number" value="0" name="totft" id="t5" value="" readonly></td>     
     </tr>
 </table>
 <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button>
@@ -169,40 +171,40 @@
                     $("input[name='districtcode']").val("");
                     $("input[name='batchcandidate']").val("");
                     $("input[name='candidatecount']").val("");
-                    $("input[name='genpm']").val("");
-                    $("input[name='genpf']").val("");
-                    $("input[name='genpt']").val("");
-                    $("input[name='tsppm']").val("");
-                    $("input[name='tsppf']").val("");
-                    $("input[name='tsppt']").val("");
-                    $("input[name='scppm']").val("");
-                    $("input[name='scppf']").val("");
-                    $("input[name='scppt']").val("");
-                    $("input[name='minpm']").val("");
-                    $("input[name='minpf']").val("");
-                    $("input[name='minpt']").val("");
+                    $("input[name='genpm']").val("0");
+                    $("input[name='genpf']").val("0");
+                    $("input[name='genpt']").val("0");
+                    $("input[name='tsppm']").val("0");
+                    $("input[name='tsppf']").val("0");
+                    $("input[name='tsppt']").val("0");
+                    $("input[name='scppm']").val("0");
+                    $("input[name='scppf']").val("0");
+                    $("input[name='scppt']").val("0");
+                    $("input[name='minpm']").val("0");
+                    $("input[name='minpf']").val("0");
+                    $("input[name='minpt']").val("0");
 
-                    $("input[name='genfm']").val("");
-                    $("input[name='genff']").val("");
-                    $("input[name='genft']").val("");
-                    $("input[name='tspfm']").val("");
-                    $("input[name='tspff']").val("");
-                    $("input[name='tspft']").val("");
-                    $("input[name='scpfm']").val("");
-                    $("input[name='scpff']").val("");
-                    $("input[name='scpft']").val("");
-                    $("input[name='minfm']").val("");
-                    $("input[name='minff']").val("");
-                    $("input[name='minft']").val("");
+                    $("input[name='genfm']").val("0");
+                    $("input[name='genff']").val("0");
+                    $("input[name='genft']").val("0");
+                    $("input[name='tspfm']").val("0");
+                    $("input[name='tspff']").val("0");
+                    $("input[name='tspft']").val("0");
+                    $("input[name='scpfm']").val("0");
+                    $("input[name='scpff']").val("0");
+                    $("input[name='scpft']").val("0");
+                    $("input[name='minfm']").val("0");
+                    $("input[name='minff']").val("0");
+                    $("input[name='minft']").val("0");
 
 
-                    $("input[name='totpm']").val("");
-                    $("input[name='totpf']").val("");
-                    $("input[name='totpt']").val("");
+                    $("input[name='totpm']").val("0");
+                    $("input[name='totpf']").val("0");
+                    $("input[name='totpt']").val("0");
 
-                    $("input[name='totfm']").val("");
-                    $("input[name='totff']").val("");
-                    $("input[name='totft']").val("");
+                    $("input[name='totfm']").val("0");
+                    $("input[name='totff']").val("0");
+                    $("input[name='totft']").val("0");
             if(batch) {
                 $.ajax({
                     url: '/pftarget/batchajax/'+batch,
@@ -219,30 +221,102 @@
                     $("input[name='districtcode']").val(data[0].district_id);
                     $("input[name='batchcandidate']").val(data[0].no_of_stud);
                     $("input[name='candidatecount']").val(data[0].candidate_count);
+                    if(isNaN(data[0].genpm))
+                    $("input[name='genpm']").val(0);
+                    else
                     $("input[name='genpm']").val(data[0].genpm);
+                    if(isNaN(data[0].genpf))
+                    $("input[name='genpf']").val(0);
+                    else
                     $("input[name='genpf']").val(data[0].genpf);
+                    if(isNaN(data[0].genpt))
+                    $("input[name='genpt']").val(0);
+                    else
                     $("input[name='genpt']").val(data[0].genpt);
+                    if(isNaN(data[0].tsppm))
+                    $("input[name='tsppm']").val(0);
+                    else
                     $("input[name='tsppm']").val(data[0].tsppm);
+                    if(isNaN(data[0].tsppf))
+                    $("input[name='tsppf']").val(0);
+                    else
                     $("input[name='tsppf']").val(data[0].tsppf);
+                    if(isNaN(data[0].tsppt))
+                    $("input[name='tsppt']").val(0);
+                    else
                     $("input[name='tsppt']").val(data[0].tsppt);
+                    if(isNaN(data[0].scppm))
+                    $("input[name='scppm']").val(0);
+                    else
                     $("input[name='scppm']").val(data[0].scppm);
+                    if(isNaN(data[0].scppf))
+                    $("input[name='scppf']").val(0);
+                    else
                     $("input[name='scppf']").val(data[0].scppf);
+                    if(isNaN(data[0].scppt))
+                    $("input[name='scppt']").val(0);
+                    else
                     $("input[name='scppt']").val(data[0].scppt);
+                    if(isNaN(data[0].minpm))
+                    $("input[name='minpm']").val(0);
+                    else
                     $("input[name='minpm']").val(data[0].minpm);
+                    if(isNaN(data[0].minpf))
+                    $("input[name='minpf']").val(0);
+                    else
                     $("input[name='minpf']").val(data[0].minpf);
+                    if(isNaN(data[0].minpt))
+                    $("input[name='minpt']").val(0);
+                    else
                     $("input[name='minpt']").val(data[0].minpt);
 
+                    if(isNaN(data[0].genfm))
+                    $("input[name='genfm']").val(0);
+                    else
                     $("input[name='genfm']").val(data[0].genfm);
+                    if(isNaN(data[0].genff))
+                    $("input[name='genff']").val(0);
+                    else
                     $("input[name='genff']").val(data[0].genff);
+                    if(isNaN(data[0].genft))
+                    $("input[name='genft']").val(0);
+                    else
                     $("input[name='genft']").val(data[0].genft);
+                    if(isNaN(data[0].tspfm))
+                    $("input[name='tspfm']").val(0);
+                    else
                     $("input[name='tspfm']").val(data[0].tspfm);
+                    if(isNaN(data[0].tspff))
+                    $("input[name='tspff']").val(0);
+                    else
                     $("input[name='tspff']").val(data[0].tspff);
+                    if(isNaN(data[0].tspft))
+                    $("input[name='tspft']").val(0);
+                    else
                     $("input[name='tspft']").val(data[0].tspft);
-                     $("input[name='scpfm']").val(data[0].scpfm);
+                    if(isNaN(data[0].scpfm))
+                    $("input[name='scpfm']").val(0);
+                    else
+                    $("input[name='scpfm']").val(data[0].scpfm);
+                    if(isNaN(data[0].scpff))
+                    $("input[name='scpff']").val(0);
+                    else
                     $("input[name='scpff']").val(data[0].scpff);
+                    if(isNaN(data[0].scpft))
+                    $("input[name='scpft']").val(0);
+                    else
                     $("input[name='scpft']").val(data[0].scpft);
+                    if(isNaN(data[0].minfm))
+                    $("input[name='minfm']").val(0);
+                    else
                     $("input[name='minfm']").val(data[0].minfm);
+                    if(isNaN(data[0].minff))
+                    $("input[name='minff']").val(0);
+                    else
                     $("input[name='minff']").val(data[0].minff);
+                    if(isNaN(data[0].minft))
+                    $("input[name='minft']").val(0);
+                    else
                     $("input[name='minft']").val(data[0].minft);
 
 
@@ -268,40 +342,62 @@
 <script type="text/javascript">
 function av(avSelect)
 {
-$batchcandidaate = $("input[name='batchcandidate']").val();
+$batchcandidate = $("input[name='batchcandidate']").val();
 $candidatecount = $("input[name='candidatecount']").val();
+
+$total = parseFloat(avSelect.form.one.value)+parseInt(avSelect.form.five.value)+parseFloat(avSelect.form.nine.value)+parseFloat(avSelect.form.thirteen.value)+parseFloat(avSelect.form.two.value)+parseInt(avSelect.form.six.value)+parseFloat(avSelect.form.ten.value)+parseFloat(avSelect.form.fourteen.value);
+if($total>$candidatecount){
+    alert("You can't exceed the total limit!!"+$candidatecount);
+    document.getElementById(""+avSelect.id).value=0;
+}
+// $totalcandidate = $("input[name='totalcandidate']").val();
+// $previousinput = $("input[name='previousinput']").val();
+// // $newtotalcandidate = 0;
+// // alert($totalcandidate+"   "+$newtotalcandidate);
+// if((parseFloat($totalcandidate)+parseFloat(avSelect.value))>$candidatecount){
+//     alert("You can't exceed the batch limit!!  "+$candidatecount);
+//     document.getElementById(""+avSelect.id).value=0;
+//     // $("input[name='totalcandidate']").val(parseFloat($totalcandidate)-parseFloat($previousinput));
+// }
+// else{
+//     $newtotalcandidate = parseFloat($totalcandidate)+parseFloat(avSelect.value);
+//     $previousinput = avSelect.value;
+//     $("input[name='totalcandidate']").val($newtotalcandidate);
+// }
 // var id = $(avSelect).attr('id');
-// alert(avSelect.id);
+// alert(avSelect.value);
 // alert($batchcandidaate+"  "+$candidatecount);
+
 var one=avSelect.form.one.value;
 var two=avSelect.form.two.value;
 var avvy=parseFloat(one)+parseFloat(two);
-if(avSelect.id=="one"||avSelect.id=="two"){
-if(avvy<=$candidatecount)
-  avSelect.form.avvy.value=avvy;
-else{
-  if(isNaN(avvy)){}
-  else{
-  if(avSelect.id=="one"){  
-  avSelect.form.one.value=0;
-  one=avSelect.form.one.value;
-  two=avSelect.form.two.value;
-  avvy=parseFloat(one)+parseFloat(two);
-  avSelect.form.avvy.value=avvy;
-  avSelect.form.one.focus();
-  }
-  if(avSelect.id=="two"){  
-  avSelect.form.two.value=0;
-  one=avSelect.form.one.value;
-  two=avSelect.form.two.value;
-  avvy=parseFloat(one)+parseFloat(two);
-  avSelect.form.avvy.value=avvy;
-  avSelect.form.two.focus();
-  }
-  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
-  }
-}
-}
+avSelect.form.avvy.value=avvy;
+// if(avSelect.id=="one"||avSelect.id=="two"){
+// if(avvy<=$candidatecount)
+//   avSelect.form.avvy.value=avvy;
+// else{
+//   if(isNaN(avvy)){}
+//   else{
+//   if(avSelect.id=="one"){  
+//   avSelect.form.one.value=0;
+//   one=avSelect.form.one.value;
+//   two=avSelect.form.two.value;
+//   avvy=parseFloat(one)+parseFloat(two);
+//   avSelect.form.avvy.value=avvy;
+//   avSelect.form.one.focus();
+//   }
+//   if(avSelect.id=="two"){  
+//   avSelect.form.two.value=0;
+//   one=avSelect.form.one.value;
+//   two=avSelect.form.two.value;
+//   avvy=parseFloat(one)+parseFloat(two);
+//   avSelect.form.avvy.value=avvy;
+//   avSelect.form.two.focus();
+//   }
+//   alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+//   }
+// }
+// }
 
 var three=avSelect.form.three.value;
 var four=avSelect.form.four.value;
@@ -311,32 +407,33 @@ avSelect.form.avvy1.value=avvy1;
 var five=avSelect.form.five.value;
 var six=avSelect.form.six.value;
 var avvy2=parseFloat(five)+parseFloat(six);
-if(avSelect.id=="five"||avSelect.id=="six"){
-if(avvy2<=$candidatecount)
-  avSelect.form.avvy2.value=avvy2;
-else{
-  if(isNaN(avvy2)){}
-  else{
-  if(avSelect.id=="five"){  
-  avSelect.form.five.value=0;
-  five=avSelect.form.five.value;
-  six=avSelect.form.six.value;
-  avvy2=parseFloat(five)+parseFloat(six);
-  avSelect.form.avvy2.value=avvy2;
-  avSelect.form.five.focus();
-  }
-  if(avSelect.id=="six"){  
-  avSelect.form.six.value=0;
-  five=avSelect.form.five.value;
-  six=avSelect.form.six.value;
-  avvy2=parseFloat(five)+parseFloat(six);
-  avSelect.form.avvy2.value=avvy2;
-  avSelect.form.six.focus();
-  }
-  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
-  }
-}
-}
+avSelect.form.avvy2.value=avvy2;
+// if(avSelect.id=="five"||avSelect.id=="six"){
+// if(avvy2<=$candidatecount)
+//   avSelect.form.avvy2.value=avvy2;
+// else{
+//   if(isNaN(avvy2)){}
+//   else{
+//   if(avSelect.id=="five"){  
+//   avSelect.form.five.value=0;
+//   five=avSelect.form.five.value;
+//   six=avSelect.form.six.value;
+//   avvy2=parseFloat(five)+parseFloat(six);
+//   avSelect.form.avvy2.value=avvy2;
+//   avSelect.form.five.focus();
+//   }
+//   if(avSelect.id=="six"){  
+//   avSelect.form.six.value=0;
+//   five=avSelect.form.five.value;
+//   six=avSelect.form.six.value;
+//   avvy2=parseFloat(five)+parseFloat(six);
+//   avSelect.form.avvy2.value=avvy2;
+//   avSelect.form.six.focus();
+//   }
+//   alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+//   }
+// }
+// }
 
 
 var seven=avSelect.form.seven.value;
@@ -347,32 +444,33 @@ avSelect.form.avvy3.value=avvy3;
 var nine=avSelect.form.nine.value;
 var ten=avSelect.form.ten.value;
 var avvy4=parseFloat(nine)+parseFloat(ten);
-if(avSelect.id=="nine"||avSelect.id=="ten"){
-if(avvy4<=$candidatecount)
-  avSelect.form.avvy4.value=avvy4;
-else{
-  if(isNaN(avvy4)){}
-  else{
-  if(avSelect.id=="nine"){  
-  avSelect.form.nine.value=0;
-  nine=avSelect.form.nine.value;
-  ten=avSelect.form.ten.value;
-  avvy4=parseFloat(nine)+parseFloat(ten);
-  avSelect.form.avvy4.value=avvy4;
-  avSelect.form.nine.focus();
-  }
-  if(avSelect.id=="ten"){  
-  avSelect.form.ten.value=0;
-  nine=avSelect.form.nine.value;
-  ten=avSelect.form.ten.value;
-  avvy4=parseFloat(nine)+parseFloat(ten);
-  avSelect.form.avvy4.value=avvy4;
-  avSelect.form.ten.focus();
-  }
-  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
-  }
-}
-}
+avSelect.form.avvy4.value=avvy4;
+// if(avSelect.id=="nine"||avSelect.id=="ten"){
+// if(avvy4<=$candidatecount)
+//   avSelect.form.avvy4.value=avvy4;
+// else{
+//   if(isNaN(avvy4)){}
+//   else{
+//   if(avSelect.id=="nine"){  
+//   avSelect.form.nine.value=0;
+//   nine=avSelect.form.nine.value;
+//   ten=avSelect.form.ten.value;
+//   avvy4=parseFloat(nine)+parseFloat(ten);
+//   avSelect.form.avvy4.value=avvy4;
+//   avSelect.form.nine.focus();
+//   }
+//   if(avSelect.id=="ten"){  
+//   avSelect.form.ten.value=0;
+//   nine=avSelect.form.nine.value;
+//   ten=avSelect.form.ten.value;
+//   avvy4=parseFloat(nine)+parseFloat(ten);
+//   avSelect.form.avvy4.value=avvy4;
+//   avSelect.form.ten.focus();
+//   }
+//   alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+//   }
+// }
+// }
 
 var leven=avSelect.form.leven.value;
 var twel=avSelect.form.twel.value;
@@ -382,32 +480,33 @@ avSelect.form.avvy5.value=avvy5;
 var thirteen=avSelect.form.thirteen.value;
 var fourteen=avSelect.form.fourteen.value;
 var avvy6=parseFloat(thirteen)+parseFloat(fourteen);
-if(avSelect.id=="thirteen"||avSelect.id=="fourteen"){
-if(avvy6<=$candidatecount)
-  avSelect.form.avvy6.value=avvy6;
-else{
-  if(isNaN(avvy6)){}
-  else{
-  if(avSelect.id=="thirteen"){  
-  avSelect.form.thirteen.value=0;
-  thirteen=avSelect.form.thirteen.value;
-  fourteen=avSelect.form.fourteen.value;
-  avvy6=parseFloat(thirteen)+parseFloat(fourteen);
-  avSelect.form.avvy6.value=avvy6;
-  avSelect.form.thirteen.focus();
-  }
-  if(avSelect.id=="fourteen"){  
-  avSelect.form.fourteen.value=0;
-  thirteen=avSelect.form.thirteen.value;
-  fourteen=avSelect.form.fourteen.value;
-  avvy6=parseFloat(thirteen)+parseFloat(fourteen);
-  avSelect.form.avvy6.value=avvy6;
-  avSelect.form.fourteen.focus();
-  }
-  alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
-  }
-}
-}
+avSelect.form.avvy6.value=avvy6;
+// if(avSelect.id=="thirteen"||avSelect.id=="fourteen"){
+// if(avvy6<=$candidatecount)
+//   avSelect.form.avvy6.value=avvy6;
+// else{
+//   if(isNaN(avvy6)){}
+//   else{
+//   if(avSelect.id=="thirteen"){  
+//   avSelect.form.thirteen.value=0;
+//   thirteen=avSelect.form.thirteen.value;
+//   fourteen=avSelect.form.fourteen.value;
+//   avvy6=parseFloat(thirteen)+parseFloat(fourteen);
+//   avSelect.form.avvy6.value=avvy6;
+//   avSelect.form.thirteen.focus();
+//   }
+//   if(avSelect.id=="fourteen"){  
+//   avSelect.form.fourteen.value=0;
+//   thirteen=avSelect.form.thirteen.value;
+//   fourteen=avSelect.form.fourteen.value;
+//   avvy6=parseFloat(thirteen)+parseFloat(fourteen);
+//   avSelect.form.avvy6.value=avvy6;
+//   avSelect.form.fourteen.focus();
+//   }
+//   alert("Sorry!!You can't exceed the total limit.."+ $candidatecount);  
+//   }
+// }
+// }
 
 var fifteen=avSelect.form.fifteen.value;
 var sixteen=avSelect.form.sixteen.value;
