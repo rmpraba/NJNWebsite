@@ -87,8 +87,13 @@
                     success:function(data) {                       
                         $('select[name="mappingbatch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
+                        var count=0;
                         $.each(data, function(key, value) {
+                            if(count==0){
+                            $('select[name="mappingbatch"]').append('<option value="">-----Select Batch-----</option>');
+                            }
                             $('select[name="mappingbatch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            count++;
                         });
                     }
 
@@ -99,7 +104,7 @@
         });
         $('select[name="mappingbatch"]').on('change', function() {
             var batch = $(this).val();
-            alert(batch);
+            // alert(batch);
             $("input[name='mappingtiming']").val("From: "+" To: ");
                     $("[data-field='mappingtsubject']").text("");
                     $("[data-field='mappingtype']").text("");
