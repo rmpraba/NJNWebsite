@@ -99,14 +99,22 @@
         });
         $('select[name="mappingbatch"]').on('change', function() {
             var batch = $(this).val();
-            // alert(batch);
+            alert(batch);
+            $("input[name='mappingtiming']").val("From: "+" To: ");
+                    $("[data-field='mappingtsubject']").text("");
+                    $("[data-field='mappingtype']").text("");
+                    $("[data-field='mappingdistrict']").text("");
+                    $("[data-field='mappingdivision']").text("");
+                    $("input[name='mappingdistrictcode']").val("");
+
+                    var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
             if(batch) {
                 $.ajax({
                     url: '/candidatelist/batchajax/'+batch,
                     type: "GET",
                     dataType: "json",
                     success:function(data) { 
-                    // console.log(data[0].candidate); 
+                    console.log(data[0].candidate); 
                         // alert('success');
                     $("input[name='mappingtiming']").val("From: "+ data[0].start_date+" To: "+data[0].end_date);
                     $("[data-field='mappingtsubject']").text(data[0].batch_type);
@@ -115,9 +123,9 @@
                     $("[data-field='mappingdivision']").text(data[0].division);
                     $("input[name='mappingdistrictcode']").val(data[0].district_id);
 
-                    var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
+                    // row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
                     $.each(data[0].candidate, function (i, item) {
-                    row += '<tr><td>' + item.serial_no + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.serial_no+ '">Remove</button></td></tr>';
+                    row += '<tr><td>' + item.candidate_id + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.candidate_id+ '">Remove</button></td></tr>';
 
                 });
                 row+='</table>';

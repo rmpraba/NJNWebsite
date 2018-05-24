@@ -18,8 +18,9 @@ use App\states;
 use App\types_of_centres;
 use App\sequences;
 use App\training_batches;
-use App\physical_target;
 use App\roles;
+use App\physical_target;
+use App\financial_target;
 use Hash;
 use Illuminate\Support\Facades\Input;
 
@@ -369,5 +370,70 @@ class TdController extends Controller
         return view('tdview.appbatchexpense')->with(array('batchinfo'=>$batchinfo));
     }
  
+ public function viewpftargetfetch(Request $req)
+    {
+        $tc = new training_centres();
+        $tcs =  $tc->fetchtcforList();
+        return view('tdview.approvepftarget',compact('tcs'));
+        // $tc = new training_centres();
+        // $centreid = session()->get('centreid');
+        // echo $centreid;
+        // $tcname =  $tc->fetchTcSpecInfo($centreid);
+        // $tcs =  $tc->fetchtcforList();
+        // $tb = new training_batches();
+        // $batches=$tb->fetchtrainingBatch($centreid);
+        // return json_encode($batches);
+        // return view('tcview.approvepftarget',compact('tcname','batches'));
+    }
+    public function viewgetBatchList($id)
+    {
+        // $tb = new training_batches();
+        // $batches = $tb->fetchtrainingBatch($id);
+        // return json_encode($batches);
+        // $tb = new financial_target();
+        // $batches = $tb->fetchBatch($id);
+        $batches = DB::table('training_batches')->join('financial_targets','training_batches.batch_id','=','financial_targets.batch_id')->where('training_batches.centre_id','=',$id)->where('financial_targets.status','=','Created')->pluck('training_batches.batch_name','training_batches.batch_id');
+        return json_encode($batches);
+    } 
+    public function viewgetBatchInfo($id)
+    {
+        // $info = DB::table('training_batches as b')->join('training_centres as t','t.centre_id','=','b.centre_id')->join('batches as ba','ba.batch_id','=','b.batch_id')->join('districts as d','d.district_code','=','t.district_id')->join('physical_targets as p','p.centre_id','=','b.centre_id')->join('financial_targets as f','f.centre_id','=','b.centre_id')->where('b.batch_id','=',$id)->select('ba.start_date','ba.end_date','b.batch_type','t.centre_type','d.district_name','d.district_code','d.division','p.general_male_target as genpm','p.general_female_target as genpf','p.general_total_target as genpt','p.tsp_male_target as tsppm','p.tsp_female_target as tsppf','p.tsp_total_target as tsppt','p.scp_male_target as scppm','p.scp_female_target as scppf','p.scp_total_target as scppt','p.min_male_target as minpm','p.min_female_target as minpf','p.min_total_target as minpt','f.general_male_target as genfm','f.general_female_target as genff','f.general_total_target as genft' ,'f.tsp_male_target as tspfm','f.tsp_female_target as tspff','f.tsp_total_target as tspft','f.scp_male_target as scpfm','f.scp_female_target as scpff','f.scp_total_target as scpft','f.min_male_target as minfm','f.min_female_target as minff','f.min_total_target as minft')->get();
+        // return json_encode($info);  
+        $pt=new physical_target();
+        $ft=new financial_target();        
+        // if(count($ptobj)==0){
+        $info = DB::table('training_batches')->join('training_centres','training_centres.centre_id','=','training_batches.centre_id')->join('batches','batches.batch_id','=','training_batches.batch_id')->join('districts','districts.district_code','=','training_centres.district_id')->where('training_batches.batch_id','=',$id)->select('training_batches.batch_academic_year','training_batches.centre_id','training_batches.batch_id','training_batches.batch_type','training_centres.centre_type','batches.start_date','batches.end_date','districts.district_name','districts.division',
+            'districts.district_code')->get();
+        // } 
+        // echo $info[0]->district_code."  ".$info[0]->batch_academic_year."  ".$info[0]->centre_id."  ".$info[0]->batch_id."  ".$info[0]->batch_type;
+        $ptobj = $pt->checkPhysicalTarget($info[0]->district_code,$info[0]->batch_academic_year,$info[0]->centre_id,$info[0]->batch_id,$info[0]->batch_type);
+        $ftobj = $ft->checkFinancialTarget($info[0]->district_code,$info[0]->batch_academic_year,$info[0]->centre_id,$info[0]->batch_id,$info[0]->batch_type);
+        // echo count($ptobj);
+        if(count($ptobj)>0){
+        $info = DB::table('training_batches as b')->join('training_centres as t','t.centre_id','=','b.centre_id')->join('batches as ba','ba.batch_id','=','b.batch_id')->join('districts as d','d.district_code','=','t.district_id')->join('physical_targets as p','p.centre_id','=','b.centre_id')->join('financial_targets as f','f.centre_id','=','b.centre_id')->where('f.batch_id','=',$id)->where('p.batch_id','=',$id)->where('b.batch_id','=',$id)->select('ba.start_date','ba.end_date','b.batch_type','t.centre_type','t.district_id','d.district_name','d.district_code','d.division','p.general_male_target as genpm','p.general_female_target as genpf','p.general_total_target as genpt','p.tsp_male_target as tsppm','p.tsp_female_target as tsppf','p.tsp_total_target as tsppt','p.scp_male_target as scppm','p.scp_female_target as scppf','p.scp_total_target as scppt','p.min_male_target as minpm','p.min_female_target as minpf','p.min_total_target as minpt','f.general_male_target as genfm','f.general_female_target as genff','f.general_total_target as genft' ,'f.tsp_male_target as tspfm','f.tsp_female_target as tspff','f.tsp_total_target as tspft','f.scp_male_target as scpfm','f.scp_female_target as scpff','f.scp_total_target as scpft','f.min_male_target as minfm','f.min_female_target as minff','f.min_total_target as minft')->get();
+        }
+        else{
+            $info = DB::table('training_batches')->join('training_centres','training_centres.centre_id','=','training_batches.centre_id')->join('batches','batches.batch_id','=','training_batches.batch_id')->join('districts','districts.district_code','=','training_centres.district_id')->where('training_batches.batch_id','=',$id)->select('training_batches.batch_academic_year','training_batches.centre_id','training_batches.batch_id','training_batches.batch_type','training_centres.centre_type','batches.start_date','batches.end_date','districts.district_name','districts.division','districts.district_code','training_centres.district_id')->get();
+        }
+        return json_encode($info);           
+    }
+    public function pftargetapproval(Request $req)
+    {
+        $physicalcall = new physical_target();
+        $financialcall = new financial_target();
+        $year = $req->input('vfiscalyear');
+        $districtid = $req->input('vdistrictcode');
+        $tc = $req->input('vtc');
+        $batch = $req->input('vbatch');
+        $type = $req->input('vtype');
+        $status=$req->input('approvereject');
+        // echo $status;
+        $data = array('status' => $status , 'status_updated_date' => 'currdate');
+        $physicalcall->updateStatus($districtid,$year,$tc,$batch,$data);
+        $financialcall->updateStatus($districtid,$year,$tc,$batch,$data);
+        $message = $status."  Successfully!!";
+        Session::flash("success", $message);
+        return Redirect::back();
+    }  
 
 }

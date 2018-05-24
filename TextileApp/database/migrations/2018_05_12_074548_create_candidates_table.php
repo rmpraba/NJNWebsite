@@ -57,6 +57,7 @@ class CreateCandidatesTable extends Migration
             $table->string('expected_salary_within')->nullable();
             $table->string('preferred_training_period')->nullable();
             $table->string('status')->nullable();
+            $table->string('candidate_id')->nullable();
             $table->timestamps();
         });
     }

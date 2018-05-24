@@ -216,7 +216,7 @@ class TcController extends Controller
 
      public function insertpf(Request $req)
     {
-        $districtid = "KLR";
+        $districtid = $req->input('districtcode');
         $year = $req->input('fiscalyear');
         $tc = $req->input('tc');
         $batch = $req->input('batch');
@@ -247,8 +247,8 @@ class TcController extends Controller
         $minff = $req->input('minff');
         $minft = $req->input('minft');
         
-        $data1 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genpm,"general_female_target"=>$genpf,"general_total_target"=>$genpt,"tsp_male_target"=>$tsppm,"tsp_female_target"=>$tsppf,"tsp_total_target"=>$tsppt,"scp_male_target"=>$scppm,"scp_female_target"=>$scppf,"scp_total_target"=>$scppt,"min_male_target"=>$minpm,"min_female_target"=>$minpf,"min_total_target"=>$minpt);
-        $data2 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genfm,"general_female_target"=>$genff,"general_total_target"=>$genft,"tsp_male_target"=>$tspfm,"tsp_female_target"=>$tspff,"tsp_total_target"=>$tspft,"scp_male_target"=>$scpfm,"scp_female_target"=>$scpff,"scp_total_target"=>$scpft,"min_male_target"=>$minfm,"min_female_target"=>$minff,"min_total_target"=>$minft);
+        $data1 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genpm,"general_female_target"=>$genpf,"general_total_target"=>$genpt,"tsp_male_target"=>$tsppm,"tsp_female_target"=>$tsppf,"tsp_total_target"=>$tsppt,"scp_male_target"=>$scppm,"scp_female_target"=>$scppf,"scp_total_target"=>$scppt,"min_male_target"=>$minpm,"min_female_target"=>$minpf,"min_total_target"=>$minpt,"status"=>"Created");
+        $data2 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genfm,"general_female_target"=>$genff,"general_total_target"=>$genft,"tsp_male_target"=>$tspfm,"tsp_female_target"=>$tspff,"tsp_total_target"=>$tspft,"scp_male_target"=>$scpfm,"scp_female_target"=>$scpff,"scp_total_target"=>$scpft,"min_male_target"=>$minfm,"min_female_target"=>$minff,"min_total_target"=>$minft,"status"=>"Created");
         $updatedata1 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genpm,"general_female_target"=>$genpf,"general_total_target"=>$genpt,"tsp_male_target"=>$tsppm,"tsp_female_target"=>$tsppf,"tsp_total_target"=>$tsppt,"scp_male_target"=>$scppm,"scp_female_target"=>$scppf,"scp_total_target"=>$scppt,"min_male_target"=>$minpm,"min_female_target"=>$minpf,"min_total_target"=>$minpt);
         $updatedata2 = array("district_id"=>$districtid,"financial_year"=>$year,"centre_id"=>$tc,"batch_id"=>$batch,"general_male_target"=>$genfm,"general_female_target"=>$genff,"general_total_target"=>$genft,"tsp_male_target"=>$tspfm,"tsp_female_target"=>$tspff,"tsp_total_target"=>$tspft,"scp_male_target"=>$scpfm,"scp_female_target"=>$scpff,"scp_total_target"=>$scpft,"min_male_target"=>$minfm,"min_female_target"=>$minff,"min_total_target"=>$minft);
 
@@ -344,8 +344,9 @@ class TcController extends Controller
             'districts.district_code')->get();
         $centreid = session()->get('centreid');
         $type = session()->get('batchtype');
-        $candidatecall = new candidates();
-        $candidate = $candidatecall->fetchCandidateMappedList($centreid,$id,$type);
+        // $candidatecall = new candidates();
+        // $candidate = $candidatecall->fetchCandidateMappedList($centreid,$id,$type);
+        $candidate = DB::table('candidates')->join('batch_candidates','batch_candidates.candidate_id','=','candidates.candidate_id')->where('batch_candidates.batch_id','=',$id)->select('batch_candidates.candidate_id','candidates.first_name','candidates.last_name','candidates.gender','candidates.category','candidates.education','candidates.skill')->get();
         $info[0]->candidate = $candidate;
         return json_encode($info);
         // return json_encode(['info' =>  $info,'candidate' => $candidate]);    
@@ -410,7 +411,7 @@ class TcController extends Controller
                 // echo "fail";
             if(!empty($data) && $data->count()){
                 foreach ($data as $key => $value) {
-                    $insert[] = ['serial_no' => $value->serial_no, 'first_name' => $value->first_name,'last_name' => $value->last_name,'phone_no' => $value->phone_no,'email' => $value->email,'dob' => $value->dob,'aadhar_no' => $value->aadhar_no,'gender' => $value->gender,'marital_status' => $value->marital_status,'religion' => $value->religion,'category' => $value->category,'relationship' => $value->relationship,'relation_firstname' => $value->relation_firstname,'relation_lastname' => $value->relation_lastname,'current_location' => $value->current_location,'current_street' => $value->current_street,'current_city' => $value->current_city,'current_state' => $value->current_state,'current_district' => $value->current_district,'current_taluk' => $value->current_taluk,'current_village' => $value->current_village,'current_pincode' => $value->current_pincode,'permanent_location' => $value->permanent_location,'permanent_street' => $value->permanent_street,'permanent_city' => $value->permanent_city,'permanent_state' => $value->permanent_state,'permanent_district' => $value->permanent_district,'permanent_taluk' => $value->permanent_taluk,'permanent_village' => $value->permanent_village,'permanent_pincode' => $value->permanent_pincode,'education' => $value->education,'subject' => $value->subject,'yearofpassing' => $value->yearofpassing,'physically_challenged' => $value->physically_challenged,'skill' => $value->skill,'apprentiseship' => $value->apprentiseship,'perviously_employed' => $value->perviously_employed,'willing_migrate' => $value->willing_migrate,'expected_salary_outside' => $value->expected_salary_outside,'expected_salary_within' => $value->expected_salary_within,'preferred_training_period' => $value->preferred_training_period,'status' => $value->status
+                    $insert[] = ['serial_no' => $value->serial_no,'candidate_id' => $value->serial_no, 'first_name' => $value->first_name,'last_name' => $value->last_name,'phone_no' => $value->phone_no,'email' => $value->email,'dob' => $value->dob,'aadhar_no' => $value->aadhar_no,'gender' => $value->gender,'marital_status' => $value->marital_status,'religion' => $value->religion,'category' => $value->category,'relationship' => $value->relationship,'relation_firstname' => $value->relation_firstname,'relation_lastname' => $value->relation_lastname,'current_location' => $value->current_location,'current_street' => $value->current_street,'current_city' => $value->current_city,'current_state' => $value->current_state,'current_district' => $value->current_district,'current_taluk' => $value->current_taluk,'current_village' => $value->current_village,'current_pincode' => $value->current_pincode,'permanent_location' => $value->permanent_location,'permanent_street' => $value->permanent_street,'permanent_city' => $value->permanent_city,'permanent_state' => $value->permanent_state,'permanent_district' => $value->permanent_district,'permanent_taluk' => $value->permanent_taluk,'permanent_village' => $value->permanent_village,'permanent_pincode' => $value->permanent_pincode,'education' => $value->education,'subject' => $value->subject,'yearofpassing' => $value->yearofpassing,'physically_challenged' => $value->physically_challenged,'skill' => $value->skill,'apprentiseship' => $value->apprentiseship,'perviously_employed' => $value->perviously_employed,'willing_migrate' => $value->willing_migrate,'expected_salary_outside' => $value->expected_salary_outside,'expected_salary_within' => $value->expected_salary_within,'preferred_training_period' => $value->preferred_training_period,'status' => $value->status
                 ];
                 }
                 if(!empty($insert)){

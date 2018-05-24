@@ -50,7 +50,7 @@ class physical_target extends Model
         return $target;
     }
     public function updateStatus($districtid,$year,$tc,$batch,$array){
-        $target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
+        $target = physical_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
         return $target;
     }
 }

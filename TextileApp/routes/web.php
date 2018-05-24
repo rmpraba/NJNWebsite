@@ -56,6 +56,11 @@ Route::get('/viewpftarget', 'TcController@viewpftargetfetch');
 Route::get('/viewpftarget/ajax/{id}','TcController@viewgetBatchList');
 Route::get('/viewpftarget/batchajax/{id}','TcController@viewgetBatchInfo');
 
+Route::get('/approvepftarget', 'TdController@viewpftargetfetch');
+Route::get('/approvepftarget/ajax/{id}','TdController@viewgetBatchList');
+Route::get('/approvepftarget/batchajax/{id}','TdController@viewgetBatchInfo');
+Route::post('/pftargetapproval', 'TdController@pftargetapproval');
+
 Route::get('/training_center_form','TdController@tcform');
 Route::post('/training_center_form','TdController@insert');
 

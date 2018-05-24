@@ -43,5 +43,9 @@ class financial_target extends Model
     	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
         return $target;
     }
+    // public function fetchBatch($id){
+    //     $target = financial_target::where('centre_id',$id)->where('status','Created')->pluck('batch_name','batch_id');        
+    //     return $target;
+    // }
     
 }

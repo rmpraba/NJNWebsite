@@ -49,7 +49,8 @@ class candidates extends Model
 							'expected_salary_outside',
 							'expected_salary_within',
 							'preferred_training_period',
-							'status'
+							'status',
+							'candidate_id'
 
                      ];
     public function createCandidate($insert){

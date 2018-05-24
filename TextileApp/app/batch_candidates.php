@@ -21,6 +21,10 @@ class batch_candidates extends Model
     	$candidates = batch_candidates::where('candidate_id',$id)->get();     
         return $candidates;
     }
+    public function batchCandidate($id){
+        $candidates = batch_candidates::where('batch_id',$id)->get();     
+        return $candidates;
+    }
     public function deletebatchCandidate($id){
     	$candidates = batch_candidates::where('candidate_id',$id)->delete();     
         return $candidates;

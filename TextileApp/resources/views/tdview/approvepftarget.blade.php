@@ -5,7 +5,7 @@
  <div class="row" id="viewtargetcontainer">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-3">
-            @include('includes.sidebar')
+            @include('includes.tdsidebar')
         </div>
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
@@ -37,10 +37,12 @@
     <td>
         <div class="form-group">
                 <label>Select Training Centre:</label><br>
-                @foreach ($tcname as $tc)
-                <input type="hidden" class="form-control" id="vtc" name="vtc" value="{{ $tc->centre_id}}" required readonly>
-                <input type="text" class="form-control" id="vtcname" name="vtcname" value="{{ $tc->centre_name}}" required readonly>
-                @endforeach     
+                <select name="vtc" class="form-control" style="width:350px" required>
+                    <option value="">--- Select Training Centre ---</option>
+                    @foreach ($tcs as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>   
         </div>
     </td>
     </tr>
@@ -49,14 +51,8 @@
             <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="vbatch" class="form-control" style="width:350px" required>
-                    <option value="">--- Select Batch ---</option>
-                    @foreach ($batches as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-                <!-- <select name="vbatch" class="form-control" style="width:350px" required>
                 <option value="">--- Select Batch ---</option>
-                </select> -->
+                </select>
             </div>
         </td>
         <td></td>
@@ -128,8 +124,8 @@
         <td><input required class="tinf" type="number" name="vtotft" id="vt5" value="" readonly></td>       
     </tr>
 </table>
-<!-- <button type="submit" name="approvereject" value="Approved" class="btn btn-primary" style="margin-left: 30%;width: 30%;">Approve</button> -->
-<!-- <button type="submit" name="approvereject" value="Rejected" class="btn btn-primary" style="margin-left: 5%;width: 30%;">Reject</button> -->
+<button type="submit" name="approvereject" value="Approved" class="btn btn-success" style="margin-left: 30%;width: 30%;">Approve</button>
+<button type="submit" name="approvereject" value="Rejected" class="btn btn-danger" style="margin-left: 5%;width: 30%;">Reject</button>
 </form>
 </div>
 </div>    
@@ -139,7 +135,7 @@
             var tc = $(this).val();
             if(tc) {
                 $.ajax({
-                    url: '/viewpftarget/ajax/'+tc,
+                    url: '/approvepftarget/ajax/'+tc,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
@@ -200,7 +196,7 @@
                     $("input[name='vtotft']").val("");
             if(batch) {
                 $.ajax({
-                    url: '/viewpftarget/batchajax/'+batch,
+                    url: '/approvepftarget/batchajax/'+batch,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {  
