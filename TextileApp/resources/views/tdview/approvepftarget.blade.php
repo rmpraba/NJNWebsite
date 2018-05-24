@@ -141,8 +141,13 @@
                     success:function(data) {                       
                         $('select[name="vbatch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
+                        var count=0;
                         $.each(data, function(key, value) {
+                            if(count==0){
+                            $('select[name="vbatch"]').append('<option value="">-----Select Batch-----</option>'); 
+                            }
                             $('select[name="vbatch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            count++;
                         });
                     }
 
