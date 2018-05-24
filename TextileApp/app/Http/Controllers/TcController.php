@@ -486,6 +486,24 @@ class TcController extends Controller
     {
         $tcs = DB::table("training_centres")->pluck("centre_name","centre_id");
         return view('tcview.employment_expense',compact('tcs'));
+    }    
+    public function pftargetapproval(Request $req)
+    {
+        $physicalcall = new physical_target();
+        $financialcall = new financial_target();
+        $year = $req->input('vfiscalyear');
+        $districtid = $req->input('vdistrictcode');
+        $tc = $req->input('vtc');
+        $batch = $req->input('vbatch');
+        $type = $req->input('vtype');
+        $status=$req->input('approvereject');
+        // echo $status;
+        $data = array('status' => $status , 'status_updated_date' => 'currdate');
+        $physicalcall->updateStatus($districtid,$year,$tc,$batch,$data);
+        $financialcall->updateStatus($districtid,$year,$tc,$batch,$data);
+        $message = $status."successfully!!";
+        Session::flash("success", $message);
+        return Redirect::back();
     }
     
    

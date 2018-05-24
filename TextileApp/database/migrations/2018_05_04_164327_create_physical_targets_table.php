@@ -32,6 +32,8 @@ class CreatePhysicalTargetsTable extends Migration
             $table->string('min_female_target')->nullable();
             $table->string('min_total_target')->nullable();
             $table->string('created_by')->nullable();
+            $table->string('status')->nullable();
+            $table->string('status_updated_date')->nullable();
             $table->timestamps();
         });
     }

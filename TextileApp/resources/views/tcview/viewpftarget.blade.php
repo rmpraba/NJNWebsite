@@ -9,8 +9,11 @@
         </div>
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
+        @if(Session::has('success'))
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
+        @endif
     <center><h1 style="color: #b30000;"> Physical & Financial Target </h1></center>
-    <form action="/viewpftarget" method="post">
+    <form action="/pftargetapproval" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="vdistrictcode" hidden>
     <!-- <span data-field="districtcode" id="districtcode" name="districtcode" hidden></span> -->
@@ -81,38 +84,38 @@
     </tr>
     <tr>
         <td>1</td><th>General</th>
-        <td><input required class="tinf" type="number" name="vgenpm" id="vone" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vgenpf" id="vtwo" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenpm" id="vone" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vgenpf" id="vtwo" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vgenpt" id="vavvy" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="vgenfm" id="vthree" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vgenff" id="vfour" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vgenfm" id="vthree" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vgenff" id="vfour" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vgenft" id=vavvy1 value="" readonly></td>  
     </tr>
     <tr>
         <td>2</td><th>SCP</th>
-        <td><input required class="tinf" type="number" name="vscppm" id="vfive" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vscppf" id="vsix" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vscppt" id="vavvy2" value="" readonly></td>
+        <td><input required class="tinf" type="number" name="vscppm" id="vfive" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vscppf" id="vsix" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vscppt" id="vavvy2" value="" readonly readonly></td>
         <td><input required class="tinf" type="number" name="vscpfm" id="vseven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vscpff" id="veight" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vscpff" id="veight" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vscpft" id="vavvy3" value="" readonly></td>        
     </tr>
     <tr>
         <td>3</td><th>TSP</th>
-        <td><input required class="tinf" type="number" name="vtsppm" id="vnine" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vtsppf" id="vten" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtsppm" id="vnine" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vtsppf" id="vten" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vtsppt" id="vavvy4" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="vtspfm" id="vleven" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vtspff" id="vtwel" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vtspfm" id="vleven" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vtspff" id="vtwel" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vtspft" id="vavvy5" value="" readonly></td>        
     </tr>
     <tr>
         <td>4</td><th>Minorities</th>
-        <td><input required class="tinf" type="number" name="vminpm" id="vthirteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vminpf" id="vfourteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vminpm" id="vthirteen" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vminpf" id="vfourteen" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vminpt" id="vavvy6" value="" readonly></td>
-        <td><input required class="tinf" type="number" name="vminfm" id="vfifteen" OnChange="av(this)"></td>
-        <td><input required class="tinf" type="number" name="vminff" id="vsixteen" OnChange="av(this)"></td>
+        <td><input required class="tinf" type="number" name="vminfm" id="vfifteen" OnChange="av(this)" readonly></td>
+        <td><input required class="tinf" type="number" name="vminff" id="vsixteen" OnChange="av(this)" readonly></td>
         <td><input required class="tinf" type="number" name="vminft" id="vavvy7" value="" readonly></td>      
     </tr>
     <tr>
@@ -125,7 +128,8 @@
         <td><input required class="tinf" type="number" name="vtotft" id="vt5" value="" readonly></td>       
     </tr>
 </table>
-<!-- <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button> -->
+<button type="submit" name="approvereject" value="Approved" class="btn btn-primary" style="margin-left: 30%;width: 30%;">Approve</button>
+<button type="submit" name="approvereject" value="Rejected" class="btn btn-primary" style="margin-left: 5%;width: 30%;">Reject</button>
 </form>
 </div>
 </div>    

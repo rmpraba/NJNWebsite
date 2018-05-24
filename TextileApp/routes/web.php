@@ -45,6 +45,7 @@ Route::get('/logout', 'loginController@logout');
 Route::get('/pftarget/ajax/{id}','TcController@getBatchList');
 Route::get('/pftarget/batchajax/{id}','TcController@getBatchInfo');
 Route::get('/pftarget', 'TcController@pftargetfetch');
+Route::post('/pftargetapproval', 'TcController@pftargetapproval');
 Route::post('insertpftarget', 'TcController@insertpf');
 Route::get('/batchexpense', 'TcController@batchexpenseview');
 Route::get('/employementexpense', 'TcController@employmentExpense');

@@ -23,7 +23,9 @@ class financial_target extends Model
 							'min_male_target',
 							'min_female_target',
 							'min_total_target',
-							'created_by'
+							'created_by',
+							'status',
+                            'status_updated_date'
                      ];
     public function insertFinancialTarget($array){
     	$target = financial_target::create( $array );        
@@ -32,10 +34,14 @@ class financial_target extends Model
      public function checkFinancialTarget($districtid,$year,$tc,$batch,$type){
     	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->get();
     	return $target;
-
     }
     public function updateFinancialTarget($districtid,$year,$tc,$batch,$type,$array){
     	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
         return $target;
     }
+    public function updateStatus($districtid,$year,$tc,$batch,$array){
+    	$target = financial_target::where('district_id',$districtid)->where('financial_year',$year)->where('centre_id',$tc)->where('batch_id',$batch)->update($array);        
+        return $target;
+    }
+    
 }
