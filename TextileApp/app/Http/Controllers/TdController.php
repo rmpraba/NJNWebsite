@@ -21,6 +21,7 @@ use App\training_batches;
 use App\roles;
 use App\physical_target;
 use App\financial_target;
+use App\batch_employment_expenses;
 use Hash;
 use Illuminate\Support\Facades\Input;
 
@@ -428,12 +429,32 @@ class TdController extends Controller
         $type = $req->input('vtype');
         $status=$req->input('approvereject');
         // echo $status;
-        $data = array('status' => $status , 'status_updated_date' => 'currdate');
+        $data = array('status' => $status , 'status_updated_date' => date('Y-m-d H:i:s'));
         $physicalcall->updateStatus($districtid,$year,$tc,$batch,$data);
         $financialcall->updateStatus($districtid,$year,$tc,$batch,$data);
         $message = $status."  Successfully!!";
         Session::flash("success", $message);
         return Redirect::back();
-    }  
+    } 
+    public function approveemploymentExpense(){
+        $info = DB::table('training_batches as t')->join('batch_employment_expenses as e','e.batch_id','=','t.batch_id')->join('training_centres as c','c.centre_id','=','t.centre_id')->where('t.employment_expense_status',null)->select('c.centre_id','c.centre_name','c.district','t.batch_id','t.batch_name','t.batch_type','t.action','e.expense')->get();
+        return view('tdview.approveemploymentexpense')->with(array('info'=>$info));
+    }
+    public function approveExpense($batchid,$centreid)
+    {  
+       $tccall =new training_batches();
+       $new_data =array('employment_expense_status'=>"Approved");
+       $tc=$tccall->approveExpense($batchid,$centreid,$new_data);
+       Session::flash("message", "Expense approved!!");
+       return Redirect::back(); 
+    }
+    public function rejectExpense($batchid,$centreid)
+    { 
+        $tccall = new training_batches();
+        $new_data = array('employment_expense_status'=>"Rejected");
+        $tc = $tccall->rejectExpense($batchid,$centreid,$new_data);
+        Session::flash("message", "Expense rejected!!");
+        return Redirect::back();  
+    }
 
 }

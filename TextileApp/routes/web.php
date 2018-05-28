@@ -48,7 +48,7 @@ Route::get('/pftarget', 'TcController@pftargetfetch');
 Route::post('/pftargetapproval', 'TcController@pftargetapproval');
 Route::post('insertpftarget', 'TcController@insertpf');
 Route::get('/batchexpense', 'TcController@batchexpenseview');
-Route::get('/employementexpense', 'TcController@employmentExpense');
+// Route::get('/employementexpense', 'TcController@employmentExpense');
 
 Route::post('batchexpensetotal/{id}', 'TcController@insertbatchexpense');
 
@@ -114,3 +114,14 @@ Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
 Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
 
 Route::post('/importExcel/{id}', 'TcController@importExcel');
+
+Route::get('/employmentexpense', 'TcController@employmentexpensefetch');
+Route::get('/employmentexpense/ajax/{id}','TcController@employmentexpenseBatchList');
+Route::get('/employmentexpense/batchajax/{id}','TcController@employmentexpenseBatchInfo');
+
+Route::post('/employmentexpenseupdate','TcController@employmentexpenseUpdate');
+
+Route::get('/approveemploymentexpense','TdController@approveemploymentExpense');
+
+Route::post('/approveexpense/{batchid}/{centreid}','TdController@approveExpense');
+Route::post('/rejectexpense/{batchid}/{centreid}','TdController@rejectExpense');

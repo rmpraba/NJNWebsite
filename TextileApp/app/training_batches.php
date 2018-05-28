@@ -13,7 +13,13 @@ class training_batches extends Model
 							'created_by',
 							'batch_type',
 							'batch_name',
-							'batch_academic_year'
+							'batch_academic_year',
+                            'action',
+                            'stipend',
+                            'raw_material',
+                            'inst_exp',
+                            'total_expense',
+                            'employment_expense_status'
                      ];
     public function insertTrainingBatch($array){
     	$batch = training_batches::create( $array );        
@@ -21,6 +27,11 @@ class training_batches extends Model
     } 
     public function fetchtrainingBatch($centreid){
     	$batch = training_batches::where("centre_id",$centreid)->pluck('batch_name','batch_id');
+        return $batch;
+    }
+
+    public function fetchcompletedtrainingBatch($centreid){
+        $batch = training_batches::where("centre_id",$centreid)->where('action',"Completed")->pluck('batch_name','batch_id');
         return $batch;
     }
 
@@ -39,9 +50,7 @@ class training_batches extends Model
         {
            $field = "hold_date";
            $value = date('Y-m-d H:i:s');
-        }
-        
-          
+        }       
         $data = training_batches::where ('id', $batchid)->update(array('action' => $action,$field => $value));
         return $data;
     }
@@ -54,7 +63,6 @@ class training_batches extends Model
         $batches = training_batches::where('action',"Completed")->get();
         return $batches;
     }
-
     
     public function updateBatchExpense($data){ 
         $success = training_batches::where ('id', $data['id'])->update( $data );
@@ -71,6 +79,14 @@ class training_batches extends Model
     }
     public function fetchBatchSpecInfo($batchid){
         $batchinfo = training_batches::where('batch_id', $batchid)->get(); 
+        return $batchinfo;
+    }
+    public function approveExpense($batchid,$centreid,$data){
+        $batchinfo = training_batches::where('batch_id', $batchid)->where('centre_id', $centreid)->update($data); 
+        return $batchinfo;
+    }
+    public function rejectExpense($batchid,$centreid,$data){
+        $batchinfo = training_batches::where('batch_id', $batchid)->where('centre_id', $centreid)->get($data); 
         return $batchinfo;
     }
 }

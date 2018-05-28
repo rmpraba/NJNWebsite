@@ -20,6 +20,8 @@ class CreateBatchCandidatesTable extends Migration
             $table->string('batch_id')->nullable();
             $table->string('batch_type')->nullable();
             $table->string('candidate_id')->nullable();
+            $table->string('employment_status')->nullable();
+            $table->string('employed_industry')->nullable();
             $table->timestamps();
         });
     }
