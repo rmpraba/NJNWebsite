@@ -57,7 +57,7 @@ Route::get('/viewpftarget/ajax/{id}','TcController@viewgetBatchList');
 Route::get('/viewpftarget/batchajax/{id}','TcController@viewgetBatchInfo');
 
 Route::get('/approvepftarget', 'TdController@viewpftargetfetch');
-Route::get('/approvepftarget/ajax/{id}','TdController@viewgetBatchList');
+Route::get('/approvepftarget/ajax/{id}/{year}','TdController@viewgetBatchList');
 Route::get('/approvepftarget/batchajax/{id}','TdController@viewgetBatchInfo');
 Route::post('/pftargetapproval', 'TdController@pftargetapproval');
 
@@ -109,7 +109,7 @@ Route::get('/candidate/batchajax/{id}','TcController@getSubjectBatch');
 Route::post('/batchcandidatemapping', 'TcController@batchCandidateMapping');
 
 Route::get('/candidatelist', 'TcController@candidateListView');
-Route::get('/candidatelist/ajax/{id}','TcController@getTrainingSubjectList');
+Route::get('/candidatelist/ajax/{id}/{year}','TcController@getTrainingSubjectList');
 Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
 Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
 

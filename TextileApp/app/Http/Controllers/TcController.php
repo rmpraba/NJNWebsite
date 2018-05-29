@@ -137,17 +137,18 @@ class TcController extends Controller
         // echo $centreid;
         $tcname =  $tc->fetchTcSpecInfo($centreid);
         // $tcs =  $tc->fetchtcforList();
-        $tb = new training_batches();
-        $batches=$tb->fetchtrainingBatch($centreid);
+        // $tb = new training_batches();
+        // $batches=$tb->fetchtrainingBatch($centreid);
         // return json_encode($batches);
         $ayobj = new academicyear();
         $academicyear = $ayobj -> fetchAcademicyear();
-        return view('tcview.pftarget',compact('tcname','batches','academicyear'));
+        return view('tcview.pftarget',compact('tcname','academicyear'));
     }
     public function getBatchList($id)
     {
+        $centreid = session()->get('centreid');
         $tb = new training_batches();
-        $batches=$tb->fetchtrainingBatch($id);
+        $batches=$tb->fetchtrainingspecBatch($centreid,$id);
         return json_encode($batches);
     } 
     public function getBatchInfo($id)
@@ -186,17 +187,19 @@ class TcController extends Controller
         // echo $centreid;
         $tcname =  $tc->fetchTcSpecInfo($centreid);
         // $tcs =  $tc->fetchtcforList();
-        $tb = new training_batches();
-        $batches=$tb->fetchtrainingBatch($centreid);
+            // $tb = new training_batches();
+            // $batches=$tb->fetchtrainingBatch($centreid);
         $ayobj = new academicyear();
         $academicyear = $ayobj -> fetchAcademicyear();
         // return json_encode($batches);
-        return view('tcview.viewpftarget',compact('tcname','batches','academicyear'));
+        return view('tcview.viewpftarget',compact('tcname','academicyear'));
     }
     public function viewgetBatchList($id)
     {
+        $centreid = session()->get('centreid');
         $tb = new training_batches();
-        $batches=$tb->fetchtrainingBatch($id);
+        // $batches=$tb->fetchtrainingBatch($id);
+        $batches=$tb->fetchtrainingspecBatch($centreid,$id);
         return json_encode($batches);
     } 
     public function viewgetBatchInfo($id)
@@ -339,11 +342,11 @@ class TcController extends Controller
         }        
     }
 
-    public function getTrainingSubjectList($id){
+    public function getTrainingSubjectList($id,$year){
         $centreid = session()->get('centreid');
         $tbcall = new training_batches();
         session()->put('batchtype',$id);
-        $info=$tbcall->fetchTypeBatch($centreid,$id);
+        $info=$tbcall->fetchTypeBatch($centreid,$id,$year);
         return json_encode($info);    
     }
     public function getSubjectBatchList($id){
@@ -522,16 +525,17 @@ class TcController extends Controller
         $tc = new training_centres();
         $centreid = session()->get('centreid');
         $tcname =  $tc->fetchTcSpecInfo($centreid);
-        $tb = new training_batches();
-        $batches=$tb->fetchtrainingBatch($centreid);
+        // $tb = new training_batches();
+        // $batches=$tb->fetchtrainingBatch($centreid);
         $ayobj = new academicyear();
         $academicyear = $ayobj -> fetchAcademicyear();
         return view('tcview.employment_expense',compact('tcname','batches','academicyear'));
     }
     public function employmentexpenseBatchList($id)
     {
+        $centreid = session()->get('centreid');
         $tb = new training_batches();
-        $batches=$tb->fetchcompletedtrainingBatch($id);
+        $batches=$tb->fetchcompletedtrainingBatch($centreid,$id);
         return json_encode($batches);
     } 
     public function employmentexpenseBatchInfo($id){

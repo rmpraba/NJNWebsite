@@ -393,14 +393,15 @@ class TdController extends Controller
         // return json_encode($batches);
         // return view('tcview.approvepftarget',compact('tcname','batches'));
     }
-    public function viewgetBatchList($id)
+    public function viewgetBatchList($id,$year)
     {
         // $tb = new training_batches();
         // $batches = $tb->fetchtrainingBatch($id);
         // return json_encode($batches);
         // $tb = new financial_target();
         // $batches = $tb->fetchBatch($id);
-        $batches = DB::table('training_batches')->join('financial_targets','training_batches.batch_id','=','financial_targets.batch_id')->where('training_batches.centre_id','=',$id)->where('financial_targets.status','=','Created')->pluck('training_batches.batch_name','training_batches.batch_id');
+        $batches = DB::table('training_batches')->join('financial_targets','training_batches.batch_id','=','financial_targets.batch_id')->where('training_batches.centre_id','=',$id)->where('financial_targets.status','=','Created')->
+        where('training_batches.batch_academic_year','=',$year)->pluck('training_batches.batch_name','training_batches.batch_id');
         return json_encode($batches);
     } 
     public function viewgetBatchInfo($id)

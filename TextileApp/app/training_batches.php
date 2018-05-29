@@ -30,8 +30,13 @@ class training_batches extends Model
         return $batch;
     }
 
-    public function fetchcompletedtrainingBatch($centreid){
-        $batch = training_batches::where("centre_id",$centreid)->where('action',"Completed")->pluck('batch_name','batch_id');
+    public function fetchtrainingspecBatch($centreid,$academicyear){
+        $batch = training_batches::where("centre_id",$centreid)->where("batch_academic_year",$academicyear)->pluck('batch_name','batch_id');
+        return $batch;
+    }
+
+    public function fetchcompletedtrainingBatch($centreid,$year){
+        $batch = training_batches::where("centre_id",$centreid)->where('action',"Completed")->where('batch_academic_year',$year)->pluck('batch_name','batch_id');
         return $batch;
     }
 
@@ -73,8 +78,8 @@ class training_batches extends Model
         $batch = training_batches::where("centre_id",$centreid)->pluck('batch_type','batch_type');
         return $batch;
     }
-    public function fetchTypeBatch($centreid,$type){
-        $batch = training_batches::where("centre_id",$centreid)->where("batch_type",$type)->pluck('batch_name','batch_id');
+    public function fetchTypeBatch($centreid,$type,$academicyear){
+        $batch = training_batches::where("centre_id",$centreid)->where("batch_type",$type)->where('batch_academic_year',$academicyear)->pluck('batch_name','batch_id');
         return $batch;
     }
     public function fetchBatchSpecInfo($batchid){

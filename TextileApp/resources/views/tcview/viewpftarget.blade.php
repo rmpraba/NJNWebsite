@@ -53,9 +53,6 @@
                 <label>Select Batch:</label><br>
                 <select name="vbatch" class="form-control" style="width:350px" required>
                     <option value="">--- Select Batch ---</option>
-                    @foreach ($batches as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
                 </select>
                 <!-- <select name="vbatch" class="form-control" style="width:350px" required>
                 <option value="">--- Select Batch ---</option>
@@ -138,18 +135,23 @@
 </div>    
 <script type="text/javascript">
     $(document).ready(function() {
-        $('select[name="vtc"]').on('change', function() {
-            var tc = $(this).val();
-            if(tc) {
+        $('select[name="vfiscalyear"]').on('change', function() {
+            var fy = $(this).val();
+            if(fy) {
                 $.ajax({
-                    url: '/viewpftarget/ajax/'+tc,
+                    url: '/viewpftarget/ajax/'+fy,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
                         $('select[name="vbatch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
+                        var count=0;
                         $.each(data, function(key, value) {
+                           if(count==0){
+                            $('select[name="vbatch"]').append('<option value="">-----Select Batch-----</option>'); 
+                            }
                             $('select[name="vbatch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            count++;
                         });
                     }
 

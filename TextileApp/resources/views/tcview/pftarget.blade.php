@@ -58,14 +58,8 @@
             <div class="form-group">
                 <label>Select Batch:</label><br>
                 <select name="batch" class="form-control" style="width:350px" required>
-                    <option value="">--- Select Batch ---</option>
-                    @foreach ($batches as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-                <!-- <select name="batch" class="form-control" style="width:350px" required>
                 <option value="">--- Select Batch ---</option>
-                </select> -->
+                </select>
             </div>
         </td>
         <td></td>
@@ -129,12 +123,12 @@
     </tr>
     <tr>
         <td></td><th>Total</th>
-        <td><input required class="tinf" type="number" value="0" name="totpm" id="t0" value="" readonly></td>
-        <td><input required class="tinf" type="number" value="0" name="totpf" id="t1" value="" readonly></td>
-        <td><input required class="tinf" type="number" value="0" name="totpt" id="t2" value="" readonly></td>
-        <td><input required class="tinf" type="number" value="0" name="totfm" id="t3" value="" readonly></td>
-        <td><input required class="tinf" type="number" value="0" name="totff" id="t4" value="" readonly></td>
-        <td><input required class="tinf" type="number" value="0" name="totft" id="t5" value="" readonly></td>     
+        <td><input required class="tinf" type="number"  name="totpm" id="t0"  readonly></td>
+        <td><input required class="tinf" type="number" name="totpf" id="t1"  readonly></td>
+        <td><input required class="tinf" type="number" name="totpt" id="t2" readonly></td>
+        <td><input required class="tinf" type="number" name="totfm" id="t3" readonly></td>
+        <td><input required class="tinf" type="number" name="totff" id="t4" readonly></td>
+        <td><input required class="tinf" type="number" name="totft" id="t5" readonly></td>     
     </tr>
 </table>
 <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button>
@@ -143,18 +137,23 @@
 </div>    
 <script type="text/javascript">
     $(document).ready(function() {
-        $('select[name="tc"]').on('change', function() {
-            var tc = $(this).val();
-            if(tc) {
+        $('select[name="fiscalyear"]').on('change', function() {
+            var fy = $(this).val();
+            if(fy) {
                 $.ajax({
-                    url: '/pftarget/ajax/'+tc,
+                    url: '/pftarget/ajax/'+fy,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
                         $('select[name="batch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
+                        var count=0;
                         $.each(data, function(key, value) {
+                           if(count==0){
+                            $('select[name="batch"]').append('<option value="">-----Select Batch-----</option>'); 
+                            }
                             $('select[name="batch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            count++;
                         });
                     }
 

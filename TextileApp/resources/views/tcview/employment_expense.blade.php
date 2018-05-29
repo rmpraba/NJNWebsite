@@ -55,9 +55,6 @@
                 <label>Select Batch:</label><br>
                 <select name="batch" class="form-control" style="width:350px" required>
                     <option value="">--- Select Batch ---</option>
-                    @foreach ($batches as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
                 </select>
             </div>
         </td>
@@ -87,18 +84,23 @@
     $(document).ready(function() {
         var batch,tc,expense,academicyear,type;
         var candidatearr=[];
-        $('select[name="tc"]').on('change', function() {
-            tc = $(this).val();
-            if(tc) {
+        $('select[name="fiscalyear"]').on('change', function() {
+            var fy = $(this).val();
+            if(fy) {
                 $.ajax({
-                    url: '/employmentexpense/ajax/'+tc,
+                    url: '/employmentexpense/ajax/'+fy,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
                         $('select[name="batch"]').empty();
                         // $('select[name="batch"]').append('<option value="'select'">-----Select-----</option>');
+                        var count=0;
                         $.each(data, function(key, value) {
+                           if(count==0){
+                            $('select[name="batch"]').append('<option value="">-----Select Batch-----</option>'); 
+                            }
                             $('select[name="batch"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            count++;
                         });
                     }
 

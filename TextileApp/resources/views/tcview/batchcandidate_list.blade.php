@@ -79,12 +79,13 @@
 </div>
 </div>    
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function() {        
         $('select[name="mappingsubject"]').on('change', function() {
+            var fy=$('select[name="mappingfiscalyear"]').val();
             var subject = $(this).val();
             if(subject) {
                 $.ajax({
-                    url: '/candidatelist/ajax/'+subject,
+                    url: '/candidatelist/ajax/'+subject+'/'+fy,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       

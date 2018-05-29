@@ -136,9 +136,10 @@
     $(document).ready(function() {
         $('select[name="vtc"]').on('change', function() {
             var tc = $(this).val();
+            var fy = $('select[name="vfiscalyear"]').val();
             if(tc) {
                 $.ajax({
-                    url: '/approvepftarget/ajax/'+tc,
+                    url: '/approvepftarget/ajax/'+tc+'/'+fy,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {                       
