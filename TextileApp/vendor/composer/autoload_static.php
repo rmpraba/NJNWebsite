@@ -365,6 +365,7 @@ class ComposerStaticInited5f728d0f8cf100c0f036a347cf9558
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\academicyear' => __DIR__ . '/../..' . '/app/academicyear.php',
         'App\\batch_candidates' => __DIR__ . '/../..' . '/app/batch_candidates.php',
         'App\\batch_employment_expense' => __DIR__ . '/../..' . '/app/batch_employment_expense.php',
         'App\\batches' => __DIR__ . '/../..' . '/app/batches.php',

@@ -22,6 +22,7 @@ use App\roles;
 use App\physical_target;
 use App\financial_target;
 use App\batch_employment_expenses;
+use App\academicyear;
 use Hash;
 use Illuminate\Support\Facades\Input;
 
@@ -273,7 +274,9 @@ class TdController extends Controller
     public function credentialCreation()
     {  
        $districts=districts::all(); 
-       return view('tdview.credential',compact('districts'));  
+       $ayobj = new academicyear();
+       $academicyear = $ayobj->fetchAcademicyear();
+       return view('tdview.credential',compact('districts','academicyear'));  
         // return view('tdview.credential');
     }
 
@@ -335,7 +338,9 @@ class TdController extends Controller
         return Redirect::back();
     }
     public function showTrainingSubject(){
-        return view('tdview.training_subject');
+        $ayobj = new academicyear();
+        $academicyear = $ayobj->fetchAcademicyear();
+        return view('tdview.training_subject',compact('academicyear'));
     }
     public function createTrainingSubject(Request $req){
         $name = $req->input('subjectname');
@@ -375,7 +380,9 @@ class TdController extends Controller
     {
         $tc = new training_centres();
         $tcs =  $tc->fetchtcforList();
-        return view('tdview.approvepftarget',compact('tcs'));
+        $ayobj = new academicyear();
+        $academicyear = $ayobj->fetchAcademicyear();
+        return view('tdview.approvepftarget',compact('tcs','academicyear'));
         // $tc = new training_centres();
         // $centreid = session()->get('centreid');
         // echo $centreid;

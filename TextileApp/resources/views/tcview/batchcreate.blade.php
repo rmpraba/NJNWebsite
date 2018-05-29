@@ -18,8 +18,11 @@
         <label>Financial Year:</label><br>
         <select class="form-control" id="sel1" name="fiscalyear" required>
         <option value="">-----Select Academic Year-----</option>
-        <option value="2018-2019">2018-2019</option>
-        <option value="2019-2020">2019-2020</option>
+        @foreach ($academicyear as $key )
+        <option value="{{ $key->academic_year }}">{{ $key->academic_year }}</option>
+        @endforeach
+        <!-- <option value="2018-2019">2018-2019</option>
+        <option value="2019-2020">2019-2020</option> -->
         </select>    
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td><br><label>Batch Name:</label><br>

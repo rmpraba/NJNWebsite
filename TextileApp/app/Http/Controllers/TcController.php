@@ -22,6 +22,7 @@ use App\financial_target;
 use App\candidates;
 use App\batch_candidates;
 use App\batch_employment_expense;
+use App\academicyear;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Excel;
@@ -30,9 +31,11 @@ class TcController extends Controller
 {
     public function batch()
     {        
-        $tcobj=new training_centre_subjects();
+        $tcobj = new training_centre_subjects();
         $trainingtype=$tcobj->fetchSubject();
-        return view('tcview.batchcreate',compact('trainingtype'));
+        $ayobj = new academicyear();
+        $academicyear = $ayobj -> fetchAcademicyear();
+        return view('tcview.batchcreate',compact('trainingtype','academicyear'));
     }
     public function batchstrength($type)
     {
@@ -137,7 +140,9 @@ class TcController extends Controller
         $tb = new training_batches();
         $batches=$tb->fetchtrainingBatch($centreid);
         // return json_encode($batches);
-        return view('tcview.pftarget',compact('tcname','batches'));
+        $ayobj = new academicyear();
+        $academicyear = $ayobj -> fetchAcademicyear();
+        return view('tcview.pftarget',compact('tcname','batches','academicyear'));
     }
     public function getBatchList($id)
     {
@@ -183,8 +188,10 @@ class TcController extends Controller
         // $tcs =  $tc->fetchtcforList();
         $tb = new training_batches();
         $batches=$tb->fetchtrainingBatch($centreid);
+        $ayobj = new academicyear();
+        $academicyear = $ayobj -> fetchAcademicyear();
         // return json_encode($batches);
-        return view('tcview.viewpftarget',compact('tcname','batches'));
+        return view('tcview.viewpftarget',compact('tcname','batches','academicyear'));
     }
     public function viewgetBatchList($id)
     {
@@ -363,7 +370,9 @@ class TcController extends Controller
         session()->put('centreid',$info[0]->centre_id);
         $tbcall = new training_batches();
         $tbinfo = $tbcall->fetchtrainingType($info[0]->centre_id);
-        return view('tcview.batchcandidate_list',compact('tbinfo'));
+        $ayobj = new academicyear();
+        $academicyear = $ayobj -> fetchAcademicyear();
+        return view('tcview.batchcandidate_list',compact('tbinfo','academicyear'));
     }
    
     public function batchCandidateDelete(Request $req){
@@ -515,7 +524,9 @@ class TcController extends Controller
         $tcname =  $tc->fetchTcSpecInfo($centreid);
         $tb = new training_batches();
         $batches=$tb->fetchtrainingBatch($centreid);
-        return view('tcview.employment_expense',compact('tcname','batches'));
+        $ayobj = new academicyear();
+        $academicyear = $ayobj -> fetchAcademicyear();
+        return view('tcview.employment_expense',compact('tcname','batches','academicyear'));
     }
     public function employmentexpenseBatchList($id)
     {

@@ -9,5 +9,6 @@
   <!-- <a href="{{ URL::to('candidateupload') }}">Candidate Upload</a> -->
   <!-- <a href="{{ URL::to('candidatemapping') }}">Candidate Mapping</a> -->
   <a href="{{ URL::to('candidatelist') }}">Candidate List</a>
-  <a href="/employmentexpense">Employment Status and Expenses</a>
+  <a href="{{ URL::to('employmentexpense') }}"">Employment Status and Expenses</a>
+  
 </div>

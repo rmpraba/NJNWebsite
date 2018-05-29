@@ -27,6 +27,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\academicyear' => $baseDir . '/app/academicyear.php',
     'App\\batch_candidates' => $baseDir . '/app/batch_candidates.php',
     'App\\batch_employment_expense' => $baseDir . '/app/batch_employment_expense.php',
     'App\\batches' => $baseDir . '/app/batches.php',
