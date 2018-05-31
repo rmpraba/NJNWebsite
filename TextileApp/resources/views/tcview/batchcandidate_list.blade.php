@@ -73,6 +73,7 @@
         <th>Training Subject:<span data-field="mappingtsubject" id="mappingtsubject" name="mappingtsubject"></th>
     </tr>    
 </table> <br><br>
+<div id="myview">@include('candidate.blade.php')</div>
 <div id="view"></div>
 <!-- <button type="submit" class="btn btn-primary" style="margin-left: 70%;width: 30%;">Submit</button> -->
 <!-- </form> -->
@@ -115,8 +116,7 @@
                     $("[data-field='mappingdistrict']").text("");
                     $("[data-field='mappingdivision']").text("");
                     $("input[name='mappingdistrictcode']").val("");
-
-                    var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
+                    var row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th>Candidate Image</th><th></th></tr>';
             if(batch) {
                 $.ajax({
                     url: '/candidatelist/batchajax/'+batch,
@@ -131,16 +131,14 @@
                     $("[data-field='mappingdistrict']").text(data[0].district_name);
                     $("[data-field='mappingdivision']").text(data[0].division);
                     $("input[name='mappingdistrictcode']").val(data[0].district_id);
-
                     // row = '<meta name="csrf-token" content="{{ csrf_token() }}" /><table class="table table-bordered"><tr><th>Candidate ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Category</th><th>Education</th><th>Skill</th><th></th></tr>';
                     $.each(data[0].candidate, function (i, item) {
-                    row += '<tr><td>' + item.candidate_id + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.candidate_id+ '">Remove</button></td></tr>';
-
+                    row += '<tr><td>' + item.candidate_id + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td><td>' + item.gender + '</<td><td>' + item.category + '</td><td>' + item.education + '</td><td>' + item.skill + '</td><td><input type="file" name="image'+item.candidate_id+'" class="form-control" id="file'+item.candidate_id+'"><button class="btn  btn-danger uploadTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.candidate_id+ '">Submit</button></td><td><button class="btn  btn-danger saveTest"  data-toggle="modal" data-target="#myModal" data-id="' + item.candidate_id+ '">Remove</button></td></tr>';
                 });
                 row+='</table>';
                 $('#view').html('');
                 $('#view').append(row);
-
+                
                     },
                     error: function(e) {
                         // alert('fail');
@@ -166,7 +164,27 @@
                 }
             });
         });
+
+         $(document).on('click', '.uploadTest', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var id = $(this).attr('data-id');
+            var photo=$('input[name="image'+id+'"]').val();
+            var file = document.getElementById('file'+id).files[0];
+            alert(file);
+            $.ajax({
+                url: '/candidatephotoupload',
+                type: "POST",
+                data: {_token: CSRF_TOKEN ,'candidateid': $(this).attr('data-id'),'photo': $('input[name="image'+id+'"]')},
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    // alert('success'+data.msg);
+                    alert('Uploaded successfully!!');
+                }
+            });
+            // alert(id);
+            // var image = $("#file"+id)[0].files[0];
+            // alert(image);
+        });
     });
 </script>
-
 @stop

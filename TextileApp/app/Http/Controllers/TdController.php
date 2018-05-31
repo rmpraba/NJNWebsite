@@ -154,8 +154,6 @@ class TdController extends Controller
         Session::flash("success", "Deleted successfully!!");
         return Redirect::back();
     }
-
-
     public function fetchbatchlistview(Request $obj)
     {
         $batchcall = new batches();

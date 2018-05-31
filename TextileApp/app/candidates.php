@@ -50,7 +50,8 @@ class candidates extends Model
 							'expected_salary_within',
 							'preferred_training_period',
 							'status',
-							'candidate_id'
+							'candidate_id',
+							'photo'
 
                      ];
     public function createCandidate($insert){
@@ -62,11 +63,16 @@ class candidates extends Model
         return $candidates;
     }
     public function updateCandidateStatus($id,$data){
-    	$candidates = candidates::where('serial_no',$id)->update($data);     
+    	$candidates = candidates::where('candidate_id',$id)->update($data);     
         return $candidates;
     }
     public function fetchCandidateMappedList($centreid,$batchid,$batchtype){
     	$candidates = candidates::where('status','Mapped')->get();     
+        return $candidates;
+    }
+    public function uploadImage($candidateid,$batchid,$filename){
+    	$data = array('photo' => $filename);
+    	$candidates = candidates::where('candidate_id',$candidateid)->update($data);     
         return $candidates;
     }
     

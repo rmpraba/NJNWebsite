@@ -111,7 +111,7 @@ Route::post('/batchcandidatemapping', 'TcController@batchCandidateMapping');
 Route::get('/candidatelist', 'TcController@candidateListView');
 Route::get('/candidatelist/ajax/{id}/{year}','TcController@getTrainingSubjectList');
 Route::get('/candidatelist/batchajax/{id}','TcController@getSubjectBatchList');
-Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
+Route::post('/batchcandidatedelete/{candidateid}/{batchid}', 'TcController@batchCandidateDelete');
 
 Route::post('/importExcel/{id}', 'TcController@importExcel');
 
@@ -125,3 +125,9 @@ Route::get('/approveemploymentexpense','TdController@approveemploymentExpense');
 
 Route::post('/approveexpense/{batchid}/{centreid}','TdController@approveExpense');
 Route::post('/rejectexpense/{batchid}/{centreid}','TdController@rejectExpense');
+
+Route::post('/uploadcandidatephoto/{candidateid}/{batchid}','TcController@uploadPhoto');
+
+Route::get('/candidatelistinfo','TcController@candidateInfo');
+
+

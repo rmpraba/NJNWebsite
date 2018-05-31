@@ -58,6 +58,7 @@ class CreateCandidatesTable extends Migration
             $table->string('preferred_training_period')->nullable();
             $table->string('status')->nullable();
             $table->string('candidate_id')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

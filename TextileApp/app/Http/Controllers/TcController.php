@@ -378,17 +378,17 @@ class TcController extends Controller
         return view('tcview.batchcandidate_list',compact('tbinfo','academicyear'));
     }
    
-    public function batchCandidateDelete(Request $req){
-        $id = $req->candidateid;
+    public function batchCandidateDelete(Request $req,$candidateid,$batchid){
+        $id = $candidateid;
         $centreid = session()->get('centreid');
-        $type = session()->get('batchtype');
-        $batchid = session()->get('batchid');
+        // $type = session()->get('batchtype');
+        // $batchid = session()->get('batchid');
         $bccall = new batch_candidates();
         $candidatecall = new candidates();
         $candidateinfo = $bccall -> checkCandidate($id);
         if(count($candidateinfo)>0){
         $data1 = array('status' => 'Created' );       
-        $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_type' => $type ,'batch_id' => $batchid );
+        $data = array('candidate_id' => $id , 'centre_id' => $centreid ,'batch_id' => $batchid );
         $info = $bccall -> deletebatchCandidate($data);    
          $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
         // return json_encode($info);
@@ -585,5 +585,22 @@ class TcController extends Controller
         Session::flash("success", "Successfully updated!!");
         return Redirect::back();
     }
+    
+    public function candidateInfo(Request $req)
+    {
+        $centreid = session()->get('centreid');
+        $candidate = DB::table('candidates')->join('batch_candidates','batch_candidates.candidate_id','=','candidates.candidate_id')->join('batches','batches.batch_id','batch_candidates.batch_id')->where('batch_candidates.centre_id','=',$centreid)->select('batch_candidates.candidate_id','batch_candidates.batch_type','candidates.first_name','candidates.last_name','candidates.gender','candidates.category','candidates.education','candidates.skill','batches.batch_id','batches.batch_name')->get();
+        return view('tcview.candidate',compact('candidate'));   
+    }
+    public function uploadPhoto(Request $req,$candidateid,$batchid)
+    {
+        $file = Input::file('photo');
+        $filename = $candidateid. '-' .time();
+        $file = $file->move(public_path().'/uploads/', $filename);
+        $candidatecall = new candidates();
+        $candidatecall -> uploadImage($candidateid,$batchid,$filename);
+        Session::flash("success", "Successfully uploaded!!");
+        return Redirect::back();
+    } 
    
 }
