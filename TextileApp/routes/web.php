@@ -130,4 +130,8 @@ Route::post('/uploadcandidatephoto/{candidateid}/{batchid}','TcController@upload
 
 Route::get('/candidatelistinfo','TcController@candidateInfo');
 
+Route::get('/dashboard','TdController@fetchDashboardInfo');
+Route::get('/dashboard/{tc}/{fiscalyear}','TdController@fetchSpecDashboardInfo');
+Route::get('/tcdashboard','TcController@fetchTcDashboardInfo');
+
 

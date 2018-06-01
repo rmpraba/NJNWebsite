@@ -13,4 +13,5 @@
   <a href="{{ URL::to('centretype') }}">Centre Type</a>
   <a href="{{ URL::to('subject') }}">Training Subject</a>
   <a href="{{ URL::to('approveemploymentexpense')}}">Approve Employment Expense</a>
+  <a href="{{ URL::to('dashboard') }}">Dashboard</a>
 </div>

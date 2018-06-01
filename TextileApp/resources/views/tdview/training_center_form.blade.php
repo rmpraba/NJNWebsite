@@ -8,27 +8,32 @@
     </div>
      <div class="col-md-9">
         @if(Session::has('success'))
-        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
+        <div class="alert alert-success"><span class="glphicon glyphicon-ok"></span><em> {!! session('success') !!}<button type="button" class="close" data-dismiss="alert">×</button></em></div>
         @endif
-        <table>
-      
+        <table>      
               <form action="" method="post" >
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <tr>
           <td colspan="4">
               <label class="dd" align="right">District &nbsp :<?php echo "$district";?></label><br>
               <label class="dd" align="right">Division :<?php echo "$div";?></label>
-          </td>
-          
-        </tr>  
+          </td>          
+        </tr>   
         <tr>
-          <td colspan="3">
+          <td>     
               <label for="usr">Training centre name </label>
               <input type="text" class="form-control" id="usr" name="centre_name" required>
-          </td>
-          <td><p class="star1">&nbsp*</p></td>    
-        </tr> 
-        
+          </td><td><p class="star">&nbsp*&nbsp&nbsp</p></td>
+          <td >
+              <label for="usr">Academic Year</label>
+              <select class="form-control" id="sel1" name="fiscalyear" required>
+              <option value="">-----Select Academic Year-----</option>
+              @foreach ($academicyear as $key )
+              <option value="{{ $key->academic_year }}">{{ $key->academic_year }}</option>
+              @endforeach
+              </select>
+          </td><td>&nbsp</td>
+        </tr>        
         <tr>
           <td>     
               <label for="sel1">Owner name </label>

@@ -29,7 +29,8 @@ class training_centres extends Model
 							'adhar_card_image',
 							'centre_type',
 							'training',
-							'centre_status'
+							'centre_status',
+                            'academic_year'
 
                      ];
     public function fetchTcList(){

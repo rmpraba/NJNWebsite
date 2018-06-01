@@ -39,6 +39,7 @@ class CreateTrainingCentresTable extends Migration
             $table->string('centre_type')->nullable();
             $table->string('training')->nullable();
             $table->string('centre_status')->nullable();
+            $table->string('academic_year')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,6 @@
         margin-top: 5%;
         margin-bottom: 2%;
     }
-
 </style>
  <div class="row" id="viewbatchlistcontainer">
         <!-- sidebar content -->
@@ -18,8 +17,7 @@
         <!-- main content -->
         <div id="viewtargetcontent" class="col-md-9">
         <h1 style="color: #b30000;">List Of Completed Batches</h1>
-        @if(session()->has('message'))
-           
+        @if(session()->has('message'))           
             <div class="alert alert-success alert-dismissible">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Success!</strong> {{ session()->get('message') }}
