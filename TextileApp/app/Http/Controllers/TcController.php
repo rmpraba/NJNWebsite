@@ -549,13 +549,13 @@ class TcController extends Controller
         $candidate = DB::table('candidates')->join('batch_candidates','batch_candidates.candidate_id','=','candidates.candidate_id')->where('batch_candidates.batch_id','=',$id)->select('batch_candidates.candidate_id','batch_candidates.batch_type','candidates.first_name','candidates.last_name','candidates.gender','candidates.category','candidates.education','candidates.skill')->get();
         $info[0]->candidate = $candidate;
         return json_encode($info);
-    }   
+    }
+
     public function employmentexpenseUpdate(Request $req){
         $candidatearr = $req->input('candidatearr');
-        // echo $candidatearr;
         for($i=0;$i<count($candidatearr);$i++)
         {
-        echo $candidatearr[$i]['candidateid']."  ".$candidatearr[$i]['status']."  ".$candidatearr[$i]['industry'];
+        // echo $candidatearr[$i]['candidateid']."  ".$candidatearr[$i]['status']."  ".$candidatearr[$i]['industry'];
         $industry = $candidatearr[$i]['industry'];
         $status = $candidatearr[$i]['status'];
         $candidateid = $candidatearr[$i]['candidateid'];
@@ -564,7 +564,6 @@ class TcController extends Controller
         $batchcandidatecall = new batch_candidates();
         $batchcandidatecall->employmentstatusUpdate($tc,$batch,$candidateid,$industry,$status);
         }
-
         $tc = $req->input('tc');
         $batch = $req->input('batch');
         $fiscalyear = $req->input('fiscalyear');
@@ -583,7 +582,8 @@ class TcController extends Controller
         $expensecall -> insertExpense($expense);
         }
         Session::flash("success", "Successfully updated!!");
-        return Redirect::back();
+        return view('pages.message');
+        // return Redirect::back();
     }
     
     public function candidateInfo(Request $req)

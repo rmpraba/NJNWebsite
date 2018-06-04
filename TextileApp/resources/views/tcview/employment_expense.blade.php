@@ -9,6 +9,7 @@
         </div>
         <!-- main content -->
         <div id="targetcontent" class="col-md-9">
+        <div class="flash-message"></div>
         @if(Session::has('success'))
         <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}
         <button type="button" class="close" data-dismiss="alert">×</button></em>
@@ -181,8 +182,8 @@
             // });
         });
         $(document).on('click', '.submitTest', function () {
-            // alert(tc+"  "+batch);
-            // alert(JSON.stringify(candidatearr));
+            alert(tc+"  "+batch);
+            alert(JSON.stringify(candidatearr));
             expense = $("input[name='expense']").val();
             // alert(expense);
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -191,10 +192,11 @@
                 type: "POST",
                 data: {_token: CSRF_TOKEN ,"tc": tc,"batch": batch,"fiscalyear": academicyear,
                 "expense": expense,"candidatearr": candidatearr,"type": type},
-                dataType: "json",
+                dataType: "html",
                 success: function (data) {
                     // alert('success'+data.msg);
-                    alert('Added successfully!!');
+                    // alert('Added successfully!!');
+                    $('div.flash-message').html(data);
                 }
             });
         });
