@@ -33,7 +33,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <span style="float:left;margin-top: 4%;"><input type="file" name="photo" /></span><br>
             <span style="float:right;margin-top: -10%;"><button class="btn btn-primary">Upload</button></span>
-            <p style="color: blue;">(Image size should begit below 1Mb)</p>
+            <p style="color: blue;">(Image size should be below 1Mb)</p>
         </form>
     </td>
     <td>

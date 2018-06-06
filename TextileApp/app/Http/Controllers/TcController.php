@@ -378,8 +378,9 @@ class TcController extends Controller
         return view('tcview.batchcandidate_list',compact('tbinfo','academicyear'));
     }
    
-    public function batchCandidateDelete(Request $req,$candidateid,$batchid){
-        $id = $candidateid;
+    public function batchCandidateDelete(Request $req){
+        $id = $req -> input('candidateid');
+        $batchid = $req -> input('batchid');
         $centreid = session()->get('centreid');
         // $type = session()->get('batchtype');
         // $batchid = session()->get('batchid');
@@ -393,7 +394,8 @@ class TcController extends Controller
          $updateinfo = $candidatecall -> updateCandidateStatus($id,$data1);    
         // return json_encode($info);
          Session::flash("success", "Removed successfully!!");
-         return Redirect::back();
+         return view('pages.message');
+         // return Redirect::back();
         }        
     }
 
@@ -584,8 +586,7 @@ class TcController extends Controller
         Session::flash("success", "Successfully updated!!");
         return view('pages.message');
         // return Redirect::back();
-    }
-    
+    }    
     public function candidateInfo(Request $req)
     {
         $centreid = session()->get('centreid');
@@ -601,6 +602,21 @@ class TcController extends Controller
         $candidatecall -> uploadImage($candidateid,$batchid,$filename);
         Session::flash("success", "Successfully uploaded!!");
         return Redirect::back();
+    } 
+    public function candidatePhoto(Request $req)
+    {
+        // $file = Input::file('file');
+        $file = $req->file('file');
+        $candidateid = $req->input('candidateid');
+        $batchid = $req->input('batchid');
+        // echo $candidateid."  ".$batchid."  ".$file;
+        $filename = $candidateid. '-' .time(). '.' .$req->file('file')->getClientOriginalExtension();
+        $file = $file->move(public_path().'/uploads/', $filename);
+        $candidatecall = new candidates();
+        $candidatecall -> uploadImage($candidateid,$batchid,$filename);
+        Session::flash("success", "Successfully uploaded!!");
+        return view('pages.message');
+        // return Redirect::back();
     } 
     public function fetchTcDashboardInfo(){
         $tc = session()->get('centreid');

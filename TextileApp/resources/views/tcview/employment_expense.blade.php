@@ -182,8 +182,8 @@
             // });
         });
         $(document).on('click', '.submitTest', function () {
-            alert(tc+"  "+batch);
-            alert(JSON.stringify(candidatearr));
+            // alert(tc+"  "+batch);
+            // alert(JSON.stringify(candidatearr));
             expense = $("input[name='expense']").val();
             // alert(expense);
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
