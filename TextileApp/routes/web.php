@@ -138,3 +138,7 @@ Route::get('/tcdashboard','TcController@fetchTcDashboardInfo');
 Route::post('/candidatePhoto','TcController@candidatePhoto');
 Route::post('/batchcandidatedelete', 'TcController@batchCandidateDelete');
 
+Route::get('/pfreport','TdController@pfreportInfo');
+Route::get('/pfreport/{tc}/{fiscalyear}','TdController@specpfReport');
+Route::get('/tcpfreport','TcController@tcpfreportInfo');
+

@@ -496,9 +496,6 @@ class TdController extends Controller
     public function fetchSpecDashboardInfo($tc,$fiscalyear)
     {
         $year = $fiscalyear;
-        // $academicyear=academicyear::all();
-        // $tc=training_centres::where('academic_year',$year)->get();
-
         if($tc=='all'){
         $tcapproved = DB::table('training_centres')->where('academic_year',$year)->where('centre_status','Approved')->count();
         $tcactive = DB::table('training_centres')->where('academic_year',$year)->where('centre_status','Approved')->count();
@@ -546,5 +543,105 @@ class TdController extends Controller
             );
         }
         return json_encode([$info]);        
+    }
+
+    public function pfreportInfo(Request $req){
+        $now = new DateTime();
+        $year1 = $now->format("Y");
+        $year2 = (int)$year1+1;
+        $year = $year1.'-'.$year2;
+
+        $academicyear=academicyear::all();
+        $tc=training_centres::where('academic_year',$year)->get();
+
+        $info = DB::table('training_batches as t')->join('training_centres as c','c.centre_id','=','t.centre_id')->select('c.centre_id','c.centre_name','c.district','t.batch_id','t.batch_name','t.batch_type')->get();
+
+        $physicalinfo = DB::table('physical_targets as p')->where('financial_year',$year)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as phy_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as phy_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as phy_total'))->groupBy('p.centre_id','p.batch_id')->get();
+        $financialinfo = DB::table('financial_targets as p')->where('financial_year',$year)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as fin_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as fin_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as fin_total'))->groupBy('p.centre_id','p.batch_id')->get();
+
+        foreach ($physicalinfo as $p) {
+            foreach ($financialinfo as $f) {
+                if(($p->centre_id==$f->centre_id)&&($p->batch_id==$f->batch_id)){
+                    $p->fin_male=$f->fin_male;
+                    $p->fin_female=$f->fin_female;
+                    $p->fin_total=$f->fin_total;
+                }
+            }
+        }
+
+        foreach ($physicalinfo as $p) {
+           foreach ($info as $i) {
+                if(($p->centre_id==$i->centre_id)&&($p->batch_id==$i->batch_id)){
+                    $p->batch_name=$i->batch_name;
+                    $p->centre_name=$i->centre_name;
+                    $p->district=$i->district;
+                    $p->batch_type=$i->batch_type;
+                }
+            } 
+        }
+        return view('reports.tdpfreport',compact('academicyear','tc','physicalinfo'))->with('acyear',$year);
+
+    }
+    public function specpfReport($tc,$fiscalyear)
+    {
+        $year = $fiscalyear;
+
+        if($tc=='all'){
+
+        $info = DB::table('training_batches as t')->join('training_centres as c','c.centre_id','=','t.centre_id')->where('t.batch_academic_year',$year)->select('c.centre_id','c.centre_name','c.district','t.batch_id','t.batch_name','t.batch_type')->get();
+
+        $physicalinfo = DB::table('physical_targets as p')->where('financial_year',$year)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as phy_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as phy_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as phy_total'))->groupBy('p.centre_id','p.batch_id')->get();
+        $financialinfo = DB::table('financial_targets as p')->where('financial_year',$year)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as fin_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as fin_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as fin_total'))->groupBy('p.centre_id','p.batch_id')->get();
+
+        foreach ($physicalinfo as $p) {
+            foreach ($financialinfo as $f) {
+                if(($p->centre_id==$f->centre_id)&&($p->batch_id==$f->batch_id)){
+                    $p->fin_male=$f->fin_male;
+                    $p->fin_female=$f->fin_female;
+                    $p->fin_total=$f->fin_total;
+                }
+            }
+        }
+
+        foreach ($physicalinfo as $p) {
+           foreach ($info as $i) {
+                if(($p->centre_id==$i->centre_id)&&($p->batch_id==$i->batch_id)){
+                    $p->batch_name=$i->batch_name;
+                    $p->centre_name=$i->centre_name;
+                    $p->district=$i->district;
+                    $p->batch_type=$i->batch_type;
+                }
+            } 
+        }
+        return json_encode($physicalinfo);  
+        }
+        else{
+            $info = DB::table('training_batches as t')->join('training_centres as c','c.centre_id','=','t.centre_id')->where('t.batch_academic_year',$year)->where('t.centre_id',$tc)->select('c.centre_id','c.centre_name','c.district','t.batch_id','t.batch_name','t.batch_type')->get();
+
+        $physicalinfo = DB::table('physical_targets as p')->where('financial_year',$year)->where('p.centre_id',$tc)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as phy_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as phy_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as phy_total'))->groupBy('p.centre_id','p.batch_id')->get();
+        $financialinfo = DB::table('financial_targets as p')->where('financial_year',$year)->where('p.centre_id',$tc)->select('p.centre_id','p.batch_id', DB::raw('sum(general_male_target+tsp_male_target+scp_male_target+min_male_target) as fin_male'),DB::raw('sum(general_female_target+tsp_female_target+scp_female_target+min_female_target) as fin_female'),DB::raw('sum(general_total_target+tsp_total_target+scp_total_target+min_total_target) as fin_total'))->groupBy('p.centre_id','p.batch_id')->get();
+
+        foreach ($physicalinfo as $p) {
+            foreach ($financialinfo as $f) {
+                if(($p->centre_id==$f->centre_id)&&($p->batch_id==$f->batch_id)){
+                    $p->fin_male=$f->fin_male;
+                    $p->fin_female=$f->fin_female;
+                    $p->fin_total=$f->fin_total;
+                }
+            }
+        }
+
+        foreach ($physicalinfo as $p) {
+           foreach ($info as $i) {
+                if(($p->centre_id==$i->centre_id)&&($p->batch_id==$i->batch_id)){
+                    $p->batch_name=$i->batch_name;
+                    $p->centre_name=$i->centre_name;
+                    $p->district=$i->district;
+                    $p->batch_type=$i->batch_type;
+                }
+            } 
+        }
+        return json_encode($physicalinfo);  
+        }
     }
 }
